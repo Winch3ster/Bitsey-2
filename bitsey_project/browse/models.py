@@ -2,14 +2,19 @@ from django.db import models
 
 # Create your models here.
 
+
+
 class Platform(models.Model):
     platformName = models.CharField(max_length=20)
 
-class GameplayImage(models.Model):
-    gameplayImageURL = models.CharField(max_length=100)
+    def __str__(self):
+        return self.platformName
 
 class GameCategory(models.Model):
     category = models.CharField(max_length=30)
+
+    def __str__(self):
+        return self.category
 
 
 
@@ -21,11 +26,27 @@ class Game(models.Model):
     publisher = models.CharField(max_length=100)
     developer = models.CharField(max_length=100)
     releaseDate = models.DateField()
-    imageURL = models.CharField(max_length=100)
+
+
+    #gameDirectory = name
+    #parentDirectory = '../static/images/game/'
+    #path = os.path.join(parentDirectory, gameDirectory)
+    #os.mkdir(path)
+
+    image = models.ImageField(upload_to= 'images/')
 
     platforms = models.ManyToManyField(Platform)
     gameCategories = models.ManyToManyField(GameCategory)
-    gameplayImages = models.ManyToManyField(GameplayImage)
+
+
+    def __str__(self):
+        return self.name
+    
+class GameplayImage(models.Model):
+    game = models.ForeignKey(Game, on_delete=models.CASCADE, related_name='gameplay_images', null=True, blank=True)
+    #parentDirectory = '../static/images/game/'
+    gameplayImage = models.ImageField(upload_to='images/game/gameplayImages/')
+
 
 class User(models.Model):
     firstName = models.CharField(max_length=20)
@@ -34,6 +55,8 @@ class User(models.Model):
     email = models.EmailField(max_length = 254, blank=True, unique=True)
     password = models.CharField(max_length=50)
 
+    def __str__(self):
+            return (self.firstName + " " + self.lastName)
 
 class Address(models.Model):
     user = models.OneToOneField(

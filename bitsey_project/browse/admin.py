@@ -1,6 +1,19 @@
 from django.contrib import admin
-from browse import models
+from .models import *
 # Register your models here.
-admin.site.register(models.Game)
-admin.site.register(models.Platform)
-admin.site.register(models.GameCategory)
+#admin.site.register(Game)
+admin.site.register(Platform)
+admin.site.register(GameCategory)
+
+
+class GameplayImageAdmin(admin.StackedInline):
+    model = GameplayImage
+
+class GameAdmin(admin.ModelAdmin):
+    inlines = [GameplayImageAdmin]
+
+    class Meta:
+        model = Game
+
+#admin.site.register(GameplayImage)
+admin.site.register(Game, GameAdmin)
