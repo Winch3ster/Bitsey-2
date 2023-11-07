@@ -1,0 +1,413 @@
+body{
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat';
+    line-height: 1.5;
+
+}
+
+a{
+    text-decoration: none;
+    color: black;
+}
+
+
+/*           text           */
+
+.light-text-color{
+    color: #343434;
+}
+
+.white-text-color{
+    color: white;
+}
+.bitsey-text-color{
+    color: #038BA5;
+    text-decoration: none;
+}
+
+.text-s{
+    font-size: 12px;
+}
+
+
+
+
+/*           layout           */
+
+.flex-justify-content-space-between{
+    height: fit-content;
+    padding: 1% 2% 1% 2%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.flex-justify-content-center{
+    width: 100%;
+    height: fit-content;
+    padding: 1% 2% 1% 2%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.flex-justify-content-space-around{
+
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.inline-display{
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    margin: 30px 0%;
+}
+
+
+.standard-margin-left{
+    margin-left: 5vw;
+}
+
+
+
+
+
+
+
+.nav{
+    position: relative;
+    width: 100%;
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-element-container{
+    position: relative;
+    width: 50%;
+    padding-top: 1%;
+    > ul {
+        width: 100%;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        > li{
+            display: inline-block;
+            align-items: center;
+            text-decoration: none;
+            list-style: none;
+            color: #038BA5;
+            cursor: pointer;
+
+         
+        }
+    }
+}
+
+.nav-icon-container{
+    position: relative;
+    width: 25%;
+    margin-right: 5%;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+
+    > img{
+        width: 25px;
+        height: auto;
+        margin: 0 5% 0 5%;
+        transition: 0.2s;
+        cursor: pointer;
+        &:hover{
+            opacity: 0.6;
+        }
+    }
+}
+
+.company-name{
+    font-weight: normal;
+    width: 20%;
+    padding-left: 5%;
+}
+
+
+
+
+
+
+/*           Container           */
+.background-image-container{
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background-size: cover;
+    opacity: 0.4;
+}
+
+
+.content-container-left{
+    width: 50%;
+    height: fit-content;
+    color: white;
+    margin-top: 10%;
+    margin-left: 5%;
+}
+
+
+.image-content-container{
+    width: 80px;
+    height: fit-content;
+    cursor: pointer;
+    transition: 0.3s;
+    > img {
+        width: 100%;
+        height: auto;
+        margin: 0 0 10px 0;
+    }
+    > p {
+        width: 100%;
+        text-align: center;
+    }
+
+    &:hover{
+        transform: scale(1.2);
+
+    }
+}
+.container-bitsey{
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: red;
+}
+
+
+
+
+
+/*           Element           */
+.white-ribbon{
+    position: relative;
+    width: 20%;
+    padding: 2% 0 2% 0;
+    top: 60px;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.device-label{
+    width: 70px;
+    height: 30px;
+    padding: 5px;
+    text-align: center;
+    border-radius: 5px;
+    margin: 0 20px;
+
+}
+.ps-theme{
+    background-color: #0030DC;
+    color: white;
+}
+.xbox-theme{
+    background-color: #117D12;
+    color: white;
+}
+.pc-theme{
+    background-color: white;
+    color: #343434;
+}
+
+
+
+.primary-btn{
+    padding: 4px 15px;
+    background-color: rgb(3, 139, 165);
+    border: 2px solid rgb(3, 139, 165);
+    border-radius: 10px;
+    font-size: 1.2rem;
+    margin: 0 5%;
+    color: white;
+    transition: 0.2s;
+    cursor: pointer;
+}
+.primary-btn:hover{
+    background-color: white;
+    color: rgb(3, 139, 165);
+    border: 2px solid white;
+}
+
+.secondary-btn{
+    padding: 4px 15px;
+
+    background-color: black;
+    color: white;
+    border: 2px solid black;
+    border-radius: 10px;
+    font-size: 1.2rem;
+    margin: 0% 5%;
+    transition: 0.2s;
+    cursor: pointer;
+}
+.secondary-btn:hover{
+    background-color: white;
+    border: 2px solid white;
+    color: black;
+}
+
+
+.secondary-btn-white{
+    padding: 4px 15px;
+    background-color: transparent;
+    color: white;
+    border: 2px solid white;
+    border-radius: 10px;
+    font-size: 1.2rem;
+    margin: 0% 5%;
+    transition: 0.2s;
+    cursor: pointer;
+}
+.secondary-btn-white:hover{
+    background-color: white;
+    border: 2px solid white;
+    color: black;
+}
+
+
+
+.social-media-icon{
+    width: 50px;
+    height: 50px;
+}
+
+
+
+
+
+.ps-label{
+    padding: 2px 5px;
+    background-color: #0030DC;
+    color: white;
+    border-radius: 5px;
+}
+
+
+.xbox-label{
+    padding: 2px 5px;
+    background-color: #117D12;
+    color: white;
+    border-radius: 5px;
+}
+
+.nintendo-label{
+    padding: 2px 5px;
+    border: 1px solid #e60012;
+    border-radius: 5px;
+}
+
+.pc-label{
+    padding: 2px 5px;
+    border: 1px solid gray;
+    border-radius: 5px;
+}
+
+/*           width           */
+
+.full-width{
+    width: 90%;
+}
+
+
+
+
+
+
+/*           carousel           */
+
+.slideshow-container{
+    height: 75vh;
+    background-image: url("../Images/index/tlou2.jpg");
+    background-size: cover;
+}
+.slide-show-selector{
+    padding: 0;
+    border-radius: 10px;
+    width: 10%;
+    height: 85px;
+    background-size: cover;
+    opacity: 0.5;
+    transition: 0.5s;
+    cursor: pointer;
+}
+.slide-show-selector:hover{
+    transform: scale(1.1);
+    box-shadow: 0px 16px 40px -5px rgba(39, 39, 39, 0.79);
+    -webkit-box-shadow: 0px 16px 40px -5px rgba(39, 39, 39, 0.79);
+    -moz-box-shadow: 0px 16px 40px -5px rgba(39, 39, 39, 0.79);
+    opacity: 1;
+}
+
+.focus{
+    opacity: 1;
+}
+
+
+
+
+
+
+/*           Background color           */
+.light-gray-background{
+    background-color: #F4F4F4;
+}
+
+.bitsey-color{
+    background-color: #038BA5;
+}
+
+
+
+
+
+/*           footer           */
+.social-media-links{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    width: 100%;
+    height: fit-content;
+    margin: 2% 5%;
+}
+.individual-icon{
+    margin-right: 25px;
+    height: 30px;
+    width: auto;
+    transition-duration: 0.4s;
+}
+
+.individual-icon:hover{
+    scale: 1.5;
+    cursor: pointer;
+}
+.footer-text{
+    font-size: 13px;
+}
+
+
+.modern-input{
+    width: 100%;
+    border: none;
+    margin-left: 20px;
+}
+
+.modern-input:focus{
+    outline: none;
+}

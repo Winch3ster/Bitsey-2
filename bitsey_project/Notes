@@ -2,3 +2,11 @@ Superuser
 
 Username: bitseyadmin
 password: bitsey1234
+
+
+
+
+
+<link rel="stylesheet" href="{% static './css/responsiveElements.css' %} ">
+    <link rel="stylesheet" href="{% static './css/common.css' %} ../CSS/common.css">
+    <link rel="stylesheet" href="{% static './css/responsivGrid.css' %}">

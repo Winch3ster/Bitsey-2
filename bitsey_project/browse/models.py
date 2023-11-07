@@ -33,7 +33,7 @@ class Game(models.Model):
     #path = os.path.join(parentDirectory, gameDirectory)
     #os.mkdir(path)
 
-    image = models.ImageField(upload_to= 'images/')
+    image = models.ImageField(upload_to= 'images/game')
 
     platforms = models.ManyToManyField(Platform)
     gameCategories = models.ManyToManyField(GameCategory)
