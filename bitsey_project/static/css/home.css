@@ -1,0 +1,68 @@
+
+.ps5-image{
+    width: 100%;
+    height: auto;
+}
+
+.discover-more-game-container{
+    position: relative;
+    width: 100%;
+    background-color: #121314;
+    padding-bottom: 10vh;
+}
+
+.genre-block{
+
+    border-radius: 10px;
+    filter: brightness(0.3);
+
+}
+.above-filter{
+    z-index: 5;
+}
+
+
+
+.buy-at-bitsey-component{
+    width: 10vw;
+    height: 10vw;
+}
+
+.game-block-background-image{
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    border-radius: 15px;
+}
+
+
+
+.card-bitsey{
+    width: 200px;
+    height: 50vw;
+    background-color: gray;
+    margin: 10px;
+}
+
+.slider-container{
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.codMWII-backgroundImage{
+    background-image: url('/static/media/images/homeImages/CODMW32023.jpg');
+}
+
+.horror-game-background{
+    background-image: url('/static/media/images/homeImages/horror-background.jpg');
+}
+
+.war-game-background{
+    background-image: url('/static/media/images/homeImages/bf1-background-2.jpg');
+}
+
+.family-background{
+    background-image: url('/static/media/images/homeImages/kirby-family-section.jpeg');
+}

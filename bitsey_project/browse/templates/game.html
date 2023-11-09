@@ -1,0 +1,232 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+        <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+    
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+        <link rel="stylesheet" href="{% static './css/responsiveElements.css'%} ">
+        <link rel="stylesheet" href="{% static './css/global.css'%}">
+        <link rel="stylesheet" href="{% static './css/responsiveGrid.css'%}">
+        
+        <link rel="stylesheet" href="{% static './css/game.css'%}">
+
+
+        <title>Bitsey | Store</title>
+    </head>
+<body>
+    <!--Navigation bar-->
+    <nav class="nav">
+        <div class="company-name">
+            <span style="color: #038BA5; font-size: x-large;">Bitsey | </span> Store
+        </div>
+
+        <div class="nav-element-container">
+            <ul>
+                <li><a href=""></a>Pre-order</li>
+                <li><a href=""></a>Games</li>
+                <li><a href=""></a>Deals</li>
+                <li><a href=""></a>Support</li>
+            </ul>
+        </div>
+
+        <div class="nav-icon-container">
+            <img src="{% static '/media/images/homeImages/user.jpg' %}" alt="">
+            <img src="{% static '/media/images/homeImages/cart.jpg' %}" alt="">
+        </div>
+    </nav>
+
+
+    <!-- Game header -->
+    <section class="position-relative col-12" style="background-color: black; padding: 0%;">
+        <div class="background-image-container" style="height: 60vh ;opacity: 0.4; filter: blur(4px); background-image: url('{{returnedGame.image.url}}');"></div>
+        <div class="inline-display position-absolute" style="top: 12vh; margin:0; align-items: center;">
+            <img class="game-image" src="{{returnedGame.image.url}}" alt="" >
+            <div class="col-6 standard-margin-left">
+                <p class="h1 text-white">{{returnedGame.name}}</p>
+                <p class="text-white">{{returnedGame.developer}}</p>
+                <p class="text-white">RM <span>{{returnedGame.price}}</span></p>
+                <p class="text-white">Rating</p>
+                <div class="inline-display"> 
+                    <button class="primary-btn">Buy Now</button>
+                    <button class="secondary-btn">Try Out</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gameplay image container -->
+    <section class="position-relative col-12 inline-display align-items-center">
+        <p class="col-3 text-center h2">Gameplay</p>
+        <div class="inline-display">
+           
+            {% for x in returnedGameplayImages %}
+                <img class="gameplay-img" src="{{x.gameplayImage.url}}" alt="">
+            {% endfor %}
+        
+        </div>
+    </section>
+
+    
+
+    <!-- Select platform and edition-->
+    <div class="col-12 d-flex justify-content-center">
+        <section class="position-relative col-8 select-version-edition-container">
+            <div class="d-flex justify-content-center">
+                <div class="col-5 m-2 rounded-2 p-2">
+                    <p>Select a version</p>
+    
+                    <label class="game-version-selector-radio">Digital
+                        <input type="radio" value="d" checked="checked" name="version">
+                        <span class="checkmark"></span>                   
+                    </label>
+                    
+                    <label class="game-version-selector-radio">Physical
+                        <input type="radio" value="a" name="version">
+                        <span class="checkmark"></span>                   
+                    </label>
+                    
+    
+                </div>
+                <div class="col-5 m-2 rounded-1 p-2">
+                    <p>Select a platform</p>
+                        <label class="game-version-selector-radio">PS5
+                            <input type="radio" value="d" checked="checked" name="platform">
+                            <span class="checkmark"></span>                   
+                        </label>
+                        
+                        <label class="game-version-selector-radio">PS4
+                            <input type="radio" value="a" name="platform">
+                            <span class="checkmark"></span>                   
+                        </label>
+                        <label class="game-version-selector-radio">Xbox One
+                            <input type="radio" value="d" checked="checked" name="platform">
+                            <span class="checkmark"></span>                   
+                        </label>
+                        
+                        <label class="game-version-selector-radio">PC
+                            <input type="radio" value="a" name="platform">
+                            <span class="checkmark"></span>                   
+                        </label>
+    
+                </div>
+            </div>
+            <div class="d-flex justify-content-center m-2"><button class="primary-btn">Add to cart <i class="bi bi-bag"></i> </button></div>
+            
+    
+        </section>
+    </div>
+    
+
+
+
+    <!-- Game informmation -->
+    <section class="position-relative col-12">
+        <p class="bitsey-text-color text-center">{{returnedGame.name}}</p>
+        <p class="text-center h2">Additional Information</p>
+
+        <div class="d-flex justify-content-evenly align-items-start">
+            <div class="position-relative col-7">
+                <p class="bitsey-text-color">Description</p>
+                <p>
+                    {{returnedGame.description}}
+
+                </p>
+                <div class="inline-display">
+                    <div>
+                        <p>Publisher</p>
+                        <p>{{returnedGame.publisher}}</p>
+                    </div>
+
+                    <div class="mx-5">
+                        <p>Developer</p>
+                        <p>{{returnedGame.developer}}</p>
+                    </div>
+
+                    <div>
+                        <p>Release date</p>
+                        <p>{{returnedGame.releaseDate}}</p>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Capabilities -->
+            <div class="position-relative col-4">
+                <p class="bitsey-text-color">Capabilities</p>
+                <div class="container">
+                    <div class="row ">
+                        <div class="col-4  gametag">Single Player</div>
+                        <div class="col-4  gametag">Xbox Live</div>
+                        <div class="col-4  gametag">4K Ultra HD</div>
+                        <div class="col-4  gametag">HDR10</div> 
+                        <div class="col-4  gametag">Cross Platform</div>       
+                        <div class="col-4  gametag">Cloud</div>              
+                        <!-- This will wrap to the next row -->
+                        <!-- Add more child elements as needed -->
+                    </div>
+                    <!-- Additional rows and child elements can be added here -->
+                </div>
+
+
+
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+    <!-- Footer -->
+    <footer class="col-12 pt-4 pb-5 light-gray-background container-fluid p-4">
+
+        <div class="col-1 col-s-12"></div>
+        <div class="col-2 col-s-12 d-block light-text-color">
+            <p>Browse Games</p>
+            <ul class="list-unstyled">
+                <li><a href="" class="footer-text">PlayStation Games</a></li>
+                <li><a href="" class="footer-text">Xbox Games</a></li>
+                <li><a href="" class="footer-text">Nintendo Games</a></li>
+                <li><a href="" class="footer-text">PC Games</a></li>
+            </ul>
+            
+        </div>
+        <div class="col-2 col-s-12 light-text-color">
+            <p >Support</p>
+            <p class="footer-text">+06 012 672 9991</p>
+            <p class="footer-text">+06 012 542 1291</p>
+            <p class="footer-text">bitsey-malaysia@gmail.com</p>
+        </div>
+        <div class="col-3 col-s-12 light-text-color">
+            <p>Location</p>
+            <p class="footer-text">
+                Kuala Lumpur Convention Centre, Jalan Pinang,
+                50088 Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur
+            </p>
+        </div>
+
+        <div class="col-3 col-s-12">
+            <p class="light-text-color">Follow Bitsey</p>
+            <div class="social-media-links">
+                <img class="individual-icon" style="margin-left: 0;" src="{% static '/media/images/homeImages/instagram.png' %}" alt="">
+                <img class="individual-icon" src="{% static '/media/images/homeImages/twitter.png' %}" alt="">
+                <img class="individual-icon" src="{% static '/media/images/homeImages/linkedin.png' %}" alt="">
+                <img class="individual-icon" src="{% static '/media/images/homeImages/facebook.png' %}" alt="">
+            </div>
+        </div>   
+    </footer>
+
+    <div class="position-relative col-12 p-0">
+        <p class="text-center m-0 light-text-color light-gray-background">@2023 Bitsey Studio Malaysia</p>
+    </div>
+    
+</body>
+</html>

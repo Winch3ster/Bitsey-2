@@ -10,3 +10,56 @@ password: bitsey1234
 <link rel="stylesheet" href="{% static './css/responsiveElements.css' %} ">
     <link rel="stylesheet" href="{% static './css/common.css' %} ../CSS/common.css">
     <link rel="stylesheet" href="{% static './css/responsivGrid.css' %}">
+
+
+
+
+
+    <div class="col-9 bg-danger" style="height: 100vh;">
+    <div class="col-12 bitsey-container-s bitsey-container-m bitsey-container-l" >
+        <div class="row-bitsey" style="padding: 0;">
+            <div class="column-bitsey">
+                <div class="game-block">
+                    <div class="game-block-image" style="background-image: url('../Images/index/store/bf1.webp');"></div> <!-- image -->
+                    <div class="m-3">
+                        <p>Battlefield 1</p> <!-- name -->
+                        <p class="text-s">RM 129.00</p> <!-- Price -->
+                        <div class="position-relative d-flex justify-content-evenly">
+                            <div class="ps-label">PS</div>
+                            <div class="pc-label">PC</div>
+                            <div class="xbox-label">Xbox</div>
+                        </div> <!-- platform -->
+                    </div>
+                    
+                </div>
+
+                <div class="game-block">
+                    <div class="game-block-image"></div> <!-- image -->
+                    <div class="m-3">
+                        <p>Name</p> <!-- name -->
+                        <p class="text-s">RM 29.00</p> <!-- Price -->
+                        <div>PS</div> <!-- platform -->
+                    </div>                           
+                </div>
+
+            </div>
+            <div class="column-bitsey">
+
+                <div class="game-block">
+                    <div>Imae</div> <!-- image -->
+                    <p>Name</p> <!-- name -->
+                    <div>PS</div> <!-- platform -->
+                    <p>RM 29.00</p> <!-- Price -->
+                </div>
+
+                <div class="game-block">
+                    <div>Imae</div> <!-- image -->
+                    <p>Name</p> <!-- name -->
+                    <div>PS</div> <!-- platform -->
+                    <p>RM 29.00</p> <!-- Price -->
+                </div>
+            </div>
+        </div>
+
+        
+    </div>

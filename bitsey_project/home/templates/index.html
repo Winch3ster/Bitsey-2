@@ -38,7 +38,7 @@
         <div class="company-name">
             <span style="color: #038BA5; font-size: x-large;">Bitsey | </span> Store
         </div>
-
+    
         <div class="nav-element-container">
             <ul>
                 <li><a href=""></a>Pre-order</li>
@@ -47,16 +47,18 @@
                 <li><a href=""></a>Support</li>
             </ul>
         </div>
-
+    
         <div class="nav-icon-container">
             <img src="{% static '/media/images/homeImages/user.jpg' %}" alt="">
             <img src="{% static '/media/images/homeImages/cart.jpg' %}" alt="">
         </div>
+    
     </nav>
+
 
     <!--Featured game section-->
     <section style="background-color: black;">
-        <div class="codMWII-backgroundImage background-image-container" style="filter:brightness(0.5);" >
+        <div class="codMWII-backgroundImage background-image-container" style="opacity: 1;">
             <div class="white-ribbon">Featured</div>
             <div class="content-container-left">
                 <h1>Call of Duty Modern Warfare III</h1>
@@ -133,7 +135,7 @@
 
     <!-- Explore horror game -->
     <section class="position-relative" style="height: 70vh; background-color: black;">
-        <div class="col-12 background-image-container" style="height: 70vh; background-image: url('../Images/index/horror-background.jpg');">
+        <div class="col-12 background-image-container horror-game-background" style="height: 70vh">
         </div>
         
 
@@ -153,7 +155,7 @@
         <div style="height: 9vh;"></div> <!--game label container-->
 
         <div class="position-relative" style="height: 60vh">
-            <div class="col-12 background-image-container" style="height: 60vh; background-image: url('../Images/index/bf1-background-2.jpg'); background-size: cover; opacity: 0.4;"></div>
+            <div class="col-12 background-image-container war-game-background" style="height: 60vh; background-size: cover; opacity: 0.4;"></div>
 
 
 
@@ -226,13 +228,13 @@
             </div>
             <div class="carousel-inner">
               <div class="carousel-item active">
-                <img src="../Images/index/ac-mirage-banner.jpg" class="d-block w-100 bg-dark carousel-banner-height" alt="...">
+                <img src="{% static '/media/images/homeImages/ac-mirage-banner.jpg' %}" class="d-block w-100 bg-dark carousel-banner-height" alt="...">
               </div>
               <div class="carousel-item">
-                <img src="../Images/index/horizon-zero-banner.jpeg" class="d-block w-100 bg-dark carousel-banner-height" alt="...">
+                <img src="{% static '/media/images/homeImages/horizon-zero-banner.jpeg' %}" class="d-block w-100 bg-dark carousel-banner-height" alt="...">
               </div>
               <div class="carousel-item">
-                <img src="../Images/index/tlou2-banner.jpg" class="d-block w-100 bg-dark carousel-banner-height" alt="...">
+                <img src="{% static '/media/images/homeImages/tlou2-banner.jpg' %}" class="d-block w-100 bg-dark carousel-banner-height" alt="...">
               </div>
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
@@ -262,7 +264,7 @@
 
 
     <!-- Family Friendly games -->
-    <section class="background-container d-flex align-items-center px-5" style="background-image: url('../Images/index/kirby-family-section.jpeg');">
+    <section class="background-container d-flex align-items-center px-5 family-background">
         <div class="col-5 bg-white p-5">
             <p class="bitsey-text-color h2">Bitsey Family</p>
             <p>Family Fun: Games for All Ages</p>
@@ -314,10 +316,10 @@
         <div class="col-3 col-s-12">
             <p class="light-text-color">Follow Bitsey</p>
             <div class="social-media-links">
-                <img class="individual-icon" style="margin-left: 0;" src="../Images/index/instagram.png" alt="">
-                <img class="individual-icon" src="../Images/index/twitter.png" alt="">
-                <img class="individual-icon" src="../Images/index/linkedin.png" alt="">
-                <img class="individual-icon" src="../Images/index/facebook.png" alt="">
+                <img class="individual-icon" style="margin-left: 0;" src="{% static '/media/images/homeImages/instagram.png' %}" alt="">
+                <img class="individual-icon" src="{% static '/media/images/homeImages/twitter.png' %}" alt="">
+                <img class="individual-icon" src="{% static '/media/images/homeImages/linkedin.png' %}" alt="">
+                <img class="individual-icon" src="{% static '/media/images/homeImages/facebook.png' %}" alt="">
             </div>
         </div>   
     </footer>

@@ -1,6 +1,6 @@
 
 .ps5-image{
-    width: 10%;
+    width: 100%;
     height: auto;
 }
 
@@ -50,9 +50,19 @@
     display: flex;
     align-items: center;
 }
-/*
+
 .codMWII-backgroundImage{
-    background-image: url('../../globalStatic/media/images/homeImages/Call-of-Duty-Modern-Warfare-3-2023-4K-Wallpaper-1.jpg');
+    background-image: url('/static/media/images/homeImages/CODMW32023.jpg');
 }
 
-*/
+.horror-game-background{
+    background-image: url('/static/media/images/homeImages/horror-background.jpg');
+}
+
+.war-game-background{
+    background-image: url('/static/media/images/homeImages/bf1-background-2.jpg');
+}
+
+.family-background{
+    background-image: url('/static/media/images/homeImages/kirby-family-section.jpeg');
+}
