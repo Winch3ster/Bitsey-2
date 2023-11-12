@@ -1,0 +1,167 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+    <link rel="stylesheet" href="{% static './css/responsiveElements.css'%} ">
+    <link rel="stylesheet" href="{% static './css/global.css'%}">
+    <link rel="stylesheet" href="{% static './css/responsiveGrid.css'%}">
+    
+    <link rel="stylesheet" href="{% static './css/user.css'%}">
+    
+    <title>Bitsey | Cart</title>
+</head>
+<body>
+    <!-- Navigation bar -->
+    <nav class="nav">
+        <div class="company-name">
+            <span style="color: #038BA5; font-size: x-large;">Bitsey | </span> Store
+        </div>
+    
+        <div class="nav-element-container">
+            <ul>
+                <li><a href=""></a>Pre-order</li>
+                <li><a href=""></a>Games</li>
+                <li><a href=""></a>Deals</li>
+                <li><a href=""></a>Support</li>
+            </ul>
+        </div>
+    
+        <div class="nav-icon-container">
+            <img src="{% static '/media/images/homeImages/user.jpg' %}" alt="">
+            <img src="{% static '/media/images/homeImages/cart.jpg' %}" alt="">
+        </div>
+    
+    </nav>
+
+
+    <div style="margin: 40px 0;">
+        <p class="h2 standard-margin-left">Cart</p> 
+
+        <div class="standard-margin-left"> <!-- Links breakdown-->
+            <a href="">Home</a>
+            <i class="bi bi-chevron-right"></i>
+            <a href="">Browse</a>
+            <i class="bi bi-chevron-right"></i>
+            <a href="">Cart</a>
+        </div> 
+
+        <div class="col-10 d-flex justify-content-between standard-margin-left"> <!-- main container -->
+
+            <div class="col-8"> <!-- order display --> 
+               <div class="rounded-3 p-2" style="padding-left: 20px; background-color: #d4f2c4;">You are eligible for free shipping!</div><!-- Messages --> 
+               
+                <div> <!-- basket-container --> 
+
+                    <!-- basket-item-container --> 
+                    <div class="d-flex justify-content-center basket-item" style="margin: 10px 0;">  
+                        <div class="col-3"> <img style="height: 100px; width: 100px; border-radius: 5px; object-fit: cover;" src="{% static '/media/images/homeImages/bf1.jpg' %}" alt=""> </div> <!-- game image --> 
+
+                        <div class="col-3"> <!-- game name and price--> 
+                            <p class="m-0">Battlefield 1</p>
+                            <p class="text-m">RM 159.90</p>
+                        </div>
+
+                        <div class="col-3"> <!-- game quantity --> 
+                            <p class="text-m">Quantity</p>
+
+                            <form class="d-flex" action=""><!-- quantity selector --> 
+                                <button class="btn-empty"><i class="bi bi-dash bitsey-text-color" id="decrement-btn"></i></button>
+                                <p style="margin: 0px 5px;">1</p>
+                                <button class="btn-empty"><i class="bi bi-plus bitsey-text-color" id="decrement-btn"></i></button>
+                            </form>
+                            
+                        </div>
+
+                        <div class="col-2">
+                            <button class="btn rounded-pill btn-outline-danger text-m">Remove</button>
+                        </div> <!-- remove --> 
+                    </div>
+
+
+               </div>
+            </div>
+
+
+            <!-- order summary  -->
+            <div class="col-3 rounded light-gray-background" style="height: fit-content; padding: 20px 20px 30px 20px;">
+                <p class="h4">Order summary</p>
+                <p class="text-s">*All physical product(s) will be shipped to the address set in your account.</p>
+                <div><!-- price summary  -->
+                    <div class="d-flex justify-content-between">
+                        <p>Item(s) subtotal:</p>
+                        <p class="fw-bold">RM <span>195.0</span></p>
+                    </div>
+                    
+                    <div class="d-flex justify-content-between">
+                        <p>Shipping:</p>
+                        <p class="fw-bold">RM <span>20.0</span></p>
+                    </div>
+                </div>  
+
+                <!-- Estimated total -->
+                <div class="d-flex justify-content-between mt-4" style="border-top: 1px solid #d8d8d8;">
+                    <p>Total:</p>
+                    <p class="fw-bold">RM <span>210.9</span></p>
+                </div>
+
+                <button class="btn btn-success rounded-pill">Payment</button>
+            </div>
+
+
+        </div>
+    </div>
+
+
+
+    <!-- Footer -->
+    <footer class="col-12 pt-4 pb-5 light-gray-background container-fluid p-4">
+
+        <div class="col-1 col-s-12"></div>
+        <div class="col-2 col-s-12 d-block light-text-color">
+            <p>Browse Games</p>
+            <ul class="list-unstyled">
+                <li><a href="" class="footer-text">PlayStation Games</a></li>
+                <li><a href="" class="footer-text">Xbox Games</a></li>
+                <li><a href="" class="footer-text">Nintendo Games</a></li>
+                <li><a href="" class="footer-text">PC Games</a></li>
+            </ul>
+            
+        </div>
+        <div class="col-2 col-s-12 light-text-color">
+            <p >Support</p>
+            <p class="footer-text">+06 012 672 9991</p>
+            <p class="footer-text">+06 012 542 1291</p>
+            <p class="footer-text">bitsey-malaysia@gmail.com</p>
+        </div>
+        <div class="col-3 col-s-12 light-text-color">
+            <p>Location</p>
+            <p class="footer-text">
+                Kuala Lumpur Convention Centre, Jalan Pinang,
+                50088 Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur
+            </p>
+        </div>
+
+        <div class="col-3 col-s-12">
+            <p class="light-text-color">Follow Bitsey</p>
+            <div class="social-media-links">
+                <img class="individual-icon" style="margin-left: 0;" src="{% static '/media/images/homeImages/instagram.png' %}" alt="">
+                <img class="individual-icon" src="{% static '/media/images/homeImages/twitter.png' %}" alt="">
+                <img class="individual-icon" src="{% static '/media/images/homeImages/linkedin.png' %}" alt="">
+                <img class="individual-icon" src="{% static '/media/images/homeImages/facebook.png' %}" alt="">
+            </div>
+        </div>   
+    </footer>
+
+
+
+</body>
+</html>

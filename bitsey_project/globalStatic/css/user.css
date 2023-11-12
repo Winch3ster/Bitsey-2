@@ -1,0 +1,80 @@
+.sign-in-wallpaper-container{
+    height: 100vh;
+    background-image: url('../media/images/userAppImages/sign-in-wallpaper.jpg');
+    background-size: cover;
+}
+.sign-in-container{
+    background-color: white;
+    height: 100vh;
+}
+
+.sign-in-control{
+    width: 55%;
+    border: none;
+    border-radius: 20px;
+    padding: 8px 20px;
+    background-color: #F4F4F4;
+    transition: 0.2s;
+    cursor: pointer;
+    margin: 10px 0;
+}
+.sign-in-control:hover{
+    background-color: #cacaca;
+}
+.sign-in-control:focus{
+    outline: none;
+    background-color: #cacaca;
+}
+
+.sign-in-back:hover{
+    color: #038BA5;
+}
+
+.signup-form-container{
+    background-color: white;
+    width: 500px;
+    box-shadow: 1px 9px 22px -1px rgba(139,139,139,0.75);
+    -webkit-box-shadow: 1px 9px 22px -1px rgba(139,139,139,0.75);
+    -moz-box-shadow: 1px 9px 22px -1px rgba(139,139,139,0.75);
+    padding-bottom: 30px;
+}
+
+.individual-form-container{
+    margin-top: 20px;
+    width: 90%;
+    margin-left: 5%;
+    font-size: 14px;
+}
+.user-progress{
+    outline: none;
+    border: none;
+    padding: 4px 25px;
+    border-radius: 10px;
+    background-color: #F4F4F4;
+    margin: 0 5px;
+    transition: 0.3s;
+}
+.user-progress:hover{
+    background-color: #038BA5;
+    opacity: 0.6;
+}
+.current{
+    background-color: #038BA5;
+}
+
+.basket-item{
+    width: 100%;
+    padding: 1px;
+    border-radius: 5px;
+    border-bottom: 1px solid #d8d8d8;
+    transition: 0.5s;
+
+}
+.btn-empty{
+    outline: none;
+    border: none;
+    background-color: transparent;
+}
+.btn-empty:hover{
+    outline: none;
+}

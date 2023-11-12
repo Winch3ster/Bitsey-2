@@ -21,11 +21,18 @@ from django.conf import settings
 from django.conf.urls.static import static
 from home import views as home
 from browse import views as browse
+from user import views as userviews
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home.home),
     path('browse', browse.browse),
-    path('browse/<int:game_id>', browse.game_detail)
+    path('browse/<int:game_id>', browse.game_detail),
+    path('signin/', userviews.signin, name='signin'),
+    path('signup/', userviews.signup, name='signup'),
+    path('cart/', userviews.cart, name='cart'),
+    path('account/<int:user_id>/', userviews.edit_user, name='edit_user'),
+    path('userDataViewer', userviews.userDataViewer)
 ] + static(settings.STATIC_URL, document_root = settings.STATIC_ROOT)
 
 urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
