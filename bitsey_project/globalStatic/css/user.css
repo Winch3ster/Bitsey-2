@@ -78,3 +78,13 @@
 .btn-empty:hover{
     outline: none;
 }
+
+.account-nav{
+  margin-left: 20px;
+  transition: 0.2s;
+  cursor: pointer;
+}
+
+.account-nav:hover{
+    color: #038BA5;
+}

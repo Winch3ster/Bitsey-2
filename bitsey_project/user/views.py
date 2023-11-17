@@ -87,19 +87,26 @@ def cart(request):
 
 def edit_user(request, user_id):
     user = get_object_or_404(User, id=user_id)
+    user_address = get_object_or_404(Address, user__id=user_id)
 
     if request.method == 'POST':
-        form = userForm(request.POST, instance=user)
-        if form.is_valid():
-            form.save()
+
+        filled_user_form = userForm(request.POST, instance=user, prefix='user')
+        filled_address_form = addressForm(request.POST, instance=user_address, prefix='address')
+
+        if filled_user_form.is_valid() and filled_address_form.is_valid():
+            filled_user_form.save()
+            filled_address_form.save()
             return HttpResponse("Successfully edited user")
     else:
-        form = userForm(instance=user)
+        form = userForm(instance=user, prefix='user')
+        address_form =  addressForm (instance=user_address, prefix='address')
+    return render(request, 'account.html', {'form': form, 'address_form': address_form,'user': user})
 
-    return render(request, 'account.html', {'form': form, 'user': user})
 
-
-
+def wishlist(request, user_id):
+    # will return games and user
+    return render(request, 'wishlist.html', {'form': form, 'address_form': address_form,'user': user})
 
 
 def userDataViewer(request):
