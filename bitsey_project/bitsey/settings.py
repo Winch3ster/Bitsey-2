@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'home',
     'user',
     'widget_tweaks',
+    'order',
 ]
 
 MIDDLEWARE = [
@@ -134,3 +135,10 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+AUTH_USER_MODEL = "user.User"
+# Authentication backend
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    # Add other backends if needed
+]

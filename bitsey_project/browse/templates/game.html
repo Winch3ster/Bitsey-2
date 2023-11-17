@@ -55,6 +55,7 @@
                 <p class="text-white">RM <span>{{returnedGame.price}}</span></p>
                 <p class="text-white">Rating</p>
                 <div class="inline-display"> 
+                    
                     <button class="primary-btn">Buy Now</button>
                     <button class="secondary-btn">Try Out</button>
                 </div>
@@ -118,8 +119,11 @@
     
                 </div>
             </div>
-            <div class="d-flex justify-content-center m-2"><button class="primary-btn">Add to cart <i class="bi bi-bag"></i> </button></div>
             
+            <form action="{% url 'addToCart' gameId=returnedGame.id %}" method="post">
+                {% csrf_token %}
+                <div type="submit" class="d-flex justify-content-center m-2"><button class="primary-btn">Add to cart <i class="bi bi-bag"></i> </button></div>
+            </form>
     
         </section>
     </div>

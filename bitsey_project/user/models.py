@@ -1,16 +1,12 @@
 from django.db import models
 from browse import models as browseModel
 from django.db.models.deletion import CASCADE
-
+from django.contrib.auth.models import AbstractUser
 # Create your models here.
 
-class User(models.Model):
+class User(AbstractUser):
     firstName = models.CharField(max_length=20)
     lastName = models.CharField(max_length=20)
-    username = models.CharField(max_length=50 )
-    email = models.EmailField(max_length = 254, blank=True, unique=True)
-    password = models.CharField(max_length=50)
-
     def __str__(self):
             return (self.firstName + " " + self.lastName)
 
@@ -23,12 +19,6 @@ class Address(models.Model):
     postalCode = models.IntegerField()
     country = models.CharField(max_length=25)
 
-
-
-class CartItem(models.Model):
-    cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    quantity = models.PositiveIntegerField(default=1)
 
 
 

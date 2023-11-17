@@ -1,35 +1,51 @@
 from django.shortcuts import render
+from django.contrib.auth import login
 from django.http import HttpResponse
 from .userForms import *
 from .models import *
 from django.shortcuts import render, get_object_or_404, redirect
+from django.urls import reverse
+from django.contrib.auth import authenticate
+from home import views as homeviews
+
 
 # Create your views here.
 def signin(request):
     if request.method == 'POST':
+        print("This sign in POST is running")
         signIn_form = userSignInForm(request.POST)
-
         if signIn_form.is_valid():
-            credentials = signIn_form.save(commit=False)
-            # perform validation
-            print(credentials.username)
-            print(credentials.password)
-            
-            if User.objects.filter(username= credentials.username, password=credentials.password).exists():
-                return HttpResponse('Found user')
-            else:
+            username = request.POST.get('username')
+            password = request.POST.get('password')
+            #user = User.objects.get(username = username, password=password)
+
+
+
+            print(username)
+            print(password)
+            user = authenticate(request, username=username, password=password)
+            print("This is user" + str(user))
+            if user is not None:
                 
+                login(request, user)
+                homeURL = reverse('homepage')
+                return redirect(homeURL)
+            else:
                 return render(request, 'signin.html', {'signIn_form': signIn_form, 'errorMessage': "Incorrect username or password"})
-
-            # check if user exist
-            # if yes redirect to homepage
-            # if no, display error
-    else:    
+    
+        else:
+            print("User form is invalid")
+            print(signIn_form.errors)  # Add this line to print form errors
+            return render(request, 'signin.html', {'signIn_form': signIn_form, 'errorMessage': "Please enter valid credentials"})
+    
+    else:
+        print("This is working")
         signIn_form = userSignInForm()
+    
+    return render(request, 'signin.html', {'signIn_form': signIn_form})
 
-    return render(request, 'signin.html', {
-        'signIn_form': signIn_form,
-    })
+
+
 
     #return HttpResponse("Hello world! this is supposingly from sign in html")
 
@@ -44,22 +60,31 @@ def signin(request):
 def signup(request):
     # If the user send POST request 
     if request.method == 'POST':
-        print("Post request received")
+        print("Sign up post is running")
         #Create new form and filled it with data from POST request
         user_form = userForm(request.POST, prefix='user')
         address_form = addressForm(request.POST, prefix='address')
         #combined_form = CombinedForm(request.POST, instance=User(), prefix='combined')
-        print(user_form.is_valid())
-        print(address_form)
-        print("Address form " + str(address_form.is_valid()))
+
         #Check if form is valid 
         if user_form.is_valid() and address_form.is_valid():
-            print("form is valid")
-            user = user_form.save()
+            print("Form is valid")
+            fname = user_form.cleaned_data["firstName"]
+            lname = user_form.cleaned_data["lastName"]
+            uname = user_form.cleaned_data["username"]
+            email = user_form.cleaned_data["email"]
+            pw = user_form.cleaned_data["password"]
+            #'firstName','lastName','username', 'email', 'password'
+            new_user = User.objects.create(firstName=fname, lastName=lname, username=uname, email=email, password=pw)
+            new_user.set_password(pw)
+            new_user.save()
+
+            #user = user_form.save(commit=False)
 
             address = address_form.save(commit=False)
-            address.user = user
+            address.user = new_user
             address.save()
+            #login(request, new_user)
 
             return HttpResponse("successfully saved user")
 
@@ -78,8 +103,6 @@ def signup(request):
     })
 
    
-def cart(request):
-    return render(request, 'cart.html')
 
 
 

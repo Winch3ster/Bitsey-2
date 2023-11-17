@@ -37,12 +37,7 @@
             
             <form class="col-12 text-center" action="{% url 'signin' %}" method="post">
                 {% csrf_token %}
-                <div>
-                    {{signIn_form.username}}
-                    {{signIn_form.password}}
-                </div>
-                
-
+                {{ signIn_form.as_p }}
                 <button class="secondary-btn-bitsey mt-3" type="submit">Sign In</button>
             </form>
         </div>
