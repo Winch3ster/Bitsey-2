@@ -38,13 +38,16 @@ urlpatterns = [
     path('signup/', userviews.signup, name='signup'),
 
 
-    path('cart/', orderviews.cart, name='cart'),
+    path('cart/', orderviews.view_cart, name='cart'),
 
 
     path('account/<int:user_id>/', userviews.edit_user, name='edit_user'),
-     path('addToCart/<int:gameId>/', browse.addToCart, name='add_to_cart'),
+    path('addToCart/<int:gameId>/', browse.addToCart, name='add_to_cart'),
+    path('removeFromCart/<int:cartItemId>/', orderviews.remove_from_cart, name="remove_from_cart" ),
+    path('search/', browse.search_for_game, name='search_for_game'),
+    path('userDataViewer', userviews.userDataViewer),
+    path('get_game_platform_data/<int:gameId>/', browse.get_game_platform_data, name='get_data'),
 
-    path('userDataViewer', userviews.userDataViewer)
 
 ] + static(settings.STATIC_URL, document_root = settings.STATIC_ROOT)
 

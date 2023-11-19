@@ -21,30 +21,11 @@
 </head>
 <body>
     <!-- Navigation bar -->
-    <nav class="nav">
-        <div class="company-name">
-            <span style="color: #038BA5; font-size: x-large;">Bitsey | </span> Store
-        </div>
-    
-        <div class="nav-element-container">
-            <ul>
-                <li><a href=""></a>Pre-order</li>
-                <li><a href=""></a>Games</li>
-                <li><a href=""></a>Deals</li>
-                <li><a href=""></a>Support</li>
-            </ul>
-        </div>
-    
-        <div class="nav-icon-container">
-            <img src="{% static '/media/images/homeImages/user.jpg' %}" alt="">
-            <img src="{% static '/media/images/homeImages/cart.jpg' %}" alt="">
-        </div>
-    
-    </nav>
+    {% include 'navbar.html' %}
 
 
     <div style="margin: 40px 0;">
-        <p class="h2 standard-margin-left">Cart</p> 
+        <p class="h2 standard-margin-left">{{user.username}}'s Cart</p> 
 
         <div class="standard-margin-left"> <!-- Links breakdown-->
             <a href="">Home</a>
@@ -56,36 +37,55 @@
 
         <div class="col-10 d-flex justify-content-between standard-margin-left"> <!-- main container -->
 
-            <div class="col-8"> <!-- order display --> 
-               <div class="rounded-3 p-2" style="padding-left: 20px; background-color: #d4f2c4;">You are eligible for free shipping!</div><!-- Messages --> 
+            <div class="col-8"> <!-- order display -->
+                
+                {% if  total_price > 300 %}
+                   
+                    <div class="rounded-3 p-2" style="padding-left: 20px; background-color: #d4f2c4;">You are eligible for free shipping!</div><!-- Messages --> 
+                {% endif %} 
                
                 <div> <!-- basket-container --> 
 
-                    <!-- basket-item-container --> 
-                    <div class="d-flex justify-content-center basket-item" style="margin: 10px 0;">  
-                        <div class="col-3"> <img style="height: 100px; width: 100px; border-radius: 5px; object-fit: cover;" src="{% static '/media/images/homeImages/bf1.jpg' %}" alt=""> </div> <!-- game image --> 
 
-                        <div class="col-3"> <!-- game name and price--> 
-                            <p class="m-0">Battlefield 1</p>
-                            <p class="text-m">RM 159.90</p>
-                        </div>
+                    {% for item in cart_items %}
 
-                        <div class="col-3"> <!-- game quantity --> 
-                            <p class="text-m">Quantity</p>
+                        <!-- basket-item-container --> 
+                        <div class="d-flex justify-content-center basket-item" style="margin: 10px 0;">  
+                            <div class="col-3"> <img style="height: 100px; width: 100px; border-radius: 5px; object-fit: cover;" src="{{item.game.image.url}}" alt=""> </div> <!-- game image --> 
 
-                            <form class="d-flex" action=""><!-- quantity selector --> 
-                                <button class="btn-empty"><i class="bi bi-dash bitsey-text-color" id="decrement-btn"></i></button>
-                                <p style="margin: 0px 5px;">1</p>
-                                <button class="btn-empty"><i class="bi bi-plus bitsey-text-color" id="decrement-btn"></i></button>
-                            </form>
+                            <div class="col-3"> <!-- game name and price--> 
+                                <p class="m-0">{{item.game.name}}</p>
+                                <p class="m-0">{{item.platform}}</p>
+                                <p class="text-m">{{item.edition}}</p>
+                            </div>
                             
+                            <div class="col-2"> <!-- game quantity --> 
+                                <p class="text-m">Quantity</p>
+
+                                <form class="d-flex" action=""><!-- quantity selector --> 
+                                    <button class="btn-empty"><i class="bi bi-dash bitsey-text-color" id="decrement-btn"></i></button>
+                                    <p style="margin: 0px 5px;">{{item.quantity}}</p>
+                                    <button class="btn-empty"><i class="bi bi-plus bitsey-text-color" id="decrement-btn"></i></button>
+                                </form>
+                                
+                            </div>
+
+                            <div class="col-2">
+                                <p class="text-m">RM {{item.game.price}}</p>
+                            </div>
+
+                            <div class="col-2">
+                                <form  action="{% url 'remove_from_cart' cartItemId=item.id %}" method="post">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn rounded-pill btn-outline-danger text-m">Remove</button>
+                                </form>
+                            </div> <!-- remove --> 
                         </div>
 
-                        <div class="col-2">
-                            <button class="btn rounded-pill btn-outline-danger text-m">Remove</button>
-                        </div> <!-- remove --> 
-                    </div>
 
+
+                    {% endfor %}
+                    
 
                </div>
             </div>
@@ -98,19 +98,19 @@
                 <div><!-- price summary  -->
                     <div class="d-flex justify-content-between">
                         <p>Item(s) subtotal:</p>
-                        <p class="fw-bold">RM <span>195.0</span></p>
+                        <p class="fw-bold">RM <span id="itemSubtotal" data-subtotal="{{total_price}}">{{total_price}}</span></p>
                     </div>
                     
                     <div class="d-flex justify-content-between">
                         <p>Shipping:</p>
-                        <p class="fw-bold">RM <span>20.0</span></p>
+                        <p class="fw-bold">RM <span id="shippingField"></span></p>
                     </div>
                 </div>  
 
                 <!-- Estimated total -->
                 <div class="d-flex justify-content-between mt-4" style="border-top: 1px solid #d8d8d8;">
                     <p>Total:</p>
-                    <p class="fw-bold">RM <span>210.9</span></p>
+                    <p class="fw-bold">RM <span id="cartTotal"></span></p>
                 </div>
 
                 <button class="btn btn-success rounded-pill">Payment</button>
@@ -164,4 +164,18 @@
 
 
 </body>
+<script>
+    function updateTotal(){
+        var shippingFee = 10
+        var shippingField = document.getElementById('shippingField')
+        var totalField = document.getElementById('cartTotal')
+        var subtotal = document.getElementById('itemSubtotal').dataset.subtotal;
+        console.log(subtotal)
+
+        shippingField.innerHTML = shippingFee
+        totalField.innerHTML = Number(subtotal) + Number(shippingFee) 
+    }
+    updateTotal();
+</script>
+
 </html>

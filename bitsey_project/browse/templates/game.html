@@ -23,25 +23,7 @@
     </head>
 <body>
     <!--Navigation bar-->
-    <nav class="nav">
-        <div class="company-name">
-            <span style="color: #038BA5; font-size: x-large;">Bitsey | </span> Store
-        </div>
-
-        <div class="nav-element-container">
-            <ul>
-                <li><a href=""></a>Pre-order</li>
-                <li><a href=""></a>Games</li>
-                <li><a href=""></a>Deals</li>
-                <li><a href=""></a>Support</li>
-            </ul>
-        </div>
-
-        <div class="nav-icon-container">
-            <img src="{% static '/media/images/homeImages/user.jpg' %}" alt="">
-            <img src="{% static '/media/images/homeImages/cart.jpg' %}" alt="">
-        </div>
-    </nav>
+    {% include 'navbar.html'%}
 
 
     <!-- Game header -->
@@ -77,54 +59,63 @@
 
     
 
-    <!-- Select platform and edition-->
-    <div class="col-12 d-flex justify-content-center">
-        <section class="position-relative col-8 select-version-edition-container">
-            <div class="d-flex justify-content-center">
-                <div class="col-5 m-2 rounded-2 p-2">
-                    <p>Select a version</p>
-    
-                    <label class="game-version-selector-radio">Digital
-                        <input type="radio" value="d" checked="checked" name="version">
-                        <span class="checkmark"></span>                   
-                    </label>
-                    
-                    <label class="game-version-selector-radio">Physical
-                        <input type="radio" value="a" name="version">
-                        <span class="checkmark"></span>                   
-                    </label>
-                    
-    
-                </div>
-                <div class="col-5 m-2 rounded-1 p-2">
-                    <p>Select a platform</p>
-                        <label class="game-version-selector-radio">PS5
-                            <input type="radio" value="d" checked="checked" name="platform">
-                            <span class="checkmark"></span>                   
-                        </label>
-                        
-                        <label class="game-version-selector-radio">PS4
-                            <input type="radio" value="a" name="platform">
-                            <span class="checkmark"></span>                   
-                        </label>
-                        <label class="game-version-selector-radio">Xbox One
-                            <input type="radio" value="d" checked="checked" name="platform">
-                            <span class="checkmark"></span>                   
-                        </label>
-                        
-                        <label class="game-version-selector-radio">PC
-                            <input type="radio" value="a" name="platform">
-                            <span class="checkmark"></span>                   
-                        </label>
-    
-                </div>
-            </div>
-            
-            <form action="{% url 'addToCart' gameId=returnedGame.id %}" method="post">
+    <!-- Select platform and edition-->    
+    <div>   
+        <section> 
+            <form id="addToCartForm" data-game-id="{{returnedGame.id}}" action="{% url 'add_to_cart' gameId=returnedGame.id %}" method="post">
                 {% csrf_token %}
-                <div type="submit" class="d-flex justify-content-center m-2"><button class="primary-btn">Add to cart <i class="bi bi-bag"></i> </button></div>
+
+
+                <div class="col-12 d-flex justify-content-center">
+                    <section class="position-relative col-8 select-version-edition-container">
+                        <div class="d-flex justify-content-center">
+                            <div class="col-5 m-2 rounded-2 p-2">
+                                <p>Select a version</p>
+                
+                                <label class="game-version-selector-radio">Digital Edition
+                                    <input type="radio"  checked="checked" name="edition" value="digital">
+                                    <span class="checkmark"></span>                   
+                                </label>
+
+                                <label class="game-version-selector-radio">Physical Edition
+
+                                                  
+                                    {% if returnedGame.physicalCopyQuantity < 1 %}
+
+                                        <input type="radio" value="physical" name="edition" disabled >
+                                        <span class="text-danger">Out of stock!</span>
+                                        <span class="checkmark"></span>  
+                                    {% else %}
+                                        <input type="radio" value="physical" name="edition" >             
+                                        <span class="checkmark"></span> 
+                                    {% endif %} 
+                                    
+                                </label>
+
+                                
+                               
+                                
+                
+                            </div>
+                            <div class="col-5 m-2 rounded-1 p-2">
+                                <p>Select a platform</p>
+
+                                    {% for platform in returnedGame.platforms.all %}
+                                        <label class="game-version-selector-radio">{{platform.platformName}}
+                                            <input type="radio" value="{{platform.platformName}}" checked="checked" name="platform">
+                                            <span class="checkmark"></span>                   
+                                        </label>
+                                    {% endfor %}
+                
+                            </div>
+                        </div>
+
+
+
+
+                <div type="button" class="d-flex justify-content-center m-2"><button type="button" class="primary-btn" onclick="validateAddToCartForm()" >Add to cart <i class="bi bi-bag"></i> </button></div>
             </form>
-    
+            <div class="text-center text-danger">{{errorMessage}}</div>
         </section>
     </div>
     
@@ -167,12 +158,10 @@
                 <p class="bitsey-text-color">Capabilities</p>
                 <div class="container">
                     <div class="row ">
-                        <div class="col-4  gametag">Single Player</div>
-                        <div class="col-4  gametag">Xbox Live</div>
-                        <div class="col-4  gametag">4K Ultra HD</div>
-                        <div class="col-4  gametag">HDR10</div> 
-                        <div class="col-4  gametag">Cross Platform</div>       
-                        <div class="col-4  gametag">Cloud</div>              
+                        {% for capability in returnedGame.gameCapabilities.all %}
+                            <div class="col-4  gametag">{{ capability.description }}</div>
+                 
+                        {% endfor %}        
                         <!-- This will wrap to the next row -->
                         <!-- Add more child elements as needed -->
                     </div>
@@ -189,6 +178,153 @@
 
 
     {% include 'footer.html'%}
+
     
+
+
+
+
+    
+<script>
+
+    function validateAddToCartForm() {
+        console.log("Get game is running")
+        var gameId = document.getElementById('addToCartForm').dataset.gameId;
+     
+        // Make a Fetch API request to the Django backend
+        fetch(`/get_game_platform_data/${gameId}`)  // Update this URL to match your Django view's URL
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();  // Assuming the backend returns JSON
+        })
+        .then(data => {
+            //Once received the validGameplatforms data
+            validPlatforms = data.gamePlatformArray
+
+            //Check the data selected by the user
+            
+            editionSelected = validateEdition()
+            platformSelected = validatePlatform()
+        
+
+            console.log("Edition selected " + editionSelected)
+            console.log("Platform selected"+ platformSelected)
+           
+            console.log(validPlatforms.includes(platformSelected))
+
+
+            //check if there is any temperment with the radios value     
+            if (editionSelected != 'physical' && editionSelected != 'digital' || !(validPlatforms.includes(platformSelected))) {
+                alert('We detected the value of radios have been changed. Please retry.');
+                return false;
+            }
+            // If validation passes, submit the form
+            document.getElementById('addToCartForm').submit();
+                
+
+        })
+        .catch(error => {
+            console.error('Error fetching data:', error);
+            return []
+        });
+        
+
+
+
+
+
+    }      
+
+    function validateEdition(){
+        //Get all the edition radios
+        var editionRadios = document.getElementsByName('edition');
+        var selectedRadioValue = ""
+        //Get all platforms radios
+        var platformRadios = document.getElementsByName('platform');
+    
+     
+        
+
+         // Iterate through the radio buttons to find the selected one
+        for (var i = 0; i < editionRadios.length; i++) {
+            if (editionRadios[i].checked) {
+                // Display the selected radio button's value
+                selectedRadioValue = editionRadios[i].value
+                break; // Exit the loop once a selected radio button is found
+            }
+        }
+
+        return selectedRadioValue
+
+    }
+
+
+
+    function validatePlatform(){
+       
+        var gameId = document.getElementById('addToCartForm').dataset.gameId;
+        console.log(gameId)
+
+        //Get all platforms radios
+        var platformRadios = document.getElementsByName('platform');
+        var selectedRadioValue = ""
+
+         // Iterate through the radio buttons to find the selected one
+        for (var i = 0; i < platformRadios.length; i++) {
+            if (platformRadios[i].checked) {
+                // Display the selected radio button's value
+                selectedRadioValue = platformRadios[i].value
+                break; // Exit the loop once a selected radio button is found
+            }
+        }
+
+        return selectedRadioValue
+
+    }
+
+
+    function getGamePlatforms(){
+        console.log("Get game is running")
+        var gameId = document.getElementById('addToCartForm').dataset.gameId;
+     
+        // Make a Fetch API request to the Django backend
+        fetch(`/get_game_platform_data/${gameId}`)  // Update this URL to match your Django view's URL
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();  // Assuming the backend returns JSON
+        })
+        .then(data => {
+
+
+
+            console.log("We got the data")
+            console.log(data.gamePlatformArray)
+
+
+
+
+            return data.gamePlatformArray
+            
+
+            // Now you can use the data as needed
+        })
+        .catch(error => {
+            console.error('Error fetching data:', error);
+            return []
+        });
+        
+    }
+
+    
+</script>
+
+
 </body>
+
+
+
 </html>

@@ -16,7 +16,10 @@ class GameCategory(models.Model):
     def __str__(self):
         return self.category
 
-
+class GameCapabilities(models.Model):
+    description = models.CharField(max_length=20)
+    def __str__(self):
+            return self.description
 
 class Game(models.Model):
     #By default, Django automatically add id to each instance
@@ -26,8 +29,8 @@ class Game(models.Model):
     publisher = models.CharField(max_length=100)
     developer = models.CharField(max_length=100)
     releaseDate = models.DateField()
-
-
+    physicalCopyQuantity = models.IntegerField()
+    
     #gameDirectory = name
     #parentDirectory = '../static/images/game/'
     #path = os.path.join(parentDirectory, gameDirectory)
@@ -37,7 +40,7 @@ class Game(models.Model):
 
     platforms = models.ManyToManyField(Platform)
     gameCategories = models.ManyToManyField(GameCategory)
-
+    gameCapabilities = models.ManyToManyField(GameCapabilities)
 
     def __str__(self):
         return self.name

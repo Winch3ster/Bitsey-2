@@ -102,9 +102,11 @@ a{
             align-items: center;
             text-decoration: none;
             list-style: none;
-            color: #038BA5;
+            
             cursor: pointer;
-
+            >a{
+                color: #038BA5;
+            }
          
         }
     }
@@ -118,18 +120,25 @@ a{
     justify-content: end;
     align-items: center;
 
-    > img{
-        width: 25px;
-        height: auto;
-        margin: 0 5% 0 5%;
-        transition: 0.2s;
+    >a{
+        width: fit-content;
+        height: fit-content;
         cursor: pointer;
         &:hover{
             opacity: 0.6;
         }
     }
 }
-
+.image-link-container{
+    width: 25px;
+    height: auto;
+    margin: 0 5% 0 5%;
+    transition: 0.2s;
+    cursor: pointer;
+    &:hover{
+        opacity: 0.6;
+    }
+}
 .company-name{
     font-weight: normal;
     width: 20%;
@@ -436,7 +445,13 @@ a{
 .modern-input:focus{
     outline: none;
 }
-
+.transparent-btn{
+    background-color: transparent;
+    border: none;
+}
+.transparent-btn:focus{
+    outline: none;
+}
 .minimalist-field{
     width: 350px;
  

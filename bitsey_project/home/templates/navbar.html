@@ -7,16 +7,34 @@
 
     <div class="nav-element-container">
         <ul>
-            <li><a href=""></a>Pre-order</li>
-            <li><a href=""></a>Games</li>
-            <li><a href=""></a>Deals</li>
-            <li><a href=""></a>Support</li>
+            <li><a href="{% url 'homepage' %}">Pre-order</a></li>
+            <li><a href="{% url 'browse' %}">Games</a></li>
+            <li><a href="{% url 'browse' %}">Deals</a></li>
+            <li><a href="{% url 'browse' %}">Support</a></li>
         </ul>
     </div>
-
+    
     <div class="nav-icon-container">
-        <img src="{% static '/media/images/homeImages/user.jpg' %}" alt="">
-        <img src="{% static '/media/images/homeImages/cart.jpg' %}" alt="">
+        {% if user.id != None %}
+            <!-- If THERE IS user signed in navigate to account page when clicked -->
+            
+            <!--<a href="account/{{user.id}}/" ><img class="image-link-container" src="{% static '/media/images/homeImages/user.jpg' %}" alt=""></a> -->
+            <a href="{% url 'edit_user' user_id=user.id %}"  ><img class="image-link-container" src="{% static '/media/images/homeImages/user.jpg' %}" alt=""></a>
+            <a href="{% url 'cart'%}" ><img class="image-link-container" src="{% static '/media/images/homeImages/cart.jpg' %}" alt=""></a>
+        
+        {% else %}
+            <!-- If NO user signed in navigate to sign in page when clicked -->
+            
+            <a href="{% url 'signin'%}" ><img class="image-link-container" src="{% static '/media/images/homeImages/user.jpg' %}" alt=""></a>
+            <a href="{% url 'signin'%}" ><img class="image-link-container" src="{% static '/media/images/homeImages/cart.jpg' %}" alt=""></a>
+        
+            
+        {% endif %} 
+
+        
+
+        
+        
     </div>
 
 </nav>

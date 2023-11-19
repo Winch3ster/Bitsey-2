@@ -80,9 +80,21 @@ def signup(request):
             new_user.save()
 
             #user = user_form.save(commit=False)
-
+            #['streetLine1', 'streetLine2', 'city', 'state', 'postalCode', 'country']
             address = address_form.save(commit=False)
+            streetL1 = address_form.cleaned_data["streetLine1"]
+            streetL2 = address_form.cleaned_data["streetLine2"]
+            city = address_form.cleaned_data["city"]
+            state = address_form.cleaned_data["state"]
+            postalcode = address_form.cleaned_data["postalCode"]
+            country = address_form.cleaned_data["country"]
+
+            new_user_address = Address(user=new_user, streetLine1 = streetL1, streetLine2 = streetL2, city = city, state = state, postalCode = postalcode, country = country)
+            new_user_address.save()
+            print(address)
+
             address.user = new_user
+            print(address.user.username)
             address.save()
             #login(request, new_user)
 
@@ -116,7 +128,7 @@ def edit_user(request, user_id):
 
         filled_user_form = userForm(request.POST, instance=user, prefix='user')
         filled_address_form = addressForm(request.POST, instance=user_address, prefix='address')
-
+         
         if filled_user_form.is_valid() and filled_address_form.is_valid():
             filled_user_form.save()
             filled_address_form.save()
@@ -124,7 +136,8 @@ def edit_user(request, user_id):
     else:
         form = userForm(instance=user, prefix='user')
         address_form =  addressForm (instance=user_address, prefix='address')
-    return render(request, 'account.html', {'form': form, 'address_form': address_form,'user': user})
+         
+    return render(request, 'account.html', {'form': form,'address_form': address_form,'user': user})
 
 
 def wishlist(request, user_id):

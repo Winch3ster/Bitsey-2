@@ -11,7 +11,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
    
     <link rel="stylesheet" href="{% static './css/responsiveElements.css'%} ">
     <link rel="stylesheet" href="{% static './css/global.css'%}">
@@ -55,9 +55,14 @@
     <p class="h2 standard-margin-left mb-4">Browse game</p> 
     <hr class="bitsey-color standard-margin-left" style="width: 100px; height: 8px; opacity: 1;">
     
-    <div class="position-relative rounded col-4 standard-margin-left light-gray-background d-flex" >
-        <i class="bi bi-search"></i>
-        <input type="search" class="modern-input light-gray-background" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+    <div class="position-relative rounded col-4 standard-margin-left light-gray-background d-flex justify-content-between" >
+
+        <form id="SearchForm" class="d-flex justify-content-between col-12 m-0 p-0" action="{% url 'search_for_game' %}" method="GET">
+            {% csrf_token %}
+            
+            <input type="search" class="modern-input light-gray-background" id="searchInput" name="search" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />    
+            <button type="submit" class="transparent-btn" ><i class="bi bi-search"></i></button>
+        </form>      
     </div>
 
     <div class="position-relative d-flex justify-content-evenly col-12 mt-5">
@@ -220,10 +225,11 @@
     
         <div class=" position-relative col-9 ">
             <div class="container">
-                <div class="row">
+                <div class="row" id="resultsContainer">
 
                     {% for game in returnedGames%}
-                        <div class="col-4 gametag">
+                        <div class="col-4 gametag" onclick="ViewDetailsPage('{{ game.id }}')">
+
                             <div class="game-block">
                                 <div class="game-block-image" style="background-image: url('{{game.image.url}}');"></div> <!-- image -->
                                 <div class="m-3">
@@ -240,6 +246,9 @@
                                 </div>
                                 
                             </div>
+
+
+
                         </div>
                     
                     {% endfor %}
@@ -251,10 +260,18 @@
             </div>
         </div>
         
-        
-
-
-     
     </div>
+
+<script>
+    function ViewDetailsPage(id) {
+        console.log("This is clicked")
+       // Use window.location to navigate to the detail page with the specified game ID
+       window.location.href = "{% url 'game_Details' game_id=0 %}".replace('0', id);
+    }
+
+    
+
+</script>
+    
 </body>
 </html>
