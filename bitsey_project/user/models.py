@@ -2,6 +2,7 @@ from django.db import models
 from browse import models as browseModel
 from django.db.models.deletion import CASCADE
 from django.contrib.auth.models import AbstractUser
+from browse import models as browsemodels
 # Create your models here.
 
 class User(AbstractUser):
@@ -21,31 +22,29 @@ class Address(models.Model):
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-class Basket(models.Model):
+class UserWishList(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    game = models.ManyToManyField(browsemodels.Game, through='WishListItem')
 
-    subtotal = models.FloatField()
-    total = models.FloatField()
-    games = models.ManyToManyField(browseModel.Game)
+    def __str__(self):
+        return f"Wishlist for {self.user.username}"
 
 
 
-class WishList(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    games = models.ManyToManyField(browseModel.Game)
+class WishListItem(models.Model):
+    wishList = models.ForeignKey(UserWishList, on_delete=models.CASCADE)
+    game = models.ForeignKey(browsemodels.Game, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.game} in {self.wishList}"
+
+
+
+
+
+
+
+
+
+
+

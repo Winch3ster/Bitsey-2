@@ -23,6 +23,6 @@ class userSignInForm(forms.Form):
         'password' : forms.TextInput(attrs={'placeholder': 'password', 'class' : 'sign-in-control'})
     }
 
-   
+
             
 #CombinedForm = inlineformset_factory(User, Address, fields='__all__', can_delete=False)

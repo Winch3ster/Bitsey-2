@@ -5,6 +5,7 @@ from .models import *
 admin.site.register(Platform)
 admin.site.register(GameCategory)
 admin.site.register(GameCapabilities)
+admin.site.register(GamePromotion)
 
 class GameplayImageAdmin(admin.StackedInline):
     model = GameplayImage

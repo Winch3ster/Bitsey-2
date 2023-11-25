@@ -8,6 +8,12 @@ from django.urls import reverse
 from django.contrib.auth import authenticate
 from home import views as homeviews
 
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from browse import models as browsemodels
+from django.contrib.auth.decorators import login_required
+import json
+
 
 # Create your views here.
 def signin(request):
@@ -140,11 +146,64 @@ def edit_user(request, user_id):
     return render(request, 'account.html', {'form': form,'address_form': address_form,'user': user})
 
 
-def wishlist(request, user_id):
-    # will return games and user
-    return render(request, 'wishlist.html', {'form': form, 'address_form': address_form,'user': user})
+
+
 
 
 def userDataViewer(request):
     users = User.objects.all()
     return render(request, 'dataviewer.html', {'users': users})
+
+
+@csrf_exempt
+def WishListItemCreate(request):
+    if request.method == 'POST':
+        # Assuming the data sent in the request is in JSON format
+        jsonData = json.loads(request.body.decode('utf-8'))
+    
+        #userId = jsonData['data']['userId']
+        gameId =jsonData['data']['gameId']
+
+        #get the games and user
+        #user = User.objects.get(pk=userId)
+        game = browsemodels.Game.objects.get(pk=gameId)
+
+        wishList, wishListCreated = UserWishList.objects.get_or_create(user=request.user)
+
+        wishListItem, wishListItemCreated = WishListItem.objects.get_or_create(wishList= wishList, game = game)
+
+        if not wishListItemCreated:
+            #if game already in wishlist, remove it
+            wishListItem.delete()
+            return JsonResponse({"status": "RemovedItem"})
+        
+        return JsonResponse({"status": "Success"})
+    
+    #If it is not a post request, assume it is a GET request for all user's wishlist items
+    else:
+        wishList, wishListCreated = UserWishList.objects.get_or_create(user=request.user)
+        wishListItems = WishListItem.objects.filter(wishList = wishList)
+
+        wishListItemsId = []
+        for item in wishListItems:
+            wishListItemsId.append(item.game.id)
+       
+        return JsonResponse({"userWishListItems": wishListItemsId})
+
+
+@login_required
+def view_wishlist(request):
+    wishlist = UserWishList.objects.get_or_create(user=request.user)[0]
+    wishlistItems = WishListItem.objects.filter(wishList = wishlist)
+
+    
+    return render(request, 'wishlist.html', {'wishlistItems': wishlistItems })
+
+def remove_from_wishList(request, wishListItemId):
+    #Remove from wishlist
+
+    uwishlist = UserWishList.objects.get_or_create(user=request.user)[0]
+    wishListItem = WishListItem.objects.filter(wishList =uwishlist, pk=wishListItemId)
+    wishListItem.delete()
+
+    return redirect(view_wishlist)

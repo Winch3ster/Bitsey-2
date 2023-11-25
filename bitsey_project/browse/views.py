@@ -9,6 +9,13 @@ from order import models as ordermodels
 # Create your views here.
 def browse(request):
     returnedGames = Game.objects.all()
+    if request.user.is_authenticated:
+        user = request.user
+        return render(request, 'store.html', {'returnedGames': returnedGames, 'user': user})
+
+
+
+    
     return render(request, 'store.html', {'returnedGames': returnedGames})
     #return HttpResponse("Hello world! this i supposingly from homepahe html")
 

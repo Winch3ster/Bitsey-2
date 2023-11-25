@@ -57,22 +57,5 @@ class Migration(migrations.Migration):
                 ('country', models.CharField(max_length=25)),
             ],
         ),
-        migrations.CreateModel(
-            name='WishList',
-            fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('games', models.ManyToManyField(to='browse.game')),
-                ('user', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
-            ],
-        ),
-        migrations.CreateModel(
-            name='Basket',
-            fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('subtotal', models.FloatField()),
-                ('total', models.FloatField()),
-                ('games', models.ManyToManyField(to='browse.game')),
-                ('user', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
-            ],
-        ),
+       
     ]

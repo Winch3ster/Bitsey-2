@@ -223,18 +223,18 @@
 
 
     
-        <div class=" position-relative col-9 ">
+        <div class=" position-relative col-9 " id="list-game-container">
             <div class="container">
                 <div class="row" id="resultsContainer">
 
                     {% for game in returnedGames%}
-                        <div class="col-4 gametag" onclick="ViewDetailsPage('{{ game.id }}')">
+                        <div class="col-4 gametag" >
 
-                            <div class="game-block">
+                            <div class="game-block" onclick="ViewDetailsPage('{{ game.id }}')">
                                 <div class="game-block-image" style="background-image: url('{{game.image.url}}');"></div> <!-- image -->
                                 <div class="m-3">
-                                    <p>{{game.name}}</p> <!-- name -->
-                                    <p class="text-s">RM {{game.price}}</p> <!-- Price -->
+                                    <p class="fw-bold light-text-color m-0">{{game.name}}</p> <!-- name -->
+                                    <p class="text-m bitsey-text-color" style="margin-bottom: 10px;">RM {{game.price}}</p> <!-- Price -->
                                     <div class="position-relative d-flex justify-content-evenly">
 
                                         {% for platform in game.platforms.all %}
@@ -243,12 +243,14 @@
                                         {% endfor %}
                                         
                                     </div> <!-- platform -->
+                                    <!-- Add to wishlist button -->
+
+                                    <div class="wishlist-container" > <!-- event.stopPropagation() = prevent triggering parent div's onclick -->
+                                        <button onclick="AddToWishList(`{{game.id}}`, `{{user.id}}`); " class="empty-btn"><i id='{{game.id}}' class="bi bi-heart" style="color: #038BA5;"></i></button> 
+                                    </div>
                                 </div>
                                 
                             </div>
-
-
-
                         </div>
                     
                     {% endfor %}
@@ -269,8 +271,62 @@
        window.location.href = "{% url 'game_Details' game_id=0 %}".replace('0', id);
     }
 
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log("DOM has loaded")
+        fetch('http://127.0.0.1:8000/wishListItem/', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },})
+            .then(response => response.json())
+            .then(data => {
+                console.log(data.userWishListItems)
+                for (var i =0; i <data.userWishListItems.length; i++){
+                    var icon = document.getElementById(data.userWishListItems[i])
+                    icon.classList.remove('bi-heart')
+                    icon.classList.add('bi-heart-fill')
+ 
+                }
+               
+            })
+            .catch(error => console.error('Error:', error));
+        });
     
 
+    function AddToWishList(gameId, userId){
+        event.stopPropagation()
+
+        var wishListIcon = document.getElementById(gameId)
+
+        console.log("AddtoWishList btn is working")
+        console.log(wishListIcon)
+
+        fetch('http://127.0.0.1:8000/wishListItem/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ data: {
+                    //"userId": userId,
+                    "gameId": gameId
+                } }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                if(data.status == 'RemovedItem'){
+                    wishListIcon.classList.remove('bi-heart-fill')
+                    wishListIcon.classList.add('bi-heart')
+                }else{
+                    wishListIcon.classList.remove('bi-heart')
+                    wishListIcon.classList.add('bi-heart-fill')
+                }
+                console.log(data.status)
+            })
+            .catch(error => console.error('Error:', error));
+       
+      
+    }
+    
 </script>
     
 </body>

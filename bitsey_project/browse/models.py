@@ -50,3 +50,19 @@ class GameplayImage(models.Model):
     #parentDirectory = '../static/images/game/'
     gameplayImage = models.ImageField(upload_to='images/game/gameplayImages/')
 
+
+
+class GamePromotion(models.Model):
+    game = models.ForeignKey(Game, on_delete=CASCADE)
+    newPrice = models.FloatField()
+
+
+class PreOrderGame(models.Model):   
+    name = models.CharField(max_length=255)
+    price = models.FloatField()
+    description = models.TextField()
+    publisher = models.CharField(max_length=100)
+    developer = models.CharField(max_length=100)
+    releaseDate = models.DateField()
+    image = models.ImageField(upload_to= 'images/game')
+    platforms = models.ManyToManyField(Platform)

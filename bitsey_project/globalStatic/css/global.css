@@ -236,7 +236,7 @@ a{
     color: #343434;
 }
 
-
+/*         BUTTONS          */
 
 .primary-btn{
     padding: 4px 15px;
@@ -313,6 +313,22 @@ a{
     color: white;
 }
 
+.small-border-radius{
+    border-radius: 6px;
+}
+
+
+.empty-btn{
+    outline: none;
+    background-color: transparent;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.empty-btn:hover{
+    outline: none;
+}
 
 
 
@@ -462,3 +478,10 @@ a{
 .minimalist-field:focus{
     outline: none;
 }
+
+
+
+
+
+
+/*  Add to wish list button  */

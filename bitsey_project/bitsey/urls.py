@@ -47,7 +47,10 @@ urlpatterns = [
     path('search/', browse.search_for_game, name='search_for_game'),
     path('userDataViewer', userviews.userDataViewer),
     path('get_game_platform_data/<int:gameId>/', browse.get_game_platform_data, name='get_data'),
-
+    path('wishlist/', userviews.view_wishlist, name='wishlish_view'),
+    path('wishListItem/', userviews.WishListItemCreate, name='wishListItem'),
+    
+    path('removeFromWishlist/<int:wishListItemId>/', userviews.remove_from_wishList, name='remove_from_wishlist')
 
 ] + static(settings.STATIC_URL, document_root = settings.STATIC_ROOT)
 

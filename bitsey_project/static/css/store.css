@@ -1,7 +1,7 @@
 .game-block{
     width: 220px;
-    height: 300px;
-    padding-bottom:10px ;
+
+    padding-bottom:20px ;
     border-radius: 15px;
     border: 2px solid #d8d8d8;
     margin: auto;
@@ -25,13 +25,6 @@
     -moz-box-shadow: 0px 15px 30px -5px rgba(39, 39, 39, 0.79);
 }
 
-.empty-btn{
-    padding: 5px;
-    cursor: pointer;
-}
-.empty-btn:hover{
-    color: #038BA5;;
-}
 .cover{
     background-image: url('/static/media/images/storeImages/cover.jpg');
 }
@@ -43,4 +36,15 @@
     padding: 5px 10px;
     margin-right: 10px;
     margin-bottom: 10px;
+}
+
+.wishlist-container{
+    width: 100%;
+    padding: 10px 0;
+    background-color: red;
+    z-index: 2;
+
+}
+.wishlist-container:hover{
+    background-color: blue;
 }
