@@ -23,3 +23,8 @@ function AddressForm(){
     addressForm.style.display ='block';
     console.log("Navigate to address detail form")
 }
+
+function WishList(){
+    console.log("navigate to uer wishlist")
+    window.location.href = "{% url 'wishlist_view' %}";
+}

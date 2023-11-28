@@ -10,7 +10,7 @@ from home import views as homeviews
 
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-from browse import models as browsemodels
+
 from django.contrib.auth.decorators import login_required
 import json
 
@@ -193,7 +193,10 @@ def WishListItemCreate(request):
 
 @login_required
 def view_wishlist(request):
+    print("view wishlist is running")
     wishlist = UserWishList.objects.get_or_create(user=request.user)[0]
+    print(request.user)
+    print(wishlist)
     wishlistItems = WishListItem.objects.filter(wishList = wishlist)
 
     

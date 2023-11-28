@@ -1,5 +1,8 @@
 from django.db import models
 from django.db.models.deletion import CASCADE
+
+
+
 # Create your models here.
 
 
@@ -55,6 +58,13 @@ class GameplayImage(models.Model):
 class GamePromotion(models.Model):
     game = models.ForeignKey(Game, on_delete=CASCADE)
     newPrice = models.FloatField()
+
+    def __str__(self):
+        return self.game.name 
+
+
+
+
 
 
 class PreOrderGame(models.Model):   

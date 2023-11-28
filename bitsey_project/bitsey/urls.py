@@ -19,10 +19,12 @@ from django.urls import path,include
 from browse import views
 from django.conf import settings
 from django.conf.urls.static import static
+from django.contrib.auth import views as auth_views
 from home import views as home
 from browse import views as browse
 from user import views as userviews
-from order import views as orderviews;
+from order import views as orderviews
+from system import views as systemviews
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -36,6 +38,7 @@ urlpatterns = [
     path('browse/<int:game_id>', browse.game_detail, name='game_Details'),
     path('signin/', userviews.signin, name='signin'),
     path('signup/', userviews.signup, name='signup'),
+    path('logout/', auth_views.LogoutView.as_view(next_page='homepage'), name='logout'),
 
 
     path('cart/', orderviews.view_cart, name='cart'),
@@ -47,9 +50,19 @@ urlpatterns = [
     path('search/', browse.search_for_game, name='search_for_game'),
     path('userDataViewer', userviews.userDataViewer),
     path('get_game_platform_data/<int:gameId>/', browse.get_game_platform_data, name='get_data'),
-    path('wishlist/', userviews.view_wishlist, name='wishlish_view'),
+    path('wishlist/', userviews.view_wishlist, name='wishlist_view'),
     path('wishListItem/', userviews.WishListItemCreate, name='wishListItem'),
     
+    path('notifications/', systemviews.GetUserNotifications, name="get_notifications"),
+    path('notifications/Delete/<int:notificationId>/', systemviews.DeleteSpecificNotification, name="delete_specific_notifications"),
+    path('notifications/Read/', systemviews.ReadNotification, name="read_notifications"),
+
+    path('notifications/anyUnread/', systemviews.AnyUnreadNotification, name="any_unread_notifications"),
+
+    path('notifications/DeleteAll/', systemviews.DeleteAllNotification, name="delete_all_notifications"),
+
+    
+   
     path('removeFromWishlist/<int:wishListItemId>/', userviews.remove_from_wishList, name='remove_from_wishlist')
 
 ] + static(settings.STATIC_URL, document_root = settings.STATIC_ROOT)

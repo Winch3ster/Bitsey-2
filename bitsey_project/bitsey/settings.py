@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'order',
     'corsheaders',
     'rest_framework',
+    'system'
 ]
 
 MIDDLEWARE = [

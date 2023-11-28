@@ -18,6 +18,8 @@
         {% if user.id != None %}
             <!-- If THERE IS user signed in navigate to account page when clicked -->
             
+            <div onclick="OpenNotificationBar()"><img class="image-link-container" src="{% static '/media/images/homeImages/notification-bell.png' %}" alt="" style="height: 24px; width: auto;"><span class="notification-mark" id="notification-mark"></span></div>
+            
             <!--<a href="account/{{user.id}}/" ><img class="image-link-container" src="{% static '/media/images/homeImages/user.jpg' %}" alt=""></a> -->
             <a href="{% url 'edit_user' user_id=user.id %}"  ><img class="image-link-container" src="{% static '/media/images/homeImages/user.jpg' %}" alt=""></a>
             <a href="{% url 'cart'%}" ><img class="image-link-container" src="{% static '/media/images/homeImages/cart.jpg' %}" alt=""></a>
@@ -30,11 +32,21 @@
         
             
         {% endif %} 
-
-        
-
-        
-        
     </div>
 
 </nav>
+
+<div id="notification-bar" class="notification-bar light-text-color">
+    <div class="d-flex justify-content-between m-2">
+        <p class="m-0">Notifications</p>
+        <div class="bitsey-text-color" onclick="CloseNotificationBar()"><i class="bi bi-x" style="cursor: pointer; font-size: larger;"></i></div>
+    </div>
+
+    <div id="notification-bar-message-container">
+
+        
+    </div>
+    
+
+    <div class="bitsey-text-color text-center" style="cursor: pointer;" onclick="ClearNotifications()">Clear all</div>
+</div>

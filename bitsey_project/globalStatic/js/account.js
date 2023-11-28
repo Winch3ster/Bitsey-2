@@ -23,3 +23,4 @@ function AddressForm(){
     addressForm.style.display ='block';
     console.log("Navigate to address detail form")
 }
+

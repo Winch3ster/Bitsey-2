@@ -46,5 +46,3 @@ class WishListItem(models.Model):
 
 
 
-
-

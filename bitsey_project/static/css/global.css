@@ -132,7 +132,7 @@ a{
 .image-link-container{
     width: 25px;
     height: auto;
-    margin: 0 5% 0 5%;
+    margin: 0 12px 0 12px;
     transition: 0.2s;
     cursor: pointer;
     &:hover{
@@ -145,8 +145,67 @@ a{
     padding-left: 5%;
 }
 
+/*    Notification    */
+.notification-mark{
+    position: absolute;
+    right: 105px;
+    top: -2px;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    background-color: red;
+    color: white;
+    padding: 1px 6px;
+    border-radius: 20px;
+    font-size: 9px;
+}
+
+.notification-bar{
+    display: none;
+    position: absolute;
+    padding: 5px 10px 20px 10px;
+    width: 400px;
+    border-radius: 5px;
+    right: 10px;
+    top: 150px;
+    z-index: 2;
+    background-color: white;
+    transition: 0.3s;
+}
 
 
+.notification-message-container{
+    width: 100%;
+    display: flex;
+    height: fit-content;
+    padding: 0;
+    border-radius: 7px;
+    background-color: white;
+    margin: 10px 0;
+}
+
+.notification-message-label{
+    width: 5%;
+    background-color: #038BA5;
+    border-radius: 6px 0 0 6px;
+}
+.notification-message-label-read{
+    width: 5%;
+    background-color: #343434;
+    border-radius: 6px 0 0 6px;
+    
+}
+
+.notification-message{
+    width: 85%;
+    margin-left: 5%;
+    padding: 17px 0;
+}
+.notification-message-close{
+    width: 8%;
+    border-radius: 0 6px 6px 0;
+    font-size: 20px;
+}
 
 
 
@@ -271,7 +330,7 @@ a{
 }
 .secondary-btn:hover{
     background-color: white;
-    border: 2px solid white;
+    border: 2px solid black;
     color: black;
 }
 

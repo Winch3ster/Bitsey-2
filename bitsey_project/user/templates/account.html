@@ -58,14 +58,21 @@
                         <p class=" account-nav">Change address</p>
                     </div>
                     
-                    <div class="d-flex m-4" onclick="WishList()">
+                    <div class="d-flex m-4">
                         <div ><i class="bi bi-heart-fill light-text-color"></i></div> <!-- indicator -->
-                        <a style="margin-left: 20px;" href="">WishList</a>
+                        <a style="margin-left: 20px;" href="{% url 'wishlist_view' %}">WishList</a>
                     </div>
 
                     <div class="d-flex m-4">
                         <div ><i class="bi bi-bag-fill light-text-color"></i></div> <!-- indicator -->
                         <a style="margin-left: 20px;" href="">Purchase history</a>
+                    </div>
+
+                    <div class="d-flex m-4">
+                        <form method="post" action="{% url 'logout' %}">
+                            {% csrf_token %}
+                            <input  type="submit" class="secondary-btn-bitsey small-border-radius" value="Sign Out"></input>
+                        </form>
                     </div>
                 </div>
                 

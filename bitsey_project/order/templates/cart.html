@@ -36,59 +36,71 @@
         </div> 
 
         <div class="col-10 d-flex justify-content-between standard-margin-left"> <!-- main container -->
-
             <div class="col-8"> <!-- order display -->
+                {% if cart_is_empty %}
+                    <p class="h2 text-center">Oh no... Your cart is empty!</p>
+                    
+                    <div class="col-12 d-flex justify-content-center">
+                        <img style="height: 300px; width: 300px;" src="{% static '/media/images/userAppImages/wind.gif' %}" alt="empty wishlist">
+                    </div>
+
+                {% else %}
+            
                 
                 {% if  total_price > 300 %}
                    
                     <div class="rounded-3 p-2" style="padding-left: 20px; background-color: #d4f2c4;">You are eligible for free shipping!</div><!-- Messages --> 
                 {% endif %} 
-               
-                <div> <!-- basket-container --> 
+                
+                    <div> <!-- basket-container --> 
 
 
-                    {% for item in cart_items %}
+                        {% for item in cart_items %}
 
-                        <!-- basket-item-container --> 
-                        <div class="d-flex justify-content-center basket-item" style="margin: 10px 0;">  
-                            <div class="col-3"> <img style="height: 100px; width: 100px; border-radius: 5px; object-fit: cover;" src="{{item.game.image.url}}" alt=""> </div> <!-- game image --> 
+                            <!-- basket-item-container --> 
+                            <div class="d-flex justify-content-center basket-item" style="margin: 10px 0;">  
+                                <div class="col-3"> <img style="height: 100px; width: 100px; border-radius: 5px; object-fit: cover;" src="{{item.game.image.url}}" alt=""> </div> <!-- game image --> 
 
-                            <div class="col-3"> <!-- game name and price--> 
-                                <p class="m-0">{{item.game.name}}</p>
-                                <p class="m-0">{{item.platform}}</p>
-                                <p class="text-m">{{item.edition}}</p>
-                            </div>
-                            
-                            <div class="col-2"> <!-- game quantity --> 
-                                <p class="text-m">Quantity</p>
-
-                                <form class="d-flex" action=""><!-- quantity selector --> 
-                                    <button class="btn-empty"><i class="bi bi-dash bitsey-text-color" id="decrement-btn"></i></button>
-                                    <p style="margin: 0px 5px;">{{item.quantity}}</p>
-                                    <button class="btn-empty"><i class="bi bi-plus bitsey-text-color" id="decrement-btn"></i></button>
-                                </form>
+                                <div class="col-3"> <!-- game name and price--> 
+                                    <p class="m-0">{{item.game.name}}</p>
+                                    <p class="m-0">{{item.platform}}</p>
+                                    <p class="text-m">{{item.edition}}</p>
+                                </div>
                                 
+                                <div class="col-2"> <!-- game quantity --> 
+                                    <p class="text-m">Quantity</p>
+
+                                    <form class="d-flex" action=""><!-- quantity selector --> 
+                                        <button class="btn-empty"><i class="bi bi-dash bitsey-text-color" id="decrement-btn"></i></button>
+                                        <p style="margin: 0px 5px;">{{item.quantity}}</p>
+                                        <button class="btn-empty"><i class="bi bi-plus bitsey-text-color" id="decrement-btn"></i></button>
+                                    </form>
+                                    
+                                </div>
+
+                                <div class="col-2">
+                                    <p class="text-m">RM {{item.game.price}}</p>
+                                </div>
+
+                                <div class="col-2">
+                                    <form  action="{% url 'remove_from_cart' cartItemId=item.id %}" method="post">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn rounded-pill btn-outline-danger text-m">Remove</button>
+                                    </form>
+                                </div> <!-- remove --> 
                             </div>
 
-                            <div class="col-2">
-                                <p class="text-m">RM {{item.game.price}}</p>
-                            </div>
-
-                            <div class="col-2">
-                                <form  action="{% url 'remove_from_cart' cartItemId=item.id %}" method="post">
-                                    {% csrf_token %}
-                                    <button type="submit" class="btn rounded-pill btn-outline-danger text-m">Remove</button>
-                                </form>
-                            </div> <!-- remove --> 
-                        </div>
 
 
+                        {% endfor %}
+                        
 
-                    {% endfor %}
-                    
+                </div>
+                
 
-               </div>
-            </div>
+            {% endif %}         
+
+        </div>
 
 
             <!-- order summary  -->
@@ -103,7 +115,7 @@
                     
                     <div class="d-flex justify-content-between">
                         <p>Shipping:</p>
-                        <p class="fw-bold">RM <span id="shippingField"></span></p>
+                        <p class="fw-bold">RM  <span id="shippingField" data-shippingfee="{{shipping_price}}">{{shipping_price}}</span></p>
                     </div>
                 </div>  
 
@@ -113,7 +125,12 @@
                     <p class="fw-bold">RM <span id="cartTotal"></span></p>
                 </div>
 
-                <button class="btn btn-success rounded-pill">Payment</button>
+                {% if cart_is_empty %}
+                    <button class="btn btn-success rounded-pill" disabled>Payment</button>   
+                {% else %}
+                    <button class="btn btn-success rounded-pill">Payment</button>
+                {% endif %} 
+                
             </div>
 
 
@@ -166,14 +183,16 @@
 </body>
 <script>
     function updateTotal(){
-        var shippingFee = 10
+        
         var shippingField = document.getElementById('shippingField')
+        var shipping = shippingField.dataset.shippingfee;
+        console.log(shipping)
         var totalField = document.getElementById('cartTotal')
         var subtotal = document.getElementById('itemSubtotal').dataset.subtotal;
         console.log(subtotal)
 
-        shippingField.innerHTML = shippingFee
-        totalField.innerHTML = Number(subtotal) + Number(shippingFee) 
+
+        totalField.innerHTML = Number(subtotal) + Number(shipping) 
     }
     updateTotal();
 </script>

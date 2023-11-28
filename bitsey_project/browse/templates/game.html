@@ -38,7 +38,7 @@
                 <p class="text-white">Rating</p>
                 <div class="inline-display"> 
                     
-                    <button class="primary-btn">Buy Now</button>
+                    <a class="primary-btn" href="#add-to-cart-section">Buy Now</a>
                     <button class="secondary-btn">Try Out</button>
                 </div>
             </div>
@@ -60,13 +60,13 @@
     
 
     <!-- Select platform and edition-->    
-    <div>   
-        <section> 
+    <div >   
+        <section > 
             <form id="addToCartForm" data-game-id="{{returnedGame.id}}" action="{% url 'add_to_cart' gameId=returnedGame.id %}" method="post">
                 {% csrf_token %}
 
 
-                <div class="col-12 d-flex justify-content-center">
+                <div class="col-12 d-flex justify-content-center" id="add-to-cart-section">
                     <section class="position-relative col-8 select-version-edition-container">
                         <div class="d-flex justify-content-center">
                             <div class="col-5 m-2 rounded-2 p-2">
@@ -74,6 +74,7 @@
                 
                                 <label class="game-version-selector-radio">Digital Edition
                                     <input type="radio"  checked="checked" name="edition" value="digital">
+                                    
                                     <span class="checkmark"></span>                   
                                 </label>
 
@@ -83,10 +84,11 @@
                                     {% if returnedGame.physicalCopyQuantity < 1 %}
 
                                         <input type="radio" value="physical" name="edition" disabled >
-                                        <span class="text-danger">Out of stock!</span>
+                                        <span class="text-danger" style="margin-left: 10px;">Out of stock!</span>
                                         <span class="checkmark"></span>  
                                     {% else %}
-                                        <input type="radio" value="physical" name="edition" >             
+                                        <input type="radio" value="physical" name="edition" >   
+                                        <span class="bitsey-text-color" style="margin-left: 10px;">Stock: {{returnedGame.physicalCopyQuantity}}</span>          
                                         <span class="checkmark"></span> 
                                     {% endif %} 
                                     
@@ -101,7 +103,7 @@
                                 <p>Select a platform</p>
 
                                     {% for platform in returnedGame.platforms.all %}
-                                        <label class="game-version-selector-radio">{{platform.platformName}}
+                                        <label class="game-version-selector-radio">{{platform.platformName}} 
                                             <input type="radio" value="{{platform.platformName}}" checked="checked" name="platform">
                                             <span class="checkmark"></span>                   
                                         </label>
@@ -304,9 +306,6 @@
             console.log("We got the data")
             console.log(data.gamePlatformArray)
 
-
-
-
             return data.gamePlatformArray
             
 
@@ -319,7 +318,12 @@
         
     }
 
-    
+    function AddToCart(){
+        console.log("Make add to cart animation")
+        
+    }
+
+
 </script>
 
 
