@@ -47,6 +47,7 @@ urlpatterns = [
     path('account/<int:user_id>/', userviews.edit_user, name='edit_user'),
     path('addToCart/<int:gameId>/', browse.addToCart, name='add_to_cart'),
     path('removeFromCart/<int:cartItemId>/', orderviews.remove_from_cart, name="remove_from_cart" ),
+    path('GetNumberOfCartItem/', orderviews.GetNumberOfCartItem,  name="get_number_of_cart_item" ),
     path('search/', browse.search_for_game, name='search_for_game'),
     path('userDataViewer', userviews.userDataViewer),
     path('get_game_platform_data/<int:gameId>/', browse.get_game_platform_data, name='get_data'),
@@ -61,7 +62,8 @@ urlpatterns = [
 
     path('notifications/DeleteAll/', systemviews.DeleteAllNotification, name="delete_all_notifications"),
 
-    
+    path('convert-cart-to-order/', orderviews.convert_cart_to_order, name='convert_cart_to_order'),
+
    
     path('removeFromWishlist/<int:wishListItemId>/', userviews.remove_from_wishList, name='remove_from_wishlist')
 

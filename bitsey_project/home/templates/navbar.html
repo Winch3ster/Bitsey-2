@@ -22,7 +22,7 @@
             
             <!--<a href="account/{{user.id}}/" ><img class="image-link-container" src="{% static '/media/images/homeImages/user.jpg' %}" alt=""></a> -->
             <a href="{% url 'edit_user' user_id=user.id %}"  ><img class="image-link-container" src="{% static '/media/images/homeImages/user.jpg' %}" alt=""></a>
-            <a href="{% url 'cart'%}" ><img class="image-link-container" src="{% static '/media/images/homeImages/cart.jpg' %}" alt=""></a>
+            <a href="{% url 'cart'%}" ><img class="image-link-container" src="{% static '/media/images/homeImages/cart.jpg' %}" alt=""><span class="" id="cart-mark">1</span></a>
         
         {% else %}
             <!-- If NO user signed in navigate to sign in page when clicked -->

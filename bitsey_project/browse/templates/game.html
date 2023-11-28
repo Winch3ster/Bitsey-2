@@ -62,7 +62,8 @@
     <!-- Select platform and edition-->    
     <div >   
         <section > 
-            <form id="addToCartForm" data-game-id="{{returnedGame.id}}" action="{% url 'add_to_cart' gameId=returnedGame.id %}" method="post">
+            <!-- action="{% url 'add_to_cart' gameId=returnedGame.id %}" method="post" -->
+            <form id="addToCartForm" data-game-id="{{returnedGame.id}}" >
                 {% csrf_token %}
 
 
@@ -115,7 +116,7 @@
 
 
 
-                <div type="button" class="d-flex justify-content-center m-2"><button type="button" class="primary-btn" onclick="validateAddToCartForm()" >Add to cart <i class="bi bi-bag"></i> </button></div>
+                <div type="button" class="d-flex justify-content-center m-2"><button type="button" class="primary-btn" onclick="AddToCart()" >Add to cart <i class="bi bi-bag"></i> </button></div>
             </form>
             <div class="text-center text-danger">{{errorMessage}}</div>
         </section>
@@ -319,13 +320,65 @@
     }
 
     function AddToCart(){
-        console.log("Make add to cart animation")
+        var gameId =document.getElementById('addToCartForm').dataset.gameId
+        console.log(gameId)
+        //validateAddToCartForm()
+        // Get form data
+        const form = document.getElementById('addToCartForm');
+        const formData = new FormData(form);
+
+        // Make API call using Fetch API
+        fetch(`/addToCart/${gameId}/`, {
+            method: 'POST',
+            body: formData,            
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+
+            if(data.Success){
+                // Handle the API response as needed
+                console.log(data);
+                console.log("Make add to cart animation")
+                console.log(data.Success);
+                
+                AddToCartAnimation(data.itemInCart)
+            }
+            
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+        });
+
+
+
+
         
+    }   
+
+    function AddToCartAnimation(itemInCart){
+        console.log(itemInCart);
+        //For modern browser
+        document.documentElement.scrollTop = 0;
+        // For older browsers (including IE)
+        document.body.scrollTop = 0;
+
+        var cart_mark =document.getElementById('cart-mark')
+        cart_mark.classList.remove('cart-mark')
+        cart_mark.innerHTML = itemInCart
+        cart_mark.classList.add('add-to-cart-mark')
+        cart_mark.style.display= 'flex'
+        
+
     }
 
-
 </script>
-
+<script type="text/javascript" src="{% static 'js/notification.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/cartNotification.js' %}"></script>
 
 </body>
 

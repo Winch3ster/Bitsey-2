@@ -207,7 +207,47 @@ a{
     font-size: 20px;
 }
 
+.add-to-cart-mark{
+    position: absolute;
+    right: 7px;
+    top: -2px;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    background-color: red;
+    color: white;
+    padding: 1px 6px;
+    border-radius: 20px;
+    font-size: 9px;
+    animation-name: addNewItemInCart;
+    animation-duration: 1.1s;
+    
+}
+@keyframes addNewItemInCart {
+    0% {transform: scale(0);}
+    80% {transform: scale(0);}
+    100% {transform: scale(1.3);}
+}
 
+.cart-mark{
+    position: absolute;
+    right: 7px;
+    top: -2px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: red;
+    color: white;
+    padding: 1px 6px;
+    border-radius: 20px;
+    font-size: 9px;
+    animation-name: newItemInCart;
+    animation-duration: 0.4s;
+}
+@keyframes newItemInCart {
+    0% {transform: scale(0);}
+    100% {transform: scale(1.3);}
+}
 
 /*           Container           */
 .background-image-container{
@@ -355,7 +395,6 @@ a{
 
 .secondary-btn-bitsey{
     padding: 4px 50px;
-
     background-color: white;
     color: #343434;
     border: 2px solid #038BA5;;
@@ -375,6 +414,7 @@ a{
 .small-border-radius{
     border-radius: 6px;
 }
+
 
 
 .empty-btn{

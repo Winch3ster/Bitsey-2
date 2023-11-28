@@ -24,7 +24,3 @@ function AddressForm(){
     console.log("Navigate to address detail form")
 }
 
-function WishList(){
-    console.log("navigate to uer wishlist")
-    window.location.href = "{% url 'wishlist_view' %}";
-}

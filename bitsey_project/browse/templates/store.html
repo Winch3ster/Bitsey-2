@@ -317,8 +317,10 @@
                     wishListIcon.classList.remove('bi-heart-fill')
                     wishListIcon.classList.add('bi-heart')
                 }else{
+                   
                     wishListIcon.classList.remove('bi-heart')
                     wishListIcon.classList.add('bi-heart-fill')
+         
                 }
                 console.log(data.status)
             })
@@ -327,7 +329,9 @@
       
     }
     
-</script>
     
+</script>
+<script type="text/javascript" src="{% static 'js/notification.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/cartNotification.js' %}"></script>
 </body>
 </html>

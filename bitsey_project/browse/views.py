@@ -64,7 +64,8 @@ def addToCart(request, gameId):
                cart_item.quantity += 1
                cart_item.save()
             
-            return HttpResponse("Successfully added to cart")
+            itemInCart = ordermodels.CartItem.objects.filter(cart = cart).count()
+            return JsonResponse({"Success": True, "itemInCart": itemInCart})
         else:
             return redirect('signin')        
 

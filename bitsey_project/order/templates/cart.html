@@ -128,7 +128,11 @@
                 {% if cart_is_empty %}
                     <button class="btn btn-success rounded-pill" disabled>Payment</button>   
                 {% else %}
-                    <button class="btn btn-success rounded-pill">Payment</button>
+                <form form method="post" action="{% url 'convert_cart_to_order' %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-success rounded-pill">Payment</button>
+                </form>
+                    
                 {% endif %} 
                 
             </div>
@@ -196,5 +200,7 @@
     }
     updateTotal();
 </script>
+<script type="text/javascript" src="{% static 'js/notification.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/cartNotification.js' %}"></script>
 
 </html>
