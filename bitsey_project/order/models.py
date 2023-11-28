@@ -37,12 +37,16 @@ class CartItem(models.Model):
 
 class Order(models.Model):
     user = models.ForeignKey(usermodels.User, on_delete=models.CASCADE)
-    orderItems = models.ManyToManyField(browsemodels.Game, through='OrderItem')
+    orderItems = models.ManyToManyField(browsemodels.Game)
     totalPrice = models.FloatField()
     orderDate = models.DateField()
     isShipped = models.BooleanField()
     isReceived = models.BooleanField()
     # Add other fields as needed, e.g., total_price, order_date, etc.
+
+    def __str__(self) :
+        return f"{self.id} {self.user.firstName} {self.totalPrice}"
+    
 
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE)

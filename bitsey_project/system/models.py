@@ -7,7 +7,7 @@ from browse import models as browsemodels
 from django.db.models.deletion import CASCADE
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-
+from order import models as ordermodels
 from datetime import date
 
 # Create your models here.
@@ -53,3 +53,20 @@ def CreateNotification(toUser, message):
     notication.save()
 
    
+
+
+@receiver(post_save, sender=ordermodels.Order)
+def order_shipped_notification(sender, instance, **kwargs):
+    if instance.isShipped:
+        print(instance.user)
+        CreateIsShippedNotification(instance.user, f"Hooray! Your order (ID: {instance.id}) has been shipped!")
+
+        print(f"An order is shipped from system model")
+
+
+def CreateIsShippedNotification(toUser, message):
+    notication = Notifications(user=toUser, message = message, date=date.today(), isRead = False) 
+
+    notication.save()
+
+post_save.connect(order_shipped_notification, sender=ordermodels.Order)

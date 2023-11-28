@@ -16,11 +16,12 @@ function RenderCartMark(){
             console.log(data.itemInCart);
 
             //For modern browser
-            var cart_mark =document.getElementById('cart-mark')
-            cart_mark.classList.add('cart-mark')
-            cart_mark.innerHTML = data.itemInCart
+            if(data.itemInCart > 0){
+                var cart_mark =document.getElementById('cart-mark')
+                cart_mark.classList.add('cart-mark')
+                cart_mark.innerHTML = data.itemInCart
 
-            //cart_mark.style.display= 'flex'
+            }
             
         })
         .catch(error => console.error('Error:', error));

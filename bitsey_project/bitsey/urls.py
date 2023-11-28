@@ -63,7 +63,7 @@ urlpatterns = [
     path('notifications/DeleteAll/', systemviews.DeleteAllNotification, name="delete_all_notifications"),
 
     path('convert-cart-to-order/', orderviews.convert_cart_to_order, name='convert_cart_to_order'),
-
+    path('purchaseHistory/', userviews.view_purchase_history, name='view_purchase_history'),
    
     path('removeFromWishlist/<int:wishListItemId>/', userviews.remove_from_wishList, name='remove_from_wishlist')
 

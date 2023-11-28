@@ -124,3 +124,30 @@
     border: 2px solid #038BA5;;
     color: white;
 }
+
+
+
+
+.primary-btn-disabled{
+    width: fit-content;
+    padding: 4px 10px;
+    background-color: rgb(3, 139, 165);
+    border: 2px solid rgb(3, 139, 165);
+    opacity: 0.6;
+    border-radius: 6px;
+    font-size: 1.2rem;
+    margin: 0 5%;
+    color: white;
+    font-size: 16px;
+
+}
+
+
+
+.order-history-Individual-Item-Container{
+    position: relative;
+    width: 100%;
+    padding: 10px 0;
+    margin-top: 10px;
+    border-bottom: 2px solid gray;
+}

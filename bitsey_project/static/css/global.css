@@ -211,7 +211,7 @@ a{
     position: absolute;
     right: 7px;
     top: -2px;
-    display: none;
+    display: flex;
     justify-content: center;
     align-items: center;
     background-color: red;

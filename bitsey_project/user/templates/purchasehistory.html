@@ -1,0 +1,146 @@
+{% load static %}
+{% load widget_tweaks %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+
+    <link rel="stylesheet" href="{% static './css/responsiveElements.css'%} ">
+    <link rel="stylesheet" href="{% static './css/global.css'%}">
+    <link rel="stylesheet" href="{% static './css/responsiveGrid.css'%}">
+    
+    <link rel="stylesheet" href="{% static './css/user.css'%}">
+    
+
+    <title>Purchase History</title>
+</head>
+<body>
+    {% include 'navbar.html' %}
+
+    <div class="standard-margin-left mt-5 mb-5">
+        <h2>Purchase History</h2>
+        
+        <div> <!-- Links breakdown-->
+            <a href="">Home</a>
+            <i class="bi bi-chevron-right"></i>
+            <a href="">Account</a>
+            <i class="bi bi-chevron-right"></i>
+            <a href="">Purchase History</a>
+        </div> 
+
+        <p class="m-2">You can track your order here!</p>
+        
+        <div class="col-12 d-flex justify-content-center" style="padding-bottom: 100px;"> <!-- Wish list container -->
+
+
+            {% if noOrder %}
+
+            <div class="col-5">
+                <div class="col-12 d-flex justify-content-center">
+                    <img style="height: 300px; width: 300px;" src="{% static '/media/images/userAppImages/wind.gif' %}" alt="empty wishlist">
+                
+                </div>
+                
+                <p class="text-center">Looks like you have not purchased anything from us. Enjoy exclusive deals in Bitsey!</p>
+            </div>
+            
+            {% else %}
+            
+                <div class="col-10 p-0 m-0">
+                    
+                    {% for order in orders %}
+
+                        <div class="order-history-Individual-Item-Container">
+                            <div class="d-flex justify-content-between align-items-start">
+                                <div class="col-2">
+                                    <p><span class="bitsey-text-color">Order ID:</span> {{order.id}}</p>
+                                </div>
+    
+                                <div class="col-3 mx-2">
+                                    <p class="bitsey-text-color">Games</p>
+                                    {% for item in order_items.all %}
+                                        {% if item.order == order %}
+                                            <p>{{item.game}}</p>
+                                        {% endif %}
+                                
+                                    {% endfor %}                           
+                                </div>
+    
+                                <div class="col-2 mx-2">
+                                    <p class="bitsey-text-color">Order date</p>
+                                    <p>{{order.orderDate}}</p>
+                                </div>
+                                          
+                                <div class="col-2 ">
+                                    <p class="bitsey-text-color">Order Status</p>
+                                    {% if order.isShipped %}
+                                        <p>Shipped</p>
+                                    {% else %}
+                                        <p>Packing</p>
+                                    {% endif %} 
+                                </div>
+
+                            </div>
+
+                            <div class="d-flex justify-content-start align-items-center">
+                                <div class="col-2">
+                                    <p class="bitsey-text-color">Order subtotal</p>
+                                    <p>RM {{order.totalPrice}}</p>
+                                </div>
+                                <div class="col-2">
+                                    {% if order.isReceived %}
+                                        <div class="primary-btn-disabled" style="text-align: center;">Order Received</div>
+                                    {% else %}
+                                        <button class="learn-more-btn-bitsey" onclick="OrderReceived('{{order.id}}')">Order Received</button>
+                                    
+                                    {% endif %}           
+                                </div>
+                            </div>
+
+                            
+                           
+                        </div>
+
+
+
+
+                    {% endfor %}
+
+                </div>  
+                <!-- 
+                     user = models.ForeignKey(usermodels.User, on_delete=models.CASCADE)
+    orderItems = models.ManyToManyField(browsemodels.Game)
+    totalPrice = models.FloatField()
+    orderDate = models.DateField()
+    isShipped = models.BooleanField()
+    isReceived = models.BooleanField()
+                -->
+            {% endif %} 
+  
+        </div>
+    </div>
+    
+
+    {% include 'footer.html'%}
+</body>
+<script>
+    function OrderReceived(orderId){
+        console.log("Order id: " + orderId)
+        console.log("Order received")
+    }
+</script>
+
+<script type="text/javascript" src="{% static 'js/notification.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/cartNotification.js' %}"></script>
+
+    
+</html>

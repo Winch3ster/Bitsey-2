@@ -7,7 +7,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
 from django.contrib.auth import authenticate
 from home import views as homeviews
-
+from order import models as ordermodels
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 
@@ -210,3 +210,27 @@ def remove_from_wishList(request, wishListItemId):
     wishListItem.delete()
 
     return redirect(view_wishlist)
+
+def view_purchase_history(request):
+    print("view_purchase_history")
+    user = request.user
+    #Get all the order history
+    orders = ordermodels.Order.objects.filter(user=user)
+    order_items = ordermodels.OrderItem.objects.filter(order__in=orders)
+
+    print("Order Items: " + str(order_items))
+    noOrder = True
+    if orders is not None:
+        noOrder = False
+
+    #Create JSON for it
+
+
+    print(orders[0].orderItems)
+    print("noOrder: " + str(orders) )
+
+    return render(request, 'purchasehistory.html', {'orders': orders,'order_items': order_items ,'noOrder':noOrder} )
+
+
+def order_received(request, orderId):
+    pass

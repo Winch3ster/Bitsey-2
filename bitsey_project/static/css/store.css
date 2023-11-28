@@ -1,7 +1,6 @@
 .game-block{
     width: 220px;
-
-    padding-bottom:20px ;
+    padding-bottom:10px ;
     border-radius: 15px;
     border: 2px solid #d8d8d8;
     margin: auto;
@@ -40,11 +39,6 @@
 
 .wishlist-container{
     width: 100%;
-    padding: 10px 0;
-    background-color: red;
+    padding: 8px 0;
     z-index: 2;
-
-}
-.wishlist-container:hover{
-    background-color: blue;
 }

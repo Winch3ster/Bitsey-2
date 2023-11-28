@@ -48,3 +48,41 @@ def convert_cart_to_order(request):
     if request.method == "POST":
         print("Converting cart to order")
         
+        
+        user = request.user
+        print(user)
+        ucart = Cart.objects.get(user=user)
+        print(ucart)
+
+        cart_items = CartItem.objects.filter(cart=ucart)
+        print(cart_items)
+
+        #
+        uorder = Order.objects.create(user=user, totalPrice= 1.0, orderDate=date.today(), isShipped=False, isReceived=False)
+        print(uorder)
+
+        cart_items = CartItem.objects.filter(cart=ucart)
+        print(cart_items)
+
+        for cart_item in cart_items:
+            OrderItem.objects.create(
+                order= uorder,
+                game = cart_item.game.name,
+                edition = cart_item.edition,
+                platform = cart_item.platform,
+                quantity = cart_item.quantity,
+                price = cart_item.game.price
+            )
+        
+        order_items = OrderItem.objects.filter(order = uorder)    
+
+        uorder.totalPrice = sum(item.price * item.quantity for item in order_items)
+        uorder.orderDate = date.today()
+        uorder.isShipped = False
+        uorder.isReceived = False
+        uorder.save()
+
+        # Delete the original cart and cart items
+        cart = Cart.objects.get(user=user)
+        cart.delete()
+        return redirect(homeviews.home)
