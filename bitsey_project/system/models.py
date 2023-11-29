@@ -5,7 +5,7 @@ from django.db import models
 from user import models as usermodels
 from browse import models as browsemodels
 from django.db.models.deletion import CASCADE
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save, pre_delete
 from django.dispatch import receiver
 from order import models as ordermodels
 from datetime import date
@@ -25,12 +25,22 @@ class Notifications(models.Model):
 @receiver(post_save, sender=browsemodels.GamePromotion)
 def notifyGamePromotion(sender, instance, created, **kwargs):
     if created:
+        print("Notify game promotion is running!")
         # If the game is added to promotion list, go to the WishListItem tables, select all the data that has the game
         # --> Go to the wishlist --> to the user
         print(instance)
 
-        print(instance.game)
+        print(f"Instacne game: {instance.game}")
+        print(f"Instance game price: {instance.game.price}")
         
+        instance.oldPrice = instance.game.price
+        instance.game.price = instance.newPrice 
+        instance.game.save()
+        instance.game.isOnPromotion = True
+        instance.save()
+        print(f"Instance game isOnPromotion: {instance.game.isOnPromotion}")
+        print(f"Instance game oldprice: {instance.oldPrice}")
+
         wishListItems = usermodels.WishListItem.objects.filter(game=instance.game)
         print(wishListItems)
 
@@ -43,7 +53,16 @@ def notifyGamePromotion(sender, instance, created, **kwargs):
         print(f"{instance.game.name} is added to promotion from system model")
         # You can perform additional actions here
 
+
 post_save.connect(notifyGamePromotion, sender=browsemodels.GamePromotion)
+
+@receiver(pre_delete, sender=browsemodels.GamePromotion)
+def game_removed_from_promotion(sender, instance, **kwargs):
+    # If a Game is removed from GamePromotion
+    instance.game.price = instance.oldPrice
+    instance.game.isOnPromotion = False
+    instance.game.save()
+
 
 
 def CreateNotification(toUser, message):

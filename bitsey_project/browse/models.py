@@ -45,6 +45,8 @@ class Game(models.Model):
     gameCategories = models.ManyToManyField(GameCategory)
     gameCapabilities = models.ManyToManyField(GameCapabilities)
 
+    isOnPromotion = models.BooleanField()
+
     def __str__(self):
         return self.name
     
@@ -58,6 +60,7 @@ class GameplayImage(models.Model):
 class GamePromotion(models.Model):
     game = models.ForeignKey(Game, on_delete=CASCADE)
     newPrice = models.FloatField()
+    oldPrice = models.FloatField(default=0)
 
     def __str__(self):
         return self.game.name 

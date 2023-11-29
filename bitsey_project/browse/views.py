@@ -39,23 +39,17 @@ def addToCart(request, gameId):
         #check if user is logged in 
         #If YES, proceed 
         #If NO, redirect to front end
-
         if request.user.id != None:
 
             print(request.user.id)
-            print("New")
             # Process form data
             userPickedEdition = request.POST.get('edition')
             userPickedplatform = request.POST.get('platform')
 
             game = get_object_or_404(Game, pk=gameId)
 
-    
             cart, created = ordermodels.Cart.objects.get_or_create(user=request.user) #created will set to true if object can't befound an d a new is created
             
-
-
-        
             cart_item, item_created = ordermodels.CartItem.objects.get_or_create(cart=cart, game=game, edition=userPickedEdition, platform=userPickedplatform)
         
             #This translate to if item is not created, which means it is already in the cart

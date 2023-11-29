@@ -467,6 +467,13 @@ a{
     border-radius: 5px;
 }
 
+.promotion-label{
+    padding: 5px 10px;
+    border-radius: 10px;
+    background-color: #038BA5;
+    color: white;
+}
+
 /*           width           */
 
 .full-width{

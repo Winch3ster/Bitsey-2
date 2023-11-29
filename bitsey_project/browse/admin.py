@@ -6,13 +6,14 @@ from order import models as ordermodels
 admin.site.register(Platform)
 admin.site.register(GameCategory)
 admin.site.register(GameCapabilities)
-admin.site.register(GamePromotion)
+
 
 class GameplayImageAdmin(admin.StackedInline):
     model = GameplayImage
 
 class GameAdmin(admin.ModelAdmin):
     inlines = [GameplayImageAdmin]
+    exclude = ('isOnPromotion',)
 
     class Meta:
         model = Game
@@ -24,6 +25,10 @@ class OrderAdmin(admin.ModelAdmin):
     # Customize display fields in the list view
     list_display = ['user', 'totalPrice', 'orderDate']
 
+class GamePromotionAdmin(admin.ModelAdmin):
+    exclude = ('oldPrice',)
+
+admin.site.register(GamePromotion, GamePromotionAdmin)
 
 
 

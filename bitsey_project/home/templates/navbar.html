@@ -2,7 +2,8 @@
 <!--Navigation bar-->
 <nav class="nav">
     <div class="company-name">
-        <span style="color: #038BA5; font-size: x-large;">Bitsey | </span> Store
+        <a href="{% url 'homepage' %}"><span style="color: #038BA5; font-size: x-large;">Bitsey | </span> Store</a>
+        
     </div>
 
     <div class="nav-element-container">
@@ -10,7 +11,6 @@
             <li><a href="{% url 'homepage' %}">Pre-order</a></li>
             <li><a href="{% url 'browse' %}">Games</a></li>
             <li><a href="{% url 'browse' %}">Deals</a></li>
-            <li><a href="{% url 'browse' %}">Support</a></li>
         </ul>
     </div>
     
@@ -22,7 +22,7 @@
             
             <!--<a href="account/{{user.id}}/" ><img class="image-link-container" src="{% static '/media/images/homeImages/user.jpg' %}" alt=""></a> -->
             <a href="{% url 'edit_user' user_id=user.id %}"  ><img class="image-link-container" src="{% static '/media/images/homeImages/user.jpg' %}" alt=""></a>
-            <a href="{% url 'cart'%}" ><img class="image-link-container" src="{% static '/media/images/homeImages/cart.jpg' %}" alt=""><span class="" id="cart-mark">1</span></a>
+            <a href="{% url 'cart'%}" ><img class="image-link-container" src="{% static '/media/images/homeImages/cart.jpg' %}" alt=""><span class="" id="cart-mark"></span></a>
         
         {% else %}
             <!-- If NO user signed in navigate to sign in page when clicked -->

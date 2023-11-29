@@ -56,7 +56,7 @@
 
 
                         {% for item in cart_items %}
-
+                            
                             <!-- basket-item-container --> 
                             <div class="d-flex justify-content-center basket-item" style="margin: 10px 0;">  
                                 <div class="col-3"> <img style="height: 100px; width: 100px; border-radius: 5px; object-fit: cover;" src="{{item.game.image.url}}" alt=""> </div> <!-- game image --> 
@@ -67,16 +67,21 @@
                                     <p class="text-m">{{item.edition}}</p>
                                 </div>
                                 
+                                {% if item.edition == "physical"%}
                                 <div class="col-2"> <!-- game quantity --> 
                                     <p class="text-m">Quantity</p>
 
-                                    <form class="d-flex" action=""><!-- quantity selector --> 
-                                        <button class="btn-empty"><i class="bi bi-dash bitsey-text-color" id="decrement-btn"></i></button>
-                                        <p style="margin: 0px 5px;">{{item.quantity}}</p>
-                                        <button class="btn-empty"><i class="bi bi-plus bitsey-text-color" id="decrement-btn"></i></button>
-                                    </form>
+                                    <div class="d-flex"><!-- quantity selector --> 
+
+                                        <button type="button" class="btn-empty"><i class="bi bi-dash bitsey-text-color" onclick="decrement(`{{item.id}}`)"></i></button>
+                                        <p style="margin: 0px 5px;" id="game-quantity-{{item.id}}" data-maxPhysicalQuantity="{{item.game.physicalCopyQuantity}}">{{item.quantity}}</p>
+                                        <button type="button" class="btn-empty"><i class="bi bi-plus bitsey-text-color" onclick="increment(`{{item.id}}`)"></i></button>
+                                    
+                                    </div>
                                     
                                 </div>
+                                {% endif %}
+                                
 
                                 <div class="col-2">
                                     <p class="text-m">RM {{item.game.price}}</p>
@@ -89,8 +94,6 @@
                                     </form>
                                 </div> <!-- remove --> 
                             </div>
-
-
 
                         {% endfor %}
                         
@@ -186,7 +189,87 @@
 
 </body>
 <script>
-    function updateTotal(){
+    function decrement(cartItemId){
+        var numberDisplay =document.getElementById(`game-quantity-${cartItemId}`)
+
+        if(Number(numberDisplay.innerHTML) > 1){
+            console.log("decreasing count")
+
+            //Update cart item in the database
+            fetch('http://127.0.0.1:8000/UpdateCartItemQuantity/', {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ data: {
+                    //"userId": userId,
+                    "cartItemId": cartItemId,
+                    "operation": "decrement"
+                } }),
+            })
+            .then(response => response.json())
+            .then(data => {
+               
+                console.log(data.newQuantity)
+                
+                
+                numberDisplay.innerHTML = data.newQuantity
+                UpdateTotal(data.newTotal)
+            })
+            .catch(error => console.error('Error:', error));
+
+        }
+
+    }
+
+    function increment(cartItemId){
+        var numberDisplay =document.getElementById(`game-quantity-${cartItemId}`)
+        var maxQuantity = numberDisplay.getAttribute('data-maxPhysicalQuantity');
+
+        console.log("Max quantity: " + maxQuantity)
+
+        if(Number(numberDisplay.innerHTML) < maxQuantity){
+            console.log("Increasing count count")
+            //Update cart item in the database
+
+            fetch('http://127.0.0.1:8000/UpdateCartItemQuantity/', {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ data: {
+                    //"userId": userId,
+                    "cartItemId": cartItemId,
+                    "operation": "increment"
+                } }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data.newQuantity)
+                //Update the UI
+                numberDisplay.innerHTML = data.newQuantity
+                UpdateTotal(data.newTotal)
+            })
+            .catch(error => console.error('Error:', error));
+       
+        }
+
+    }
+
+    function UpdateTotal(newTotal){
+        var subtotal = document.getElementById('itemSubtotal');
+        subtotal.innerHTML = Number(newTotal).toFixed(2)
+
+        var shippingField = document.getElementById('shippingField')
+
+        var shippingField = document.getElementById('shippingField')
+        var shipping = shippingField.dataset.shippingfee;
+
+        var totalField = document.getElementById('cartTotal')
+        totalField.innerHTML = (Number(newTotal) + Number(shipping)).toFixed(2)
+    }
+
+    function CalculateTotal(){
         
         var shippingField = document.getElementById('shippingField')
         var shipping = shippingField.dataset.shippingfee;
@@ -198,7 +281,7 @@
 
         totalField.innerHTML = Number(subtotal) + Number(shipping) 
     }
-    updateTotal();
+    CalculateTotal();
 </script>
 <script type="text/javascript" src="{% static 'js/notification.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/cartNotification.js' %}"></script>

@@ -64,7 +64,7 @@ urlpatterns = [
 
     path('convert-cart-to-order/', orderviews.convert_cart_to_order, name='convert_cart_to_order'),
     path('purchaseHistory/', userviews.view_purchase_history, name='view_purchase_history'),
-   
+    path('UpdateCartItemQuantity/', orderviews.UpdateCartItemQuantity, name='update_cart_item_quantity'),
     path('removeFromWishlist/<int:wishListItemId>/', userviews.remove_from_wishList, name='remove_from_wishlist')
 
 ] + static(settings.STATIC_URL, document_root = settings.STATIC_ROOT)

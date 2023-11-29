@@ -35,7 +35,10 @@
                 <p class="h1 text-white">{{returnedGame.name}}</p>
                 <p class="text-white">{{returnedGame.developer}}</p>
                 <p class="text-white">RM <span>{{returnedGame.price}}</span></p>
-                <p class="text-white">Rating</p>
+                {% if returnedGame.isOnPromotion %}
+                    <div class="promotion-label" >On Promotion!</div>
+                {% endif %}
+               
                 <div class="inline-display"> 
                     
                     <a class="primary-btn" href="#add-to-cart-section">Buy Now</a>

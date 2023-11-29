@@ -69,7 +69,12 @@
                                     <p class="bitsey-text-color">Games</p>
                                     {% for item in order_items.all %}
                                         {% if item.order == order %}
+                                        <div style="border-bottom: 1px solid gray;">
                                             <p>{{item.game}}</p>
+                                            <p class="bitsey-text-color">{{item.platform}} {{item.edition}}</p>
+                                            <p>Quantity: <span class="bitsey-text-color">{{item.quantity}}</span></p> 
+                                        </div>
+                                            
                                         {% endif %}
                                 
                                     {% endfor %}                           
