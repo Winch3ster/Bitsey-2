@@ -23,20 +23,22 @@
     <!-- Navigation bar -->
     {% include 'navbar.html' %}
 
-
-    <div style="margin: 40px 0;">
-        <p class="h2 standard-margin-left">{{user.username}}'s Cart</p> 
-
-        <div class="standard-margin-left"> <!-- Links breakdown-->
+    <!-- small screen-->
+    <div class="d-block d-md-none">
+        <div class="col-12 dark-gray-background" style=" margin-bottom: 20px;">
             <a href="">Home</a>
             <i class="bi bi-chevron-right"></i>
             <a href="">Browse</a>
             <i class="bi bi-chevron-right"></i>
             <a href="">Cart</a>
-        </div> 
+        </div>
 
-        <div class="col-10 d-flex justify-content-between standard-margin-left"> <!-- main container -->
-            <div class="col-8"> <!-- order display -->
+
+        <p class="h4 standard-margin-left">{{user.username}}'s Cart</p>
+    
+    
+        <div class="col-11 d-block"> <!-- main container -->
+            <div class="col-12"> <!-- order display -->
                 {% if cart_is_empty %}
                     <p class="h2 text-center">Oh no... Your cart is empty!</p>
                     
@@ -47,67 +49,72 @@
                 {% else %}
             
                 
-                {% if  total_price > 300 %}
-                   
-                    <div class="rounded-3 p-2" style="padding-left: 20px; background-color: #d4f2c4;">You are eligible for free shipping!</div><!-- Messages --> 
-                {% endif %} 
-                
-                    <div> <!-- basket-container --> 
-
-
-                        {% for item in cart_items %}
-                            
-                            <!-- basket-item-container --> 
-                            <div class="d-flex justify-content-center basket-item" style="margin: 10px 0;">  
-                                <div class="col-3"> <img style="height: 100px; width: 100px; border-radius: 5px; object-fit: cover;" src="{{item.game.image.url}}" alt=""> </div> <!-- game image --> 
-
-                                <div class="col-3"> <!-- game name and price--> 
-                                    <p class="m-0">{{item.game.name}}</p>
-                                    <p class="m-0">{{item.platform}}</p>
-                                    <p class="text-m">{{item.edition}}</p>
-                                </div>
-                                
-                                {% if item.edition == "physical"%}
-                                <div class="col-2"> <!-- game quantity --> 
-                                    <p class="text-m">Quantity</p>
-
-                                    <div class="d-flex"><!-- quantity selector --> 
-
-                                        <button type="button" class="btn-empty"><i class="bi bi-dash bitsey-text-color" onclick="decrement(`{{item.id}}`)"></i></button>
-                                        <p style="margin: 0px 5px;" id="game-quantity-{{item.id}}" data-maxPhysicalQuantity="{{item.game.physicalCopyQuantity}}">{{item.quantity}}</p>
-                                        <button type="button" class="btn-empty"><i class="bi bi-plus bitsey-text-color" onclick="increment(`{{item.id}}`)"></i></button>
-                                    
-                                    </div>
-                                    
-                                </div>
-                                {% endif %}
-                                
-
-                                <div class="col-2">
-                                    <p class="text-m">RM {{item.game.price}}</p>
-                                </div>
-
-                                <div class="col-2">
-                                    <form  action="{% url 'remove_from_cart' cartItemId=item.id %}" method="post">
-                                        {% csrf_token %}
-                                        <button type="submit" class="btn rounded-pill btn-outline-danger text-m">Remove</button>
-                                    </form>
-                                </div> <!-- remove --> 
-                            </div>
-
-                        {% endfor %}
+                    {% if  total_price > 300 %}
+                        <div class="rounded-3 p-2" style="padding-left: 20px; background-color: #d4f2c4;">You are eligible for free shipping!</div><!-- Messages --> 
+                    {% endif %} 
+                    
+                        <div class="col-12 d-block"> <!-- basket-container --> 
+                            {% for item in cart_items %}
+    
+                                <!-- basket-item-container --> 
+                                <div class="col-10 basket-item" style="margin: 10px 0;">  
+                                    <div class="d-flex">
+                                        <img style="height: 100px; width: 100px; border-radius: 5px; object-fit: cover;" src="{{item.game.image.url}}" alt=""> <!-- game image --> 
+                                        <div style="margin-left: 8vw;">
+                                            <p class="m-1">{{item.game.name}}</p>
+                                            <p class="m-0">{{item.platform}}</p>
+                                            <p class="text-m">{{item.edition}}</p>
+                                        </div>
                         
+                                    </div>
 
-                </div>
-                
+                                    <div class="col-12 d-flex justify-content-evenly">
+                                        <div style="width: 70%;">
 
-            {% endif %}         
 
+                                            {% if item.edition == "physical"%}
+                                        <div class="col-5"> <!-- game quantity --> 
+                                            <p class="text-m m-0">Quantity</p>
+        
+                                            <div class="d-flex"><!-- quantity selector --> 
+        
+                                                <button type="button" class="btn-empty"><i class="bi bi-dash bitsey-text-color" onclick="decrement(`{{item.id}}`)"></i></button>
+                                                <p style="margin: 0px 5px;" id="game-quantity-{{item.id}}" data-maxPhysicalQuantity="{{item.game.physicalCopyQuantity}}">{{item.quantity}}</p>
+                                                <button type="button" class="btn-empty"><i class="bi bi-plus bitsey-text-color" onclick="increment(`{{item.id}}`)"></i></button>
+                                            
+                                            </div>
+     
+                                        </div>
+                                        {% else %}
+                                        <div class="col-6 "></div>
+                                        {% endif %}
+
+                                        </div>
+
+                                        <div style="width: 30%;">
+                                            <p class="text-m float-end">RM {{item.game.price}}</p>
+
+                                            <div class="p-0float-end" style="">
+                                                <form  action="{% url 'remove_from_cart' cartItemId=item.id %}" method="post">
+                                                    {% csrf_token %}
+                                                    <button type="submit" class="btn rounded-pill btn-outline-danger text-m">Remove</button>
+                                                </form>
+                                            </div> <!-- remove --> 
+                                        </div>
+                                    </div>
+                                </div>
+    
+                                {% endfor %}
+                            
+                            </div>
+                    
+                    
+                {% endif %}         
         </div>
-
-
+    
+    
             <!-- order summary  -->
-            <div class="col-3 rounded light-gray-background" style="height: fit-content; padding: 20px 20px 30px 20px;">
+            <div class="col-11 rounded light-gray-background" style="height: fit-content; padding: 20px 20px 30px 20px;">
                 <p class="h4">Order summary</p>
                 <p class="text-s">*All physical product(s) will be shipped to the address set in your account.</p>
                 <div><!-- price summary  -->
@@ -142,48 +149,145 @@
 
 
         </div>
+
     </div>
 
 
 
-    <!-- Footer -->
-    <footer class="col-12 pt-4 pb-5 light-gray-background container-fluid p-4">
 
-        <div class="col-1 col-s-12"></div>
-        <div class="col-2 col-s-12 d-block light-text-color">
-            <p>Browse Games</p>
-            <ul class="list-unstyled">
-                <li><a href="" class="footer-text">PlayStation Games</a></li>
-                <li><a href="" class="footer-text">Xbox Games</a></li>
-                <li><a href="" class="footer-text">Nintendo Games</a></li>
-                <li><a href="" class="footer-text">PC Games</a></li>
-            </ul>
-            
-        </div>
-        <div class="col-2 col-s-12 light-text-color">
-            <p >Support</p>
-            <p class="footer-text">+06 012 672 9991</p>
-            <p class="footer-text">+06 012 542 1291</p>
-            <p class="footer-text">bitsey-malaysia@gmail.com</p>
-        </div>
-        <div class="col-3 col-s-12 light-text-color">
-            <p>Location</p>
-            <p class="footer-text">
-                Kuala Lumpur Convention Centre, Jalan Pinang,
-                50088 Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur
-            </p>
-        </div>
 
-        <div class="col-3 col-s-12">
-            <p class="light-text-color">Follow Bitsey</p>
-            <div class="social-media-links">
-                <img class="individual-icon" style="margin-left: 0;" src="{% static '/media/images/homeImages/instagram.png' %}" alt="">
-                <img class="individual-icon" src="{% static '/media/images/homeImages/twitter.png' %}" alt="">
-                <img class="individual-icon" src="{% static '/media/images/homeImages/linkedin.png' %}" alt="">
-                <img class="individual-icon" src="{% static '/media/images/homeImages/facebook.png' %}" alt="">
+    <!-- wide screen -->
+    <div class="d-none d-md-block">
+        <div style="margin: 40px 0;">
+            <p class="h2 standard-margin-left">{{user.username}}'s Cart</p> 
+    
+            <div class="standard-margin-left"> <!-- Links breakdown-->
+                <a href="">Home</a>
+                <i class="bi bi-chevron-right"></i>
+                <a href="">Browse</a>
+                <i class="bi bi-chevron-right"></i>
+                <a href="">Cart</a>
+            </div> 
+    
+            <div class="col-10 d-flex justify-content-between standard-margin-left"> <!-- main container -->
+                <div class="col-8"> <!-- order display -->
+                    {% if cart_is_empty %}
+                        <p class="h2 text-center">Oh no... Your cart is empty!</p>
+                        
+                        <div class="col-12 d-flex justify-content-center">
+                            <img style="height: 300px; width: 300px;" src="{% static '/media/images/userAppImages/wind.gif' %}" alt="empty wishlist">
+                        </div>
+    
+                    {% else %}
+                
+                    
+                    {% if  total_price > 300 %}
+                       
+                        <div class="rounded-3 p-2" style="padding-left: 20px; background-color: #d4f2c4;">You are eligible for free shipping!</div><!-- Messages --> 
+                    {% endif %} 
+                    
+                        <div> <!-- basket-container --> 
+    
+    
+                            {% for item in cart_items %}
+    
+                                <!-- basket-item-container --> 
+                                <div class="d-flex justify-content-center basket-item" style="margin: 10px 0;">  
+                                    <div class="col-3"> <img style="height: 100px; width: 100px; border-radius: 5px; object-fit: cover;" src="{{item.game.image.url}}" alt=""> </div> <!-- game image --> 
+    
+                                    <div class="col-3"> <!-- game name and price--> 
+                                        <p class="m-0">{{item.game.name}}</p>
+                                        <p class="m-0">{{item.platform}}</p>
+                                        <p class="text-m">{{item.edition}}</p>
+                                    </div>
+                                    
+                                    {% if item.edition == "physical"%}
+                                    <div class="col-2"> <!-- game quantity --> 
+                                        <p class="text-m">Quantity</p>
+    
+                                        <div class="d-flex"><!-- quantity selector --> 
+    
+                                            <button type="button" class="btn-empty"><i class="bi bi-dash bitsey-text-color" onclick="decrement(`{{item.id}}`)"></i></button>
+                                            <p style="margin: 0px 5px;" id="game-quantity-{{item.id}}" data-maxPhysicalQuantity="{{item.game.physicalCopyQuantity}}">{{item.quantity}}</p>
+                                            <button type="button" class="btn-empty"><i class="bi bi-plus bitsey-text-color" onclick="increment(`{{item.id}}`)"></i></button>
+                                        
+                                        </div>
+                                        
+                                    </div>
+                                    {% else %}
+                                    <div class="col-2"></div>
+                                    {% endif %}
+                                    
+    
+                                    <div class="col-2">
+                                        <p class="text-m">RM {{item.game.price}}</p>
+                                    </div>
+    
+                                    <div class="col-2">
+                                        <form  action="{% url 'remove_from_cart' cartItemId=item.id %}" method="post">
+                                            {% csrf_token %}
+                                            <button type="submit" class="btn rounded-pill btn-outline-danger text-m">Remove</button>
+                                        </form>
+                                    </div> <!-- remove --> 
+                                </div>
+    
+                            {% endfor %}
+                            
+    
+                    </div>
+                    
+    
+                {% endif %}         
+    
             </div>
-        </div>   
-    </footer>
+    
+    
+                <!-- order summary  -->
+                <div class="col-3 rounded light-gray-background" style="height: fit-content; padding: 20px 20px 30px 20px;">
+                    <p class="h4">Order summary</p>
+                    <p class="text-s">*All physical product(s) will be shipped to the address set in your account.</p>
+                    <div><!-- price summary  -->
+                        <div class="d-flex justify-content-between">
+                            <p>Item(s) subtotal:</p>
+                            <p class="fw-bold">RM <span id="itemSubtotal" data-subtotal="{{total_price}}">{{total_price}}</span></p>
+                        </div>
+                        
+                        <div class="d-flex justify-content-between">
+                            <p>Shipping:</p>
+                            <p class="fw-bold">RM  <span id="shippingField" data-shippingfee="{{shipping_price}}">{{shipping_price}}</span></p>
+                        </div>
+                    </div>  
+    
+                    <!-- Estimated total -->
+                    <div class="d-flex justify-content-between mt-4" style="border-top: 1px solid #d8d8d8;">
+                        <p>Total:</p>
+                        <p class="fw-bold">RM <span id="cartTotal"></span></p>
+                    </div>
+    
+                    {% if cart_is_empty %}
+                        <button class="btn btn-success rounded-pill" disabled>Payment</button>   
+                    {% else %}
+                    <form form method="post" action="{% url 'convert_cart_to_order' %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-success rounded-pill">Payment</button>
+                    </form>
+                        
+                    {% endif %} 
+                    
+                </div>
+    
+    
+            </div>
+        </div>
+    </div>
+    
+
+
+
+    <!-- Footer -->
+    {% include 'footer.html' %}
+
+
 
 
 

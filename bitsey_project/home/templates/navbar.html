@@ -1,40 +1,43 @@
 {% load static %}
 <!--Navigation bar-->
-<nav class="nav">
-    <div class="company-name">
+<div class="d-block d-md-none">
+    <div class="col-12 d-flex justify-content-center" style="z-index: 2;">
         <a href="{% url 'homepage' %}"><span style="color: #038BA5; font-size: x-large;">Bitsey | </span> Store</a>
         
     </div>
+</div>
 
-    <div class="nav-element-container">
-        <ul>
-            <li><a href="{% url 'homepage' %}">Pre-order</a></li>
-            <li><a href="{% url 'browse' %}">Games</a></li>
-            <li><a href="{% url 'browse' %}">Deals</a></li>
-        </ul>
-    </div>
+
+<div class="d-none d-md-block">
+    <nav class="nav">
+        <div class="company-name">
+            <a href="{% url 'homepage' %}"><span style="color: #038BA5; font-size: x-large;">Bitsey | </span> Store</a>
+            
+        </div>
     
-    <div class="nav-icon-container">
-        {% if user.id != None %}
-            <!-- If THERE IS user signed in navigate to account page when clicked -->
+        <div class=" nav-icon-container">
+            {% if user.id != None %}
+                <!-- If THERE IS user signed in navigate to account page when clicked -->
+                
+                <div onclick="OpenNotificationBar()"><img class="image-link-container" src="{% static '/media/images/homeImages/notification-bell.png' %}" alt="" style="height: 24px; width: auto;"><span class="notification-mark" id="notification-mark"></span></div>
+                
+                <!--<a href="account/{{user.id}}/" ><img class="image-link-container" src="{% static '/media/images/homeImages/user.jpg' %}" alt=""></a> -->
+                <a href="{% url 'edit_user' user_id=user.id %}"  ><img class="image-link-container" src="{% static '/media/images/homeImages/user.jpg' %}" alt=""></a>
+                <a href="{% url 'cart'%}" ><img class="image-link-container" src="{% static '/media/images/homeImages/cart.jpg' %}" alt=""><span class="" id="cart-mark"></span></a>
             
-            <div onclick="OpenNotificationBar()"><img class="image-link-container" src="{% static '/media/images/homeImages/notification-bell.png' %}" alt="" style="height: 24px; width: auto;"><span class="notification-mark" id="notification-mark"></span></div>
+            {% else %}
+                <!-- If NO user signed in navigate to sign in page when clicked -->
+                
+                <a href="{% url 'signin'%}" ><img class="image-link-container" src="{% static '/media/images/homeImages/user.jpg' %}" alt=""></a>
+                <a href="{% url 'signin'%}" ><img class="image-link-container" src="{% static '/media/images/homeImages/cart.jpg' %}" alt=""></a>
             
-            <!--<a href="account/{{user.id}}/" ><img class="image-link-container" src="{% static '/media/images/homeImages/user.jpg' %}" alt=""></a> -->
-            <a href="{% url 'edit_user' user_id=user.id %}"  ><img class="image-link-container" src="{% static '/media/images/homeImages/user.jpg' %}" alt=""></a>
-            <a href="{% url 'cart'%}" ><img class="image-link-container" src="{% static '/media/images/homeImages/cart.jpg' %}" alt=""><span class="" id="cart-mark"></span></a>
-        
-        {% else %}
-            <!-- If NO user signed in navigate to sign in page when clicked -->
-            
-            <a href="{% url 'signin'%}" ><img class="image-link-container" src="{% static '/media/images/homeImages/user.jpg' %}" alt=""></a>
-            <a href="{% url 'signin'%}" ><img class="image-link-container" src="{% static '/media/images/homeImages/cart.jpg' %}" alt=""></a>
-        
-            
-        {% endif %} 
-    </div>
-
-</nav>
+                
+            {% endif %} 
+        </div>
+    
+    </nav>
+    
+</div>
 
 <div id="notification-bar" class="notification-bar light-text-color">
     <div class="d-flex justify-content-between m-2">
@@ -49,4 +52,87 @@
     
 
     <div class="bitsey-text-color text-center" style="cursor: pointer;" onclick="ClearNotifications()">Clear all</div>
+</div>
+
+<div class="d-none d-md-block">
+    <div class="support">
+        <a class="support-btn" href="{% url 'support_page' %}">
+            <img class="support-image" src="{% static '/media/images/homeImages/support.png' %}" alt="">
+        </a>
+    </div>
+</div>
+
+
+<div class="col-12 d-flex justify-content-center d-md-none position-fixed" style="bottom: 10px; z-index: 5;">
+    <div class="col-11 d-flex rounded-pill bg-white px-4 py-3 justify-content-evenly" style="border: 1px solid #038BA5;">
+
+        <div>
+            <a href="{% url 'support_page' %}">
+                <img class="image-link-container" src="{% static '/media/images/homeImages/support.png' %}" alt="">
+            </a>
+        </div>
+
+
+
+        {% if user.id != None %}
+            <div>
+                <div onclick="OpenNotificationBar()"><img class="image-link-container" src="{% static '/media/images/homeImages/notification-bell.png' %}" alt="" style="height: 24px; width: auto;"><span class="notification-mark" id="notification-mark"></span></div>
+            </div>
+        
+            <div>
+                <div class="image-link-container-store-placeholder"></div>
+            </div>
+
+            <div>
+                <a href="{% url 'browse' %}">
+                    <img class="image-link-container-store" src="{% static '/media/images/homeImages/storefront.png' %}" alt="">
+                </a>
+            </div>
+            
+            <div>
+                <a href="{% url 'cart'%}"  ><img class="image-link-container" src="{% static '/media/images/homeImages/cart.jpg' %}" alt=""></a>
+            </div>
+    
+            <div>
+                <a href="{% url 'edit_user' user_id=user.id %}"><img class="image-link-container" src="{% static '/media/images/homeImages/user.jpg' %}" alt=""></a>
+    
+            </div>
+
+        {% else %}
+                <!-- If NO user signed in navigate to sign in page when clicked -->
+                
+                <div>
+                    <div><img class="image-link-container" src="{% static '/media/images/homeImages/notification-bell.png' %}" alt="" style="height: 24px; width: auto;"></div>
+                </div>
+        
+                
+                <div>
+                    <div class="image-link-container-store-placeholder"></div>
+                </div>
+        
+                <div>
+                    <a href="{% url 'browse' %}">
+                        <img class="image-link-container-store" src="{% static '/media/images/homeImages/storefront.png' %}" alt="">
+                    </a>
+                </div>
+
+                <div>
+                    <a href="{% url 'signin'%}" ><img class="image-link-container" src="{% static '/media/images/homeImages/cart.jpg' %}" alt=""></a>
+                </div>
+        
+                <div>
+                    <a href="{% url 'signin'%}" ><img class="image-link-container" src="{% static '/media/images/homeImages/user.jpg' %}" alt=""></a>
+        
+                </div>
+                
+        {% endif %} 
+
+
+
+       
+
+       
+
+       
+    </div>
 </div>

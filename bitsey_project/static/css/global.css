@@ -6,6 +6,8 @@ body{
 
 }
 
+
+
 a{
     text-decoration: none;
     color: black;
@@ -139,6 +141,34 @@ a{
         opacity: 0.6;
     }
 }
+
+.image-link-container-store{
+    position: fixed;
+    bottom: 45px;
+    left: 42vw;
+    width: 70px;
+    height: auto;
+    transition: 0.2s;
+    cursor: pointer;
+    z-index: 6;
+    &:hover{
+        opacity: 0.6;
+    }
+}
+
+
+.image-link-container-store-placeholder{
+    width: 60px;
+    height: auto;
+    margin: 0 12px 20px 12px;
+    transition: 0.2s;
+    cursor: pointer;
+    z-index: 6;
+    &:hover{
+        opacity: 0.6;
+    }
+}
+
 .company-name{
     font-weight: normal;
     width: 20%;
@@ -338,16 +368,15 @@ a{
 /*         BUTTONS          */
 
 .primary-btn{
-    padding: 4px 15px;
+    padding: 2px 8px;
+    font-size: 14px;
     background-color: rgb(3, 139, 165);
     border: 2px solid rgb(3, 139, 165);
     border-radius: 20px;
-    font-size: 1.2rem;
     margin: 0 5%;
     color: white;
     transition: 0.2s;
     cursor: pointer;
-    font-size: 16px;
 }
 .primary-btn:hover{
     background-color: white;
@@ -356,17 +385,15 @@ a{
 }
 
 .secondary-btn{
-    padding: 4px 15px;
-
+    padding: 2px 8px;
+    font-size: 14px;
     background-color: black;
     color: white;
     border: 2px solid black;
     border-radius: 20px;
-    font-size: 1.2rem;
     margin: 0% 5%;
     transition: 0.2s;
     cursor: pointer;
-    font-size: 16px;
 }
 .secondary-btn:hover{
     background-color: white;
@@ -381,7 +408,6 @@ a{
     color: white;
     border: 2px solid white;
     border-radius: 20px;
-    font-size: 1.2rem;
     margin: 0% 5%;
     transition: 0.2s;
     cursor: pointer;
@@ -399,7 +425,6 @@ a{
     color: #343434;
     border: 2px solid #038BA5;;
     border-radius: 20px;
-    font-size: 1.2rem;
     margin: 0% 5%;
     transition: 0.2s;
     cursor: pointer;
@@ -428,7 +453,21 @@ a{
 .empty-btn:hover{
     outline: none;
 }
+.small-btn-padding{
+    padding: 4px 20px;
+}
+@media (min-width: 768px) { 
 
+    .primary-btn{
+        padding: 4px 15px;
+        font-size: 16px;
+    }
+    .secondary-btn{
+        padding: 4px 15px;
+        font-size: 16px;
+    }
+
+}
 
 
 .social-media-icon{
@@ -465,6 +504,33 @@ a{
     padding: 2px 5px;
     border: 1px solid gray;
     border-radius: 5px;
+}
+
+.promotion-label{
+    width: fit-content;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    background-color: #038BA5;
+    color: white;
+    font-size: 14px;
+}
+
+.promotion-label-small{
+    padding: 5px 10px;
+    border-radius: 10px;
+    background-color: #038BA5;
+    color: white;
+    font-size: 10px;
+}
+.promotion-label-smallscreen{
+    padding: 2px 5px;
+    border-radius: 10px;
+    background-color: #038BA5;
+    color: white;
+    font-size: 8px;
 }
 
 /*           width           */
@@ -515,6 +581,9 @@ a{
 /*           Background color           */
 .light-gray-background{
     background-color: #F4F4F4;
+}
+.dark-gray-background{
+    background-color: #e4e4e4;
 }
 
 .bitsey-color{
@@ -581,6 +650,71 @@ a{
 
 
 
+.support{
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    z-index: 3;
+}
+.support-btn{
+    width: 80px;
+    height: 80px;
+    border-radius: 45px;
+    background-color: white;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.3s;
+    cursor: pointer;
+    box-shadow: -1px 1px 33px 1px rgba(106,106,106,0.75);
+-webkit-box-shadow: -1px 1px 33px 1px rgba(106,106,106,0.75);
+-moz-box-shadow: -1px 1px 33px 1px rgba(106,106,106,0.75);
+}
+.support-btn:hover{
+    transform: scale(1.1);
+}
+.support-image{
+    width: 40px;
+    height: auto;
+}
 
 
-/*  Add to wish list button  */
+@media only screen and (max-width: 599px){
+    
+.support-btn{
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    border: 1px solid #038BA5;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.3s;
+    cursor: pointer;
+    box-shadow: -1px 1px 33px 1px rgba(106,106,106,0.75);
+-webkit-box-shadow: -1px 1px 33px 1px rgba(106,106,106,0.75);
+-moz-box-shadow: -1px 1px 33px 1px rgba(106,106,106,0.75);
+
+}
+.support-image{
+    width: 20px;
+    height: auto;
+}
+}
+
+
+
+.quick-contact-form{
+    position: fixed;
+    display: block;
+    right: 200px;
+    bottom: 20px;
+    z-index: 3;
+    padding: 10px 20px 20px 20px;
+    background-color: white;
+    border-radius: 10px;
+}
+
+

@@ -35,8 +35,8 @@ def notifyGamePromotion(sender, instance, created, **kwargs):
         
         instance.oldPrice = instance.game.price
         instance.game.price = instance.newPrice 
-        instance.game.save()
         instance.game.isOnPromotion = True
+        instance.game.save()
         instance.save()
         print(f"Instance game isOnPromotion: {instance.game.isOnPromotion}")
         print(f"Instance game oldprice: {instance.oldPrice}")

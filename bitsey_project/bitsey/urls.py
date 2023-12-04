@@ -44,6 +44,7 @@ urlpatterns = [
     path('cart/', orderviews.view_cart, name='cart'),
 
 
+
     path('account/<int:user_id>/', userviews.edit_user, name='edit_user'),
     path('addToCart/<int:gameId>/', browse.addToCart, name='add_to_cart'),
     path('removeFromCart/<int:cartItemId>/', orderviews.remove_from_cart, name="remove_from_cart" ),
@@ -65,7 +66,16 @@ urlpatterns = [
     path('convert-cart-to-order/', orderviews.convert_cart_to_order, name='convert_cart_to_order'),
     path('purchaseHistory/', userviews.view_purchase_history, name='view_purchase_history'),
     path('UpdateCartItemQuantity/', orderviews.UpdateCartItemQuantity, name='update_cart_item_quantity'),
-    path('removeFromWishlist/<int:wishListItemId>/', userviews.remove_from_wishList, name='remove_from_wishlist')
+    path('removeFromWishlist/<int:wishListItemId>/', userviews.remove_from_wishList, name='remove_from_wishlist'),
+
+   #path('send_email/', systemviews.send_email, name='send_email'),
+    path('Support/', systemviews.Support, name='support_page'),
+
+
+    path('searchfilter/', browse.SearchFilter, name="SearchFilter"),
+
+
+    
 
 ] + static(settings.STATIC_URL, document_root = settings.STATIC_ROOT)
 

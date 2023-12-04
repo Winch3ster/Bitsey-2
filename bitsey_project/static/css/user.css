@@ -1,3 +1,4 @@
+
 .sign-in-wallpaper-container{
     height: 100vh;
     background-image: url('../media/images/userAppImages/sign-in-wallpaper.jpg');
@@ -9,7 +10,8 @@
 }
 
 .sign-in-control{
-    width: 55%;
+    position: relative;
+    width: 90%;
     border: none;
     border-radius: 20px;
     padding: 8px 20px;
@@ -31,6 +33,7 @@
 }
 
 .signup-form-container{
+    margin-top: 20px;
     background-color: white;
     width: 500px;
     box-shadow: 1px 9px 22px -1px rgba(139,139,139,0.75);
@@ -90,6 +93,15 @@
 }
 
 
+@media (min-width: 768px) { 
+    .sign-in-control{
+        width: 55%;
+    }
+
+    .signup-form-container{
+        margin-top: 0;
+    }
+}
 
 
 /*     wishlist page css        */
@@ -117,7 +129,7 @@
     cursor: pointer;
     font-size: 16px;
     max-width: 120px;
-    margin-left: 5vw;
+
 }
 .learn-more-btn-bitsey:hover{
     background-color: #038BA5;;
@@ -150,4 +162,13 @@
     padding: 10px 0;
     margin-top: 10px;
     border-bottom: 2px solid gray;
+}
+
+
+@media (min-width: 768px) { 
+.learn-more-btn-bitsey{
+    margin-left: 5vw;
+}
+
+
 }

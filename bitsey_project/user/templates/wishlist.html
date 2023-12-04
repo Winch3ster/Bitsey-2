@@ -26,22 +26,23 @@
 <body>
     {% include 'navbar.html' %}
 
-    <div class="standard-margin-left mt-5 mb-5">
-        <h2>Wishlist</h2>
-        
-        <div> <!-- Links breakdown-->
+    <!--Small screen-->
+    <div class="d-block d-md-none">
+        <div class="col-12 dark-gray-background" style=" margin-bottom: 50px;">
             <a href="">Home</a>
             <i class="bi bi-chevron-right"></i>
-            <a href="">Account</a>
-            <i class="bi bi-chevron-right"></i>
             <a href="">Wishlist</a>
-        </div> 
+        </div>
 
-        <p class="m-2">All your liked games are stored in your wish list here</p>
-        
+       
+
+        <p class="h4 standard-margin-left">{{user.username}}'s wishlist</p>
+
+        <p class="standard-margin-left p-0" style="width: 90%;">All your liked games are stored in your wish list here</p>
+            
         <div class="col-12 d-flex justify-content-center" style="padding-bottom: 100px;"> <!-- Wish list container -->
-
-
+    
+    
             {% if  wishlistItems|length < 1 %}
 
             <div class="col-5">
@@ -59,24 +60,23 @@
                     
                     {% for item in wishlistItems %}
                 
-                    <div class="wishlist-Individual-Item-Container">
-                        <div class="col-2">
-                            <img style="height: 100px; width: 150px; border-radius: 5px; object-fit: cover;" src="{{item.game.image.url}}" alt="">
+                    <div class=" col-12 wishlist-Individual-Item-Container">
+                        <div class="" style="width: 30%;">
+                            <img style="height: 100px; width: 100px; border-radius: 5px; object-fit: cover;" src="{{item.game.image.url}}" alt="">
                         </div>
-                        <div class="col-4">
+                        <div style="width: 50%;">
                             <p class="fw-bold">{{item.game.name}}</p>
-                            <span class="text-m bitsey-text-color">{{item.game.releaseDate}}</span>
+                            
+                            <div>
+                                <form  action="{% url 'game_Details' game_id=item.game.id %}" method="post">
+                                    {% csrf_token %}
+                                    <button class="learn-more-btn-bitsey">Learn More</button>
+                                </form>
+                            </div>
                         </div>
                         
-                        <div class="col-3">
-                            <form  action="{% url 'game_Details' game_id=item.game.id %}" method="post">
-                                {% csrf_token %}
-                                <button class="learn-more-btn-bitsey">Learn More</button>
-                            </form>
-                        </div>
-                    
-                        
-                        <div class="col-2">
+                       
+                        <div class="d-flex justify-content-center align-items-center" style="width: 15%;">
 
                             <form  action="{% url 'remove_from_wishlist' wishListItemId=item.id %}" method="post">
                                 {% csrf_token %}
@@ -93,9 +93,87 @@
                 </div>  
                 
             {% endif %} 
-  
+          
+        </div>
+
+    </div>
+
+
+    <!-- Wide screen-->
+    <div class="d-none d-md-block">
+        <div class="standard-margin-left mt-5 mb-5">
+            <h2>Wishlist</h2>
+
+            
+            <div> <!-- Links breakdown-->
+                <a href="">Home</a>
+                <i class="bi bi-chevron-right"></i>
+                <a href="">Account</a>
+                <i class="bi bi-chevron-right"></i>
+                <a href="">Wishlist</a>
+            </div> 
+    
+            <p class="m-2">All your liked games are stored in your wish list here</p>
+    
+            <div class="col-12 d-flex justify-content-center" style="padding-bottom: 100px;"> <!-- Wish list container -->
+    
+    
+                {% if  wishlistItems|length < 1 %}
+    
+                <div class="col-5">
+                    <div class="col-12 d-flex justify-content-center">
+                        <img style="height: 300px; width: 300px;" src="{% static '/media/images/userAppImages/wind.gif' %}" alt="empty wishlist">
+                    
+                    </div>
+                    
+                    <p class="text-center">Look's like your wishlist is empty. Start adding your favourite game now!</p>
+                </div>
+                
+                {% else %}
+                
+                    <div class="col-9 p-0 m-0">
+                        
+                        {% for item in wishlistItems %}
+                    
+                        <div class="wishlist-Individual-Item-Container">
+                            <div class="col-2">
+                                <img style="height: 100px; width: 150px; border-radius: 5px; object-fit: cover;" src="{{item.game.image.url}}" alt="">
+                            </div>
+                            <div class="col-4">
+                                <p class="fw-bold">{{item.game.name}}</p>
+                                <span class="text-m bitsey-text-color">{{item.game.releaseDate}}</span>
+                            </div>
+                            
+                            <div class="col-3">
+                                <form  action="{% url 'game_Details' game_id=item.game.id %}" method="post">
+                                    {% csrf_token %}
+                                    <button class="learn-more-btn-bitsey">Learn More</button>
+                                </form>
+                            </div>
+                        
+                            
+                            <div class="col-2">
+    
+                                <form  action="{% url 'remove_from_wishlist' wishListItemId=item.id %}" method="post">
+                                    {% csrf_token %}
+                                    <button type="submit"  class="empty-btn"><i class="bi bi-heart-fill h5" style="color: #038BA5;"></i></button> 
+                            
+                                </form>
+                                
+                            </div>
+                        </div>
+        
+    
+                        {% endfor %}
+    
+                    </div>  
+                    
+                {% endif %} 
+      
+            </div>
         </div>
     </div>
+    
     
 
     {% include 'footer.html'%}

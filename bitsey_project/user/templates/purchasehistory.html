@@ -26,113 +26,223 @@
 <body>
     {% include 'navbar.html' %}
 
-    <div class="standard-margin-left mt-5 mb-5">
-        <h2>Purchase History</h2>
-        
-        <div> <!-- Links breakdown-->
+    <!-- small screen -->
+    <div class="d-block d-md-none">
+
+        <div class="col-12 dark-gray-background" style=" margin-bottom: 20px;">
             <a href="">Home</a>
             <i class="bi bi-chevron-right"></i>
             <a href="">Account</a>
             <i class="bi bi-chevron-right"></i>
-            <a href="">Purchase History</a>
-        </div> 
+            <a href="">Purchase history</a>
+        </div>
 
-        <p class="m-2">You can track your order here!</p>
+        <div class="col-12 d-flex">
+            <div>
+                <p class="h4 standard-margin-left bitsey-text-color">Purchase history</p>
+                <p class="standard-margin-left p-0" style="width: 90%;">You can track your order here!</p>
+            
+            </div>
+
+            <div>
+                <img style="width: 110px; height: auto;" src="{% static '/media/images/userAppImages/mario-order-history.png' %}" alt="empty wishlist">
+            </div>
+        </div>
+
         
-        <div class="col-12 d-flex justify-content-center" style="padding-bottom: 100px;"> <!-- Wish list container -->
-
-
-            {% if noOrder %}
-
-            <div class="col-5">
-                <div class="col-12 d-flex justify-content-center">
-                    <img style="height: 300px; width: 300px;" src="{% static '/media/images/userAppImages/wind.gif' %}" alt="empty wishlist">
-                
+    
+            <div class="col-12 d-flex justify-content-center" style="padding-bottom: 100px;"> <!-- Wish list container -->
+    
+    
+                {% if noOrder %}
+    
+                <div class="col-5">
+                    <div class="col-12 d-flex justify-content-center">
+                        <img style="height: 300px; width: 300px;" src="{% static '/media/images/userAppImages/wind.gif' %}" alt="empty wishlist">
+                    
+                    </div>
+                    
+                    <p class="text-center">Looks like you have not purchased anything from us. Enjoy exclusive deals in Bitsey!</p>
                 </div>
                 
-                <p class="text-center">Looks like you have not purchased anything from us. Enjoy exclusive deals in Bitsey!</p>
-            </div>
-            
-            {% else %}
-            
-                <div class="col-10 p-0 m-0">
-                    
-                    {% for order in orders %}
-
-                        <div class="order-history-Individual-Item-Container">
-                            <div class="d-flex justify-content-between align-items-start">
-                                <div class="col-2">
-                                    <p><span class="bitsey-text-color">Order ID:</span> {{order.id}}</p>
-                                </div>
+                {% else %}
+                
+                    <div class="col-12 p-0 m-0">
+                        
+                        {% for order in orders %}
     
-                                <div class="col-3 mx-2">
-                                    <p class="bitsey-text-color">Games</p>
+                            <div class="col-12 order-history-Individual-Item-Container-small">
+                                <div class="col-12" style="padding-bottom: 0;"><!--Id and date-->
+                                    <p><span class="bitsey-text-color">Order ID:</span>  {{order.id}}</p>
+                                    <p><span class="bitsey-text-color">Order Date:</span>  {{order.orderDate}}</p>
+                                </div>
+
+
+                                <div class="col-12 m-0" style="padding-top: 0;"><!--items-->
+                                    <p class="bitsey-text-color m-0">Games</p>
                                     {% for item in order_items.all %}
                                         {% if item.order == order %}
-                                        <div style="border-bottom: 1px solid gray;">
-                                            <p>{{item.game}}</p>
-                                            <p class="bitsey-text-color">{{item.platform}} {{item.edition}}</p>
-                                            <p>Quantity: <span class="bitsey-text-color">{{item.quantity}}</span></p> 
+                                        <div class="col-12 d-flex" style=" font-size: 11px; padding: 5px 0;">
+                                            <p class="m-0" style="width: 50%;">{{item.game}}</p>
+                                            <div class=" attibute-label" style="margin: 0 10px; width: 15%;">{{item.platform}} </div>
+                                            <div class="attibute-label" style="margin: 0 10px 0 0; width: 15%;">{{item.edition}}</div>
+                                            <p class=" m-0">Quantity: <span class="bitsey-text-color" style="width: 20%;">{{item.quantity}}</span></p> 
                                         </div>
                                             
                                         {% endif %}
                                 
-                                    {% endfor %}                           
+                                    {% endfor %}  
                                 </div>
+
+
+                                <div class="col-12">
+                                    <p class="float-end"><span class="bitsey-text-color">Subtotal: </span> RM {{order.totalPrice}}</p>
+                                </div>
+
+                                <div class="col-12 d-flex justify-content-between"><!--status and order received-->
+                                    <div>
+                                        <p class="bitsey-text-color">Order Status</p>
+                                        {% if order.isShipped %}
+                                            <p>Shipped</p>
+                                        {% else %}
+                                            <p>Packing</p>
+                                        {% endif %} 
+                                    </div>
+                                    <div>
+                                        {% if order.isReceived %}
+                                            <div class="primary-btn-disabled" style="text-align: center;">Order Received</div>
+                                        {% else %}
+                                            <button class="learn-more-btn-bitsey" onclick="OrderReceived('{{order.id}}')">Order Received</button>
+                                        
+                                        {% endif %}     
+                                    </div>
+                                </div>
+
+                            </div>
+                        {% endfor %}
     
-                                <div class="col-2 mx-2">
-                                    <p class="bitsey-text-color">Order date</p>
-                                    <p>{{order.orderDate}}</p>
+                    </div>  
+                  
+                {% endif %} 
+      
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+
+
+
+    <!-- Wide screen -->
+    <div class="d-none d-md-block"> 
+        <div class="standard-margin-left mt-5 mb-5">
+            
+            <div> <!-- Links breakdown-->
+                <a href="">Home</a>
+                <i class="bi bi-chevron-right"></i>
+                <a href="">Account</a>
+                <i class="bi bi-chevron-right"></i>
+                <a href="">Purchase History</a>
+            </div> 
+
+
+
+            
+        <div class="col-12 d-flex p-0 my-5">
+            <div  class="col-3">
+                <p class="h4 bitsey-text-color">Purchase history</p>
+                <p class="p-0" style="width: 90%;">You can track your order here!</p>
+            
+            </div>
+
+            <div>
+                <img style="width: 150px; height: auto; margin-left: 20px;" src="{% static '/media/images/userAppImages/mario-order-history.png' %}" alt="empty wishlist">
+            </div>
+        </div>
+
+            <div class="col-12 d-flex justify-content-center" style="padding-bottom: 100px;"> <!-- Wish list container -->
+    
+    
+                {% if noOrder %}
+    
+                <div class="col-5">
+                    <div class="col-12 d-flex justify-content-center">
+                        <img style="height: 300px; width: 300px;" src="{% static '/media/images/userAppImages/wind.gif' %}" alt="empty wishlist">
+                    
+                    </div>
+                    
+                    <p class="text-center">Looks like you have not purchased anything from us. Enjoy exclusive deals in Bitsey!</p>
+                </div>
+                
+                {% else %}
+                
+                    <div class="col-10 p-0 m-0">
+                        
+                        {% for order in orders %}
+    
+                            <div class="col-10 order-history-Individual-Item-Container">
+                               
+                                <div class="col-12 d-flex justify-content-between" style="padding-bottom: 0;"><!--Id and date-->
+                                    <p><span class="bitsey-text-color">Order ID:</span>  {{order.id}}</p>
+                                    <p><span class="bitsey-text-color">Order Date:</span>  {{order.orderDate}}</p>
                                 </div>
-                                          
-                                <div class="col-2 ">
-                                    <p class="bitsey-text-color">Order Status</p>
-                                    {% if order.isShipped %}
-                                        <p>Shipped</p>
-                                    {% else %}
-                                        <p>Packing</p>
-                                    {% endif %} 
+
+                                <div class="col-12 m-0" style="padding-top: 0;"><!--items-->
+                                    <p class="bitsey-text-color m-0">Games</p>
+                                    {% for item in order_items.all %}
+                                        {% if item.order == order %}
+                                        <div class="col-12 d-flex" style="padding: 5px 0;">
+                                            <p class="m-0" style="width: 30%;">{{item.game}}</p>
+                                            <div class="attibute-label" style="margin: 0 10px; width: 80px;">{{item.platform}} </div>
+                                            <div class="attibute-label" style="margin: 0 10px 0 0; width: 80px;">{{item.edition}}</div>
+                                            <p class=" m-0">Quantity: <span class="bitsey-text-color" style="width: 20%;">{{item.quantity}}</span></p> 
+                                        </div>
+                                            
+                                        {% endif %}
+                                        
+                                    {% endfor %}  
+                                </div>
+                                <div class="col-12" style="border-bottom: 1px solid gray;">
+                                    <p class="float-end"><span class="bitsey-text-color">Subtotal: </span> RM {{order.totalPrice}}</p>
+                                </div>
+
+                                <div class="col-12 d-flex justify-content-between"><!--status and order received-->
+                                    <div>
+                                        <p class="bitsey-text-color">Order Status</p>
+                                        {% if order.isShipped %}
+                                            <p>Shipped</p>
+                                        {% else %}
+                                            <p>Packing</p>
+                                        {% endif %} 
+                                    </div>
+                                    <div>
+                                        {% if order.isReceived %}
+                                            <div class="primary-btn-disabled" style="text-align: center;">Order Received</div>
+                                        {% else %}
+                                            <button class="learn-more-btn-bitsey" onclick="OrderReceived('{{order.id}}')">Order Received</button>
+                                        
+                                        {% endif %}     
+                                    </div>
                                 </div>
 
                             </div>
-
-                            <div class="d-flex justify-content-start align-items-center">
-                                <div class="col-2">
-                                    <p class="bitsey-text-color">Order subtotal</p>
-                                    <p>RM {{order.totalPrice}}</p>
-                                </div>
-                                <div class="col-2">
-                                    {% if order.isReceived %}
-                                        <div class="primary-btn-disabled" style="text-align: center;">Order Received</div>
-                                    {% else %}
-                                        <button class="learn-more-btn-bitsey" onclick="OrderReceived('{{order.id}}')">Order Received</button>
-                                    
-                                    {% endif %}           
-                                </div>
-                            </div>
-
-                            
-                           
-                        </div>
-
-
-
-
-                    {% endfor %}
-
-                </div>  
-                <!-- 
-                     user = models.ForeignKey(usermodels.User, on_delete=models.CASCADE)
-    orderItems = models.ManyToManyField(browsemodels.Game)
-    totalPrice = models.FloatField()
-    orderDate = models.DateField()
-    isShipped = models.BooleanField()
-    isReceived = models.BooleanField()
-                -->
-            {% endif %} 
-  
+    
+    
+    
+    
+                        {% endfor %}
+    
+                    </div>  
+                    
+                {% endif %} 
+      
+            </div>
         </div>
     </div>
+    
     
 
     {% include 'footer.html'%}

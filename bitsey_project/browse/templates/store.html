@@ -24,225 +24,326 @@
 </head>
 <body>
     <!--Announcement section-->
-    <section class="flex-justify-content-space-between light-gray-background">
+    <div class="d-none d-md-block">
+        <section class="flex-justify-content-center light-gray-background">
+            <p class="m-3">Free shipping in Malaysia on order over RM300!</p>
+        </section>
 
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left-short" viewBox="0 0 16 16">
-            <path fill-rule="evenodd" d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5z"/>
-            </svg>
-
-        <p>Free shipping in Malaysia on order over RM300!</p>
-
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-short" viewBox="0 0 16 16">
-            <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/>
-            </svg>
-    </section>
-
-    {% include 'navbar.html'%}
-    
-
-    <!-- Page background -->
-    <section class="position-relative bg" style="height: 55vh; background-color: black;">
-        <div class="col-12 background-image-container cover" style="background-attachment: local; height: 55vh;">
-        </div>
-       
-        <div class="col-12 position-absolute d-flex align-items-center justify-content-center" style="height: 55vh;"> 
-            <p class="text-white h1">Unlock the Power of Imagination, One Game at a Time.</p>
-        </div>     
-    </section>
-
-
-    <div class="light-text-color standard-margin-left my-5"> Home > Browse</div>
-    <p class="h2 standard-margin-left mb-4">Browse game</p> 
-    <hr class="bitsey-color standard-margin-left" style="width: 100px; height: 8px; opacity: 1;">
-    
-    <div class="position-relative rounded col-4 standard-margin-left light-gray-background d-flex justify-content-between" >
-
-        <form id="SearchForm" class="d-flex justify-content-between col-12 m-0 p-0" action="{% url 'search_for_game' %}" method="GET">
-            {% csrf_token %}
-            
-            <input type="search" class="modern-input light-gray-background" id="searchInput" name="search" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />    
-            <button type="submit" class="transparent-btn" ><i class="bi bi-search"></i></button>
-        </form>      
     </div>
 
-    <div class="position-relative d-flex justify-content-evenly col-12 mt-5">
 
-        <div class="col-2 light-gray-background rounded-3 pb-5 d-block" style="height: fit-content">
-            <div class="empty-btn col-12 mt-2">
-                Deals
+    <!--Navigation bar-->
+    {% include 'navbar.html' %}
+
+
+    
+    <div class="d-block d-md-none">
+        <section class="flex-justify-content-center light-gray-background annoucement-small-screen">
+            <p>Free shipping in Malaysia on order over RM300!</p>
+        </section>
+    </div>
+
+    <!-- Wide screen page background -->
+    <div class="col-12 d-none d-md-block p-0">
+        <section class="position-relative bg" style="height: 55vh; background-color: black;">
+            <div class="col-12 background-image-container cover" style="background-attachment: local; height: 55vh; background-position: center;">
             </div>
+           
+            <div class="col-12 position-absolute d-flex align-items-center justify-content-center" style="height: 55vh;"> 
+                <p class="text-white h1">Unlock the Power of Imagination, One Game at a Time.</p>
+            </div>     
+        </section>
+    </div>
+   
 
-            <div class="empty-btn col-12">
-                Pre-orders
+
+    <!-- small screen page background -->
+    <div class="col-12 d-block d-md-none p-0">
+        <section class="position-relative" style="height: 40vw; background-color: black;">
+            <div class="col-12 background-image-container cover" style="background-attachment: local; height: 40vw; background-position: center;">
             </div>
+           
+            <div class="col-12 position-absolute d-flex align-items-center justify-content-center" style="height: 40vw;"> 
+                <p class="text-white text-center">Unlock the Power of Imagination, One Game at a Time.</p>
+            </div>     
+        </section>
+    </div>
 
-            <div class="empty-btn col-12">
-                New Releases 
-            </div>
-            
+    <!-- small screen -->
+    <div class="d-block d-md-none">
+        <div style="height: 50vw;"></div>
+    </div>
 
-            <div class="col-12  bitsey-text-color" style="padding: 5px;">
-                Platform
-            </div>
+    <!-- large screen -->
+    <div class="d-none d-md-block">
+        <div style="height: 60vh;"></div>
+    </div>
 
-            <div class="col-12">
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="PlayStation" id="flexCheckPlayStation">
-                    <label class="form-check-label" for="flexCheckDefault">
-                        PlayStation
-                    </label>
-                </div>
-                <div class="form-check my-3">
-                    <input class="form-check-input" type="checkbox" value="Xbox" id="flexCheckXbox">
-                    <label class="form-check-label" for="flexCheckChecked">
-                        Xbox
-                    </label>
+
+    <div class="d-block d-md-none">
+        <p class="h5 standard-margin-left mb-4">Browse game</p> 
+    </div>
+    
+    <div class="d-none d-md-block">
+        <p class="h2 standard-margin-left mb-4">Browse game</p> 
+    </div>
+    <hr class="bitsey-color standard-margin-left" style="width: 100px; height: 5px; opacity: 1;">
+    
+
+    <!-- Search bar wide-->
+    <div class="d-none d-md-block">
+        <div class="position-relative rounded col-4 standard-margin-left light-gray-background d-flex justify-content-between" >
+
+            <form id="SearchForm" class="d-flex justify-content-between col-12 m-0 p-0" action="{% url 'search_for_game' %}" method="GET">
+                {% csrf_token %}
+                
+                <input type="search" class="modern-input light-gray-background" id="searchInput" name="search" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />    
+                <button type="submit" class="transparent-btn" ><i class="bi bi-search"></i></button>
+            </form>      
+        </div>
+    </div>
+   
+
+    <!-- Search bar small-->
+    <div class="d-flex d-md-none align-items-center">
+        <div class="position-relative rounded standard-margin-left light-gray-background d-flex justify-content-between" style="width: 65vw; padding: 5px 10px;">
+
+            <form id="SearchForm" class="d-flex justify-content-between col-5 m-0 p-0" action="{% url 'search_for_game' %}" method="GET">
+                {% csrf_token %}
+                
+                <input type="search" class="modern-input light-gray-background" id="searchInput" name="search" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />    
+                <button type="submit" class="transparent-btn" ><i class="bi bi-search"></i></button>
+            </form>      
+        </div>
+        
+        <div class="secondary-btn-bitsey small-btn-padding">
+            Filter
+        </div>
+    </div>
+
+    <!-- wide screen -->
+    <div class="d-none d-md-block">
+        <div class="position-relative d-flex justify-content-evenly col-12 mt-5">
+
+            <form action="">
+                
+            </form>
+            <div class="col-2 light-gray-background rounded-3 pb-5 d-block" style="height: fit-content">
+                <div class="empty-btn col-12 mt-2">
+                    Deals
                 </div>
     
-                <div class="form-check my-3">
-                    <input class="form-check-input" type="checkbox" value="Nintendo" id="flexCheckNintendo">
-                    <label class="form-check-label" for="flexCheckChecked">
-                        Nintendo
-                    </label>
+                <div class="empty-btn col-12">
+                    Pre-orders
                 </div>
     
-                <div class="form-check my-3">
-                    <input class="form-check-input" type="checkbox" value="PC" id="flexCheckPC">
-                    <label class="form-check-label" for="flexCheckChecked">
-                        PC
-                    </label>
+                <div class="empty-btn col-12">
+                    New Releases 
                 </div>
-            </div>
-            
-
-            <div>
-                <div class="accordion accordion-flush col-12" id="priceAccordion">
-                    <div class="accordion-item">
-                      <h2 class="accordion-header" id="flush-headingOne">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#price-collapse" aria-expanded="false" aria-controls="price-collapse">
-                          Price
-                        </button>
-                      </h2>
-                      <div id="price-collapse" class="accordion-collapse collapse" aria-labelledby="price-collapse" data-bs-parent="#priceAccordion">
-                        <div class="accordion-body">
-                            <div class="form-check my-3">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                <label class="form-check-label" for="flexCheckDefault">
-                                  Below RM50
-                                </label>
-                            </div>
-                            <div class="form-check my-3">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                <label class="form-check-label" for="flexCheckDefault">
-                                  RM50 - RM100
-                                </label>
-                            </div>
-                            <div class="form-check my-3">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                <label class="form-check-label" for="flexCheckDefault">
-                                    RM100 - RM150
-                                </label>
-                            </div>
-                            <div class="form-check my-3">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                <label class="form-check-label" for="flexCheckDefault">
-                                  RM150 - RM200
-                                </label>
-                            </div>
-                            <div class="form-check my-3">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                <label class="form-check-label" for="flexCheckDefault">
-                                  RM200 +
-                                </label>
-                            </div>
-                        </div>
+                
+    
+                <div class="col-12  bitsey-text-color" style="padding: 5px;">
+                    Platform
+                </div>
+    
+                <div class="col-12">
+                    <div class="form-check">
+                        <input class="form-check-input platform-check-input" type="checkbox" value="PS5" id="flexCheckPlayStation">
+                        <label class="form-check-label" for="flexCheckDefault">
+                            PlayStation 5
+                        </label>
+                    </div>
+                    <div class="form-check my-3">
+                        <input class="form-check-input platform-check-input" type="checkbox" value="PS4" id="flexCheckXbox">
+                        <label class="form-check-label" for="flexCheckChecked">
+                            PlayStation 4
+                        </label>
+                    </div>
+    
+                    <div class="form-check my-3">
+                        <input class="form-check-input platform-check-input" type="checkbox" value="PS3" id="flexCheckXbox">
+                        <label class="form-check-label" for="flexCheckChecked">
+                            PlayStation 3
+                        </label>
+                    </div>
+    
+                    <div class="form-check my-3">
+                        <input class="form-check-input platform-check-input" type="checkbox" value="Xbox One" id="flexCheckXbox">
+                        <label class="form-check-label" for="flexCheckChecked">
+                            Xbox One S
+                        </label>
+                    </div>
+    
+                    <div class="form-check my-3">
+                        <input class="form-check-input platform-check-input" type="checkbox" value="Xbox 360" id="flexCheckXbox">
+                        <label class="form-check-label" for="flexCheckChecked">
+                            Xbox 360
+                        </label>
+                    </div>
+    
+        
+                    <div class="form-check my-3">
+                        <input class="form-check-input platform-check-input" type="checkbox" value="Nintendo" id="flexCheckNintendo">
+                        <label class="form-check-label" for="flexCheckChecked">
+                            Nintendo
+                        </label>
+                    </div>
+        
+                    <div class="form-check my-3">
+                        <input class="form-check-input platform-check-input" type="checkbox" value="PC" id="flexCheckPC">
+                        <label class="form-check-label" for="flexCheckChecked">
+                            PC
+                        </label>
                     </div>
                 </div>
-            </div>
-            
-
-
-
-
-
-            <div class="accordion accordion-flush col-12" id="accordionFlushExample">
-                <div class="accordion-item">
-                  <h2 class="accordion-header" id="flush-headingOne">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                      Genre
-                    </button>
-                  </h2>
-                  <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-                    <div class="accordion-body">
-                        <div class="form-check my-3">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                            <label class="form-check-label" for="flexCheckDefault">
-                              Action
-                            </label>
-                        </div>
-                        <div class="form-check my-3">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
-                            <label class="form-check-label" for="flexCheckChecked">
-                              Multiplayer
-                            </label>
-                        </div>
-
-                        <div class="form-check my-3">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
-                            <label class="form-check-label" for="flexCheckChecked">
-                              Horror
-                            </label>
-                        </div>
-
-                        <div class="form-check my-3">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
-                            <label class="form-check-label" for="flexCheckChecked">
-                              Family
-                            </label>
-                        </div>
-
-                        <div class="form-check my-3">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
-                            <label class="form-check-label" for="flexCheckChecked">
-                              Sport
-                            </label>
-                        </div>
-
+                
+    
+    
+                <div class="accordion accordion-flush col-12" id="accordionFlushExample">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="flush-headingOne">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                            Genre
+                            </button>
+                        </h2>
+                        <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body">
                                 <div class="form-check my-3">
-                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
+                                    <input class="form-check-input genre-check-input" type="checkbox" value="Action" id="flexCheckDefault">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                    Action
+                                    </label>
+                                </div>
+                                <div class="form-check my-3">
+                                    <input class="form-check-input genre-check-input" type="checkbox" value="Multiplayer" id="flexCheckChecked">
+                                    <label class="form-check-label" for="flexCheckChecked">
+                                    Multiplayer
+                                    </label>
+                                </div>
+    
+                                <div class="form-check my-3">
+                                    <input class="form-check-input genre-check-input" type="checkbox" value="Horror" id="flexCheckChecked">
+                                    <label class="form-check-label" for="flexCheckChecked">
+                                    Horror
+                                    </label>
+                                </div>
+    
+                                <div class="form-check my-3">
+                                    <input class="form-check-input genre-check-input" type="checkbox" value="Family" id="flexCheckChecked">
+                                    <label class="form-check-label" for="flexCheckChecked">
+                                    Family
+                                    </label>
+                                </div>
+    
+                                <div class="form-check my-3">
+                                    <input class="form-check-input genre-check-input" type="checkbox" value="Sport" id="flexCheckChecked">
+                                    <label class="form-check-label" for="flexCheckChecked">
+                                    Sport
+                                    </label>
+                                </div>
+    
+                                <div class="form-check my-3">
+                                    <input class="form-check-input genre-check-input" type="checkbox" value="Single Player" id="flexCheckChecked">
                                     <label class="form-check-label" for="flexCheckChecked">
                                     Single Player
                                     </label>
                                 </div>
+                               
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="col-12 d-flex justify-content-center"><button type="button" class="secondary-btn-bitsey" style="padding: 5px 10px;">Apply changes</button></div>
-            
-
-        </div> <!-- filter-->
-
-
     
+                <div class="col-12 d-flex justify-content-center"><button type="button" class="secondary-btn-bitsey" style="padding: 5px 10px;" onclick="ApplyChanges()">Apply changes</button></div>
+                
+    
+            </div> <!-- filter-->
+    
+    
+        
+            <div class=" position-relative col-9 " id="list-game-container">
+                <div class="container">
+                    <div id="noResultDisplay" class="col-10" style="display: none;">
+                        <div class="col-12 d-flex justify-content-center">
+                            <img style="height: 300px; width: 300px;" src="{% static '/media/images/userAppImages/sad.gif' %}" alt="empty wishlist">
+                        
+                        </div>
+                        
+                        <p class="text-center bitsey-text-color">Oppss.. No result found based on your search criteria(s)</p>
+                    </div>
+    
+    
+                    <div class="row" id="resultsContainer">
+                        
+                    
+                        {% for game in returnedGames%}
+                            <div class="col-4 gametag" >
+    
+                                <div class="game-block" onclick="ViewDetailsPage('{{ game.id }}')">
+                                    <div class="game-block-image" style="background-image: url('{{game.image.url}}');"></div> <!-- image -->
+                                    <div class="m-3">
+                                        <p class="fw-bold light-text-color m-0">{{game.name}}</p> <!-- name -->
+                                        <p class="text-m bitsey-text-color" style="margin-bottom: 10px;">RM {{game.price}}</p> <!-- Price -->
+                                        <div class="position-relative d-flex">
+    
+                                            {% if game.isOnPromotion %}
+                                                <div class="promotion-label-small" >Promotion</div>
+                                            {% endif %}
+                                            
+                                            
+                                        </div> <!-- platform -->
+                                        <!-- Add to wishlist button -->
+    
+                                        <div class="wishlist-container" > <!-- event.stopPropagation() = prevent triggering parent div's onclick -->
+                                            <button onclick="AddToWishList(`{{game.id}}`, `{{user.id}}`); " class="empty-btn"><i id='{{game.id}}' class="bi bi-heart" style="color: #038BA5;"></i></button> 
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        
+                        {% endfor %}
+                        
+                    </div>
+        
+        
+        
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    
+    <!-- Small screen -->
+    <div class="d-block d-md-none">
         <div class=" position-relative col-9 " id="list-game-container">
+
             <div class="container">
+                <div id="noResultDisplay" class="col-10" style="display: none;">
+                    <div class="col-12 d-flex justify-content-center">
+                        <img style="height: 300px; width: 300px;" src="{% static '/media/images/userAppImages/sad.gif' %}" alt="empty wishlist">
+                    
+                    </div>
+                    
+                    <p class="text-center bitsey-text-color">Oppss.. No result found based on your search criteria(s)</p>
+                </div>
+
+
                 <div class="row" id="resultsContainer">
-
+                    
+                
                     {% for game in returnedGames%}
-                        <div class="col-4 gametag" >
+                        <div class="col-6 gametag" >
 
-                            <div class="game-block" onclick="ViewDetailsPage('{{ game.id }}')">
+                            <div class="game-block game-block-small" onclick="ViewDetailsPage('{{ game.id }}')">
                                 <div class="game-block-image" style="background-image: url('{{game.image.url}}');"></div> <!-- image -->
                                 <div class="m-3">
                                     <p class="fw-bold light-text-color m-0">{{game.name}}</p> <!-- name -->
                                     <p class="text-m bitsey-text-color" style="margin-bottom: 10px;">RM {{game.price}}</p> <!-- Price -->
-                                    <div class="position-relative d-flex justify-content-evenly">
+                                    <div class="position-relative d-flex">
 
                                         {% if game.isOnPromotion %}
-                                            <div class="promotion-label" >Promotion</div>
+                                            <div class="promotion-label-small" >Promotion</div>
                                         {% endif %}
                                         
                                         
@@ -265,9 +366,11 @@
     
             </div>
         </div>
-        
     </div>
 
+
+
+    {% include 'footer.html'%}
 <script>
     function ViewDetailsPage(id) {
         console.log("This is clicked")
@@ -337,5 +440,7 @@
 </script>
 <script type="text/javascript" src="{% static 'js/notification.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/cartNotification.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/filterAndSearch.js' %}"></script>
+
 </body>
 </html>
