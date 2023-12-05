@@ -1,7 +1,5 @@
-function ApplyChanges(){
-    console.log("Clear all")
-}
-var searchQueries = { platform : [], price: [], genre: []};
+
+var searchQueries = { platform : [], price: [], genre: [], orderby:''};
 var csrfToken
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -12,9 +10,11 @@ document.addEventListener('DOMContentLoaded', function () {
     
     var genreCheckBoxes = document.querySelectorAll('.genre-check-input');
 
-    console.log(platformCheckboxes)
-    console.log(priceCheckboxes)
-    console.log(genreCheckBoxes)
+    var orderByRadios = document.querySelectorAll('.sortby-input');
+
+
+    console.log(orderByRadios)
+
 
     platformCheckboxes.forEach(function (checkbox) {
         checkbox.addEventListener('change', function () {
@@ -55,6 +55,25 @@ document.addEventListener('DOMContentLoaded', function () {
             MakeQueries()
         });
     });
+
+    
+
+    orderByRadios.forEach(function (checkbox) {
+        checkbox.addEventListener('change', function () {
+            //If there is change in the checklist, 
+            // Build a list of selected values
+            var selectedValues = Array.from(orderByRadios)
+                .filter(checkbox => checkbox.checked)
+                .map(checkbox => checkbox.value);
+
+            searchQueries.orderby = selectedValues
+            MakeQueries()
+            console.log("searchQueries.orderby")
+            console.log(selectedValues)
+            console.log(searchQueries.orderby)
+        });
+    });
+
 });
 
 function MakeQueries(){
@@ -80,9 +99,6 @@ function MakeQueries(){
             DisplayResult(data.result)
             DisplayWishList()
         }
-
-
-        
     })
     .catch(error => console.error('Error:', error));
 
@@ -114,32 +130,47 @@ function DisplayWishList(){
 
 function ShowNoResult(){
     //Clear all previous data
-    var resultDisplay = document.getElementById('resultsContainer')
-    resultDisplay.innerHTML = ""
+    var resultDisplay = document.getElementsByClassName('resultsContainer')
+    for(var i =0; i < resultDisplay.length; i++){
+        resultDisplay[i].innerHTML = ""
+    }
+    
 
     var noResultDisplay = document.getElementById('noResultDisplay')
     noResultDisplay.style.display = 'block'
 }
 
 function DisplayResult(data){
+    console.log("Displaying result")
     //Close noResultDisplay
     var noResultDisplay = document.getElementById('noResultDisplay')
     noResultDisplay.style.display = 'none'
 
-    var resultDisplay = document.getElementById('resultsContainer')
-    resultDisplay.innerHTML = ""
+    var resultDisplay = document.getElementsByClassName('resultsContainer')
+    console.log(resultDisplay)
+    for(var i =0; i < resultDisplay.length; i++){
+        resultDisplay[i].innerHTML = ""
+    }
+
+
+    
     //Render the game into view
     //Loop through the result and create a container for it and append to the result container
-    data.forEach((data) => {
 
-        var gameBlock = createGameBlock(data)
-        //Append to container
-        console.log(`Result Display: ${resultDisplay}`)
-        resultDisplay.appendChild(gameBlock)
-        console.log(data)
+    for(var i =0; i < resultDisplay.length; i++){
+       
+        data.forEach((data) => {
 
-    })
-    console.log("Update result container")
+            var gameBlock = createGameBlock(data)
+            //Append to container
+            console.log(`Result Display: ${resultDisplay}`)
+            resultDisplay[i].appendChild(gameBlock)
+            console.log(data)
+    
+        })
+        console.log("Update result container")
+    }
+    
 }
 
 function createGameBlock(game){
@@ -176,7 +207,7 @@ function createGameBlock(game){
 
     // Create a div for the promotion label
     var promotionDiv = document.createElement("div");
-    promotionDiv.className = "position-relative d-flex justify-content-evenly";
+    promotionDiv.className = "position-relative d-flex";
 
     // Check if game is on promotion and create a promotion label if true
     if (game.isOnPromotion) {

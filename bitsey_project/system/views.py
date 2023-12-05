@@ -10,6 +10,10 @@ from django.core.mail import send_mail
 
 from django.http import HttpResponse
 from django.urls import reverse
+from django.utils import timezone
+from django.shortcuts import redirect
+from user import views as userviews
+from browse import views as browseviews
 
 # Create your views here.
 @login_required
@@ -74,28 +78,44 @@ def AnyUnreadNotification(request):
 
 
 def Support(request):
-    if request.method == 'POST': 
-        # Get form data
-        first_name = request.POST.get('firstName')
-        last_name = request.POST.get('lastName')
-        email = request.POST.get('email')
-        message = request.POST.get('message')
+    if request.method == 'POST':
+        form = SupportForm(request.POST)
+        if form.is_valid():
+            first_name = request.POST.get('firstName')
+            last_name = request.POST.get('lastName')
+            email = request.POST.get('email')
+            message = request.POST.get('message')
+        
+            # CAPTCHA validation successful, handle form submission
+            # Compose email message
+            subject = 'Bitsey Enquiry'
+            body = f'Customer Name: {first_name} {last_name}\nCustomer Email: {email}\n\nMessage:\n{message}'
 
-        print("first_name: " +str(first_name))
-        print("last_name: " + str(last_name))
-        print("email: " + str(email))
-        print("message: " + str(message))
+            # Send email
+            send_mail(subject, body, email, ["kingstonlee96@gmail.com"], fail_silently=False)
 
-        # Compose email message
-        subject = 'Bitsey Enquiry'
-        body = f'Customer Name: {first_name} {last_name}\nCustomer Email: {email}\n\nMessage:\n{message}'
-
-        # Send email
-        send_mail(subject, body, email, ["kingstonlee96@gmail.com"], fail_silently=False)
-
-        # Redirect after successful submission
-        return render(request, 'support.html', {'emailSent': True})
+            return render(request, 'support.html', {'emailSent': True, 'form': form})
     else:
-        return render(request, 'support.html', {'emailSent': False})
-    
+        form = SupportForm()
 
+    return render(request, 'support.html', {'emailSent': False, 'form': form})
+
+
+
+def BookTrial(request, game_id):
+    print("Book trial is working")
+    if request.method == 'POST':
+        #check if user is logged in 
+        #If YES, proceed 
+        #If NO, redirect to front end
+        if request.user.id != None:
+            # set the trial date
+            cGame = browsemodels.Game.objects.get(pk=game_id)
+            trial = Trial(user=request.user, game = cGame, date = timezone.now(), approved= False)
+            
+            trial.save()
+            return redirect(reverse('game_detail', args=[game_id]))
+        else:
+            return redirect(userviews.signin)
+
+            

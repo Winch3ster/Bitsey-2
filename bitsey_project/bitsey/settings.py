@@ -43,7 +43,10 @@ INSTALLED_APPS = [
     'order',
     'corsheaders',
     'rest_framework',
-    'system'
+    'system',
+    'captcha',
+    'django_recaptcha',
+   
 ]
 
 MIDDLEWARE = [
@@ -56,6 +59,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     #'whitenoise.middleware.WhiteNoiseMiddleware',
     'corsheaders.middleware.CorsMiddleware',
+ 
 ]
 
 CORS_ALLOWED_ORIGINS = [
@@ -160,3 +164,7 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = 'kingstonlee96@gmail.com'
 EMAIL_HOST_PASSWORD = 'caud ykkq disf beyp'
 
+
+#reCAPTCHA keys
+RECAPTCHA_PUBLIC_KEY = '6LcZryYpAAAAAMCmb8keL9TpGsZKYkOgJ3oWK2mj'
+RECAPTCHA_PRIVATE_KEY = '6LcZryYpAAAAAN6STYhG5nd7CB7UBo6bqHIa3Um1'

@@ -129,7 +129,7 @@
     cursor: pointer;
     font-size: 16px;
     max-width: 120px;
-
+    margin-left: 0;
 }
 .learn-more-btn-bitsey:hover{
     background-color: #038BA5;;
@@ -158,10 +158,29 @@
 
 .order-history-Individual-Item-Container{
     position: relative;
-    width: 100%;
-    padding: 10px 0;
-    margin-top: 10px;
-    border-bottom: 2px solid gray;
+    height: fit-content;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #F4F4F4;
+    margin-bottom: 30px;
+}
+.order-history-Individual-Item-Container-small{
+    position: relative;
+    height: fit-content;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: #F4F4F4;
+    margin-bottom: 10px;
+
+}
+
+.attibute-label{
+    padding: 1px 5px;
+    background-color: gray;
+    border-radius: 2px;
+    height: fit-content;
+    color: white;
+    text-align: center;
 }
 
 

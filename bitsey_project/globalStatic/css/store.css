@@ -94,3 +94,17 @@
     
 
 }
+
+
+.attibute-label{
+    padding: 4px 6px;
+    margin: 5px 10px;
+    background-color: gray;
+    border-radius: 10px;
+    height: fit-content;
+    width: fit-content;
+    color: white;
+    text-align: center;
+    outline: none;
+    border: none;
+}

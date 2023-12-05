@@ -20,6 +20,15 @@ class Notifications(models.Model):
     def __str__(self):
         return self.game.name
 
+class Trial(models.Model):
+    user = models.ForeignKey(usermodels.User, on_delete=CASCADE)
+    game = models.ForeignKey(browsemodels.Game, on_delete=CASCADE)
+    date = models.DateTimeField()
+    approved = models.BooleanField()
+
+    def __str__(self):
+        return f"{self.user.first_name } have requested trial for  {self.game.name} on {self.date}"
+
 
 
 @receiver(post_save, sender=browsemodels.GamePromotion)

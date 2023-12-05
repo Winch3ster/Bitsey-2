@@ -19,11 +19,14 @@
             {% if user.id != None %}
                 <!-- If THERE IS user signed in navigate to account page when clicked -->
                 
-                <div onclick="OpenNotificationBar()"><img class="image-link-container" src="{% static '/media/images/homeImages/notification-bell.png' %}" alt="" style="height: 24px; width: auto;"><span class="notification-mark" id="notification-mark"></span></div>
+                <div onclick="OpenNotificationBar()">
+                    <img class="image-link-container" src="{% static '/media/images/homeImages/notification-bell.png' %}" alt="" style="height: 24px; width: auto;">
+                    <span class="notification-mark" id="notification-mark" style=" z-index:3;"></span>
+                </div>
                 
                 <!--<a href="account/{{user.id}}/" ><img class="image-link-container" src="{% static '/media/images/homeImages/user.jpg' %}" alt=""></a> -->
                 <a href="{% url 'edit_user' user_id=user.id %}"  ><img class="image-link-container" src="{% static '/media/images/homeImages/user.jpg' %}" alt=""></a>
-                <a href="{% url 'cart'%}" ><img class="image-link-container" src="{% static '/media/images/homeImages/cart.jpg' %}" alt=""><span class="" id="cart-mark"></span></a>
+                <a href="{% url 'cart'%}" ><img class="image-link-container" src="{% static '/media/images/homeImages/cart.jpg' %}" alt=""><span class="cart-mark-identifier" id="cart-mark"></span></a>
             
             {% else %}
                 <!-- If NO user signed in navigate to sign in page when clicked -->
@@ -46,11 +49,8 @@
     </div>
 
     <div id="notification-bar-message-container">
-
-        
     </div>
     
-
     <div class="bitsey-text-color text-center" style="cursor: pointer;" onclick="ClearNotifications()">Clear all</div>
 </div>
 
@@ -63,8 +63,11 @@
 </div>
 
 
+
+
+<!-- small screen nav -->
 <div class="col-12 d-flex justify-content-center d-md-none position-fixed" style="bottom: 10px; z-index: 5;">
-    <div class="col-11 d-flex rounded-pill bg-white px-4 py-3 justify-content-evenly" style="border: 1px solid #038BA5;">
+    <div class="col-11 d-flex rounded-pill bg-white px-4 py-3 justify-content-evenly small-nav" >
 
         <div>
             <a href="{% url 'support_page' %}">
@@ -76,7 +79,10 @@
 
         {% if user.id != None %}
             <div>
-                <div onclick="OpenNotificationBar()"><img class="image-link-container" src="{% static '/media/images/homeImages/notification-bell.png' %}" alt="" style="height: 24px; width: auto;"><span class="notification-mark" id="notification-mark"></span></div>
+                <div onclick="OpenNotificationBar()">
+                    <img class="image-link-container" src="{% static '/media/images/homeImages/notification-bell.png' %}" alt="" style="height: 24px; width: auto;">
+                    <span class="notification-mark" id="notification-mark" style=" z-index:3;"></span>
+                </div>
             </div>
         
             <div>
@@ -90,7 +96,7 @@
             </div>
             
             <div>
-                <a href="{% url 'cart'%}"  ><img class="image-link-container" src="{% static '/media/images/homeImages/cart.jpg' %}" alt=""></a>
+                <a href="{% url 'cart'%}" ><img class="image-link-container" src="{% static '/media/images/homeImages/cart.jpg' %}" alt=""><span class="cart-mark-identifier" id="cart-mark"></span></a>
             </div>
     
             <div>
@@ -102,7 +108,9 @@
                 <!-- If NO user signed in navigate to sign in page when clicked -->
                 
                 <div>
-                    <div><img class="image-link-container" src="{% static '/media/images/homeImages/notification-bell.png' %}" alt="" style="height: 24px; width: auto;"></div>
+                    <div>
+                        <img class="image-link-container" src="{% static '/media/images/homeImages/notification-bell.png' %}" alt="" style="height: 24px; width: auto;">
+                    </div>
                 </div>
         
                 
@@ -126,13 +134,5 @@
                 </div>
                 
         {% endif %} 
-
-
-
-       
-
-       
-
-       
     </div>
 </div>

@@ -41,27 +41,113 @@
     </div>
     
 
-    
-    <!--Featured game section-->
-    <section style="background-color: black;">
-        <div class="codMWII-backgroundImage background-image-container" style="opacity: 1;">
-            <div class="white-ribbon">Featured</div>
-            <div class="content-container-left">
-                <h1>Call of Duty Modern Warfare III</h1>
-                <p>
-                    In the direct sequel to the record-breaking Call of Duty®: Modern Warfare® II, Captain Price and Task Force 141 face off against the ultimate threat. 
-                    The ultranationalist war criminal Vladimir Makarov is extending his grasp across the world causing Task Force 141 to fight like never before.
-                </p>
-                <div class="inline-display">
-                    <button class="primary-btn">View</button>
-                    <button class="secondary-btn-white">Trailer</button>
+    <!-- small screen -->
+    <div class="d-block d-md-none">
+         <!--Featured game section-->
+        <section style="background-color: black;">
+            <div class="codMWII-backgroundImage background-image-container" style="opacity: 1; height: 60vh; background-position: center;">
+                <div class="white-ribbon" style="width: 50vw; top: 15px;">Featured</div>
+                <div class="content-container-left" style="width: 80%; font-size: 14px;">
+                    <h3>Call of Duty Modern Warfare III</h3>
+                    <p>
+                        In the direct sequel to the record-breaking Call of Duty®: Modern Warfare® II, Captain Price and Task Force 141 face off against the ultimate threat. 
+                        The ultranationalist war criminal Vladimir Makarov is extending his grasp across the world causing Task Force 141 to fight like never before.
+                    </p>
+                    <div class="inline-display">
+                        <button class="secondary-btn-white" onclick="CODMW3Trailer()">Trailer</button>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </div>
+
+
+    <!-- wide screen-->
+    <div class="d-none d-md-block">
+         <!--Featured game section-->
+        <section style="background-color: black;">
+            <div class="codMWII-backgroundImage background-image-container" style="opacity: 1;">
+                <div class="white-ribbon">Featured</div>
+                <div class="content-container-left">
+                    <h1>Call of Duty Modern Warfare III</h1>
+                    <p>
+                        In the direct sequel to the record-breaking Call of Duty®: Modern Warfare® II, Captain Price and Task Force 141 face off against the ultimate threat. 
+                        The ultranationalist war criminal Vladimir Makarov is extending his grasp across the world causing Task Force 141 to fight like never before.
+                    </p>
+                    <div class="inline-display">
+                        <button class="secondary-btn-white" onclick="CODMW3Trailer()">Trailer</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+   
 
   
+    <!-- small screen -->
+    <div class="d-block d-md-none">
 
+        
+    <!--Search via console section-->
+    <section class="container mt-5">
+        <p class="text-center">Explore your favorite game via console</p>
+        
+        <div class="row-local">
+            <div class="col-2 col-s-12"></div>
+
+            <div class="col-4 col-s-12">
+                <div class="flex-justify-content-space-around">
+                    <div class="image-content-container">
+                        <img src="{% static '/media/images/homeImages/ps.jpeg' %}" alt="">
+                        <p class="bitsey-text-color">PlayStation</p>
+                    </div>
+
+                    <div class="image-content-container">
+                        <img src="{% static '/media/images/homeImages/xbox.jpeg' %}" alt="">
+                        <p class="bitsey-text-color">Xbox</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-4 col-s-12">
+                <div class="flex-justify-content-space-around">
+                    <div class="image-content-container">
+                        <img src="{% static '/media/images/homeImages/nintendo.jpeg' %}" alt="">
+                        <p class="bitsey-text-color">Nintendo</p>
+                    </div>
+
+                    <div class="image-content-container">
+                        <img src="{% static '/media/images/homeImages/monitor.jpeg' %}" alt="">
+                        <p class="bitsey-text-color">PC</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row-local">
+
+            <div class="col-5 col-s-10 ">
+                <h3 class="header-slim">PlayStation 5 Games</h3>
+                <p style="font-size: 14px;">Discover and Experience an all-new generation of incredible PlayStation 5 games here in Bitsey.</p>
+                <a href="{% url 'SearchPS5' %}" class="primary-btn" style="padding: 4px 15px;">View</a>
+            </div>
+
+            <div class="col-5 col-s-10 ">
+                <img class="ps5-image" src="{% static '/media/images/homeImages/ps5-console.jpg' %}" alt="">
+            </div>
+
+            <div class="col-1 col-s-12"></div>
+        </div>
+    </section>
+    
+
+    </div>
+
+
+    <!-- wide screen -->
+    <div class="d-none d-md-block">
+        
     <!--Search via console section-->
     <section class="container mt-5">
         <p class="text-center">Explore your favorite game via console</p>
@@ -107,7 +193,7 @@
             <div class="col-5 col-s-10 ">
                 <h3 class="header-slim">PlayStation 5 Games</h3>
                 <p>Discover and Experience an all-new generation of incredible PlayStation 5 games here in Bitsey.</p>
-                <button class="primary-btn">View</button>
+                <a href="{% url 'SearchPS5' %}" class="primary-btn" >View</a>
             </div>
 
             <div class="col-5 col-s-10 ">
@@ -118,24 +204,132 @@
         </div>
     </section>
     
+    </div>
 
-    <!-- Explore horror game -->
-    <section class="position-relative" style="height: 70vh; background-color: black;">
-        <div class="col-12 background-image-container horror-game-background" style="height: 70vh">
-        </div>
-        
+    <!-- small screen -->
+    <div class="d-block d-md-none">
+        <!-- Explore horror game -->
+        <section class="position-relative" style="height: 40vh; background-color: black;">
+            <div class="col-12 background-image-container horror-game-background" style="height: 40vh">
+            </div>
+            
 
-        <div class="col-12 d-flex justify-content-end align-items-center">
-            <div class="col-5 position-absolute" style="top:30%; margin-right: 5%;"> 
-                <p class="text-white h4">Explore Our Horror Game Library</p>
-                <p class="text-white">Explore award winning title such as The Last of Us 2 to spine chilling Resident Evil Biohazard.</p>
-                <div class="btn btn-outline-light rounded-pill">Explore</div>
-            </div>     
-        </div>
-    </section>
+            <div class="col-12 d-flex justify-content-end align-items-center">
+                <div class="position-absolute" style="top:20px; left: 18px; width: 89%;"> 
+                    <p class="text-white h4">Explore Our Horror Game Library</p>
+                    <p class="text-white" style="font-size: 14px; width: 50%;">Explore award winning title such as The Last of Us 2 to spine chilling Resident Evil Biohazard.</p>
+                    
+                   
+                    <a href="{% url 'SearchHorror' %}" class="btn btn-outline-light rounded-pill" >Explore</a>
+             
+                    
+                </div>     
+            </div>
+        </section>
 
 
-    <!-- Discover more games -->
+    </div>
+
+    <!--wide screen-->
+    <div class="d-none d-md-block">
+        <!-- Explore horror game -->
+        <section class="position-relative" style="height: 70vh; background-color: black;">
+            <div class="col-12 background-image-container horror-game-background" style="height: 70vh">
+            </div>
+            
+
+            <div class="col-12 d-flex justify-content-end align-items-center">
+                <div class="col-5 position-absolute" style="top:30%; margin-right: 5%;"> 
+                    <p class="text-white h4">Explore Our Horror Game Library</p>
+                    <p class="text-white" style="font-size: 14px;">Explore award winning title such as The Last of Us 2 to spine chilling Resident Evil Biohazard.</p>
+                    
+                    <a href="{% url 'SearchHorror' %}" class="btn btn-outline-light rounded-pill" >Explore</a>
+
+                    
+                </div>     
+            </div>
+        </section>
+    </div>
+
+
+
+    <!-- small screen -->
+    <div class="d-block d-md-none">
+         <!-- Discover more games -->
+        <section class="discover-more-game-container">
+            <p class="text-white h4 standard-margin-left" >Discover the latest gaming sensation at Bitsey</p>
+
+            <div class="position-relative" style="height: 35vh">
+                <div class="col-12 background-image-container war-game-background" style="height: 35vh; background-size: cover; opacity: 0.4; background-position: center;"></div>
+
+
+
+               
+                <div class="col-s-8 position-absolute standard-margin-left"  style="top:20px; left: 10px; width: 90%;"> 
+                    <p class="text-white h4 ">War never ends...</p>
+                    <p class="text-white" style="font-size: 14px;">Discover our action and adventure game that dwell into humanity’s darkest events.</p>
+                    <a href="{% url 'SearchWar' %}" class="btn btn-outline-light rounded-pill" >Explore</a>
+
+                </div> 
+
+               
+
+
+            </div>
+
+
+            <div class="position-relative d-flex justify-content-center align-items-center my-5">
+                <div class="col-4 rounded-pill p-1" style="background-color: #1E1F23;">
+                    <div class="col-6 rounded-pill px-1 py-2 bg-white text-center" style="font-size: 16px;">New Releases</div>
+                </div>
+            </div>
+
+            <div class="bitsey-container-s bitsey-container-m bitsey-container-l">
+                <div class="row-bitsey">
+                    <div class="column-bitsey">
+                        <div class="square">
+                            <div class="game-block-background-image" style="background-image: url('../Images/index/minecraft.jpg');"></div>
+                            <p class="text-white text-s">Minecraft</p>
+                        </div>
+                        <div class="square">
+                            <div class="game-block-background-image" style="background-image: url('../Images/index/store/bf1.webp');"></div>
+                            <p class="text-white text-s">Battlefield 1</p>
+                        </div>
+                        <div class="square">
+                            <div class="game-block-background-image" style="background-image: url('../Images/index/store/bfv.avif');"></div>
+                            <p class="text-white text-s">Battlefield V</p>
+                        </div>
+                    </div>
+                    <div class="column-bitsey">
+                        <div class="square">
+                            <div class="game-block-background-image" style="background-image: url('../Images/index/store/cod-mw-2020.webp');"></div>
+                            <p class="text-white text-s">Call of Duty Modern Warfare</p>
+                        </div>
+                        <div class="square">
+                            <div class="game-block-background-image" style="background-image: url('../Images/index/store/cod-ww2.jpg');"></div>
+                            <p class="text-white text-s">Call of Duty WW2</p>
+                        </div>
+                        <div class="square">
+                            <div class="game-block-background-image" style="background-image: url('../Images/index/store/god-of-war-ragnarok.webp');"></div>
+                            <p class="text-white text-s">God of War Ragnarok</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>        
+
+
+            
+        </section>
+    </div> <!-- small screen  until here-->
+    
+
+
+
+
+    <!-- wide screen -->
+    <div class="d-none d-md-block">
+         <!-- Discover more games -->
     <section class="discover-more-game-container">
         <p class="text-white h3 standard-margin-left" >Discover the latest gaming sensation at Bitsey</p>
         <div style="height: 9vh;"></div> <!--game label container-->
@@ -145,14 +339,13 @@
 
 
 
-            <!-- This part have problem for small screen -->
             <div class="col-5 col-s-8 position-absolute standard-margin-left" style="top:30%;"> 
                 <p class="text-white h4">War never ends...</p>
                 <p class="text-white">Discover our action and adventure game that dwell into humanity’s darkest events.</p>
-                <div class="btn btn-outline-light rounded-pill">Explore</div>
+                <a href="{% url 'SearchWar' %}" class="btn btn-outline-light rounded-pill" >Explore</a>
             </div> 
 
-            <!-- Until here -->
+           
 
 
         </div>
@@ -201,6 +394,9 @@
 
         
     </section>
+    </div>
+
+   
 
     
 
@@ -234,60 +430,114 @@
           </div>
     </section>
 
+
     <!-- Sales section -->
 
+    <!-- small screen -->
+    <div class="d-block d-md-none">
+        <section class="sales-container py-5">
+            <div class="col-12"><p class="text-center h4">Explore all our games that are currently on promotions!</p></div>
     
-
-
-
-
-    <section class="sales-container py-5">
-        <div class="col-12"><p class="text-center h4">Explore all our games that are currently on promotions!</p></div>
-
-        <div class="col-12 d-flex justify-content-center">
-            
-            
-            <div class="wrapper">
-                <div class="icon"><i id="left" class="bi bi-chevron-left"></i></div>
-          
-                <ul class="tabs-box">
-          
+            <div class="col-12 d-flex justify-content-center overflow-scroll">
+                
+                
                     {% for game in gamesOnPromotion %}
-                    <li class="tab">
-                        <img class="block" src="{{game.game.image.url}}" alt="">
+                    <div class="tab-small">
+                        <img class="block-small" src="{{game.game.image.url}}" alt="">
                         <div class="d-flex justify-content-evenly align-items-center my-2" >
                             <p class="text-danger" style="text-decoration: line-through;">RM{{game.oldPrice}}</p>
                             <p><i class="bi bi-arrow-right"></i></p>
                             <p class="bitsey-text-color">RM{{game.newPrice}}</p>
                         </div>
-                    </li>
+                    </div>
                     {% endfor %}
-                  
-   
+                      
+    
+            </div>
+            
+            <div class="col-12 d-flex justify-content-center">
+                <a href="{% url 'SearchPromotion' %}" class="secondary-btn" >See Promotion</a>
 
-                  
-                </ul>
-                <div class="icon"><i id="right" class="bi bi-chevron-right"></i></div>
-              </div>     
-        </div>
-        
-        <div class="col-12 d-flex justify-content-center">
-            <button class="secondary-btn">See Promotions</button>
-        </div>
-
-    </section>
+            </div>
+    
+        </section>
+    
+    </div>
 
 
 
-    <!-- Family Friendly games -->
-    <section class="background-container d-flex align-items-center px-5 family-background">
-        <div class="col-5 bg-white p-5">
-            <p class="bitsey-text-color h2">Bitsey Family</p>
-            <p>Family Fun: Games for All Ages</p>
-            <p>This carefully curated collection of family-friendly games is perfect for everyone of all ages</p>
-            <button class="primary-btn">View</button>
-        </div>
-    </section>
+    <!-- wide screen -->
+    <div class="d-none d-md-block">
+        <section class="sales-container py-5">
+            <div class="col-12"><p class="text-center h4">Explore all our games that are currently on promotions!</p></div>
+    
+            <div class="col-12 d-flex justify-content-center">
+                
+                
+                <div class="wrapper">
+                    <div class="icon"><i id="left" class="bi bi-chevron-left"></i></div>
+              
+                    <ul class="tabs-box">
+              
+                        {% for game in gamesOnPromotion %}
+                        <li class="tab">
+                            <img class="block" src="{{game.game.image.url}}" alt="">
+                            <div class="d-flex justify-content-evenly align-items-center my-2" >
+                                <p class="text-danger" style="text-decoration: line-through;">RM{{game.oldPrice}}</p>
+                                <p><i class="bi bi-arrow-right"></i></p>
+                                <p class="bitsey-text-color">RM{{game.newPrice}}</p>
+                            </div>
+                        </li>
+                        {% endfor %}
+                      
+       
+    
+                      
+                    </ul>
+                    <div class="icon" style="right: 0;"><i id="right" class="bi bi-chevron-right"></i></div>
+                  </div>     
+            </div>
+            
+            <div class="col-12 d-flex justify-content-center">
+                <a href="{% url 'SearchPromotion' %}" class="secondary-btn" >See Promotion</a>
+            </div>
+    
+        </section>
+    
+    </div>
+    
+
+    
+
+
+    <!-- small screen -->
+    <div class="d-block d-md-none">
+        <!-- Family Friendly games -->
+        <section class="background-container d-flex align-items-center px-3 family-background" style="height: 60vh; background-position: center; background-attachment: fixed;">
+            <div class="bg-white p-4">
+                <p class="bitsey-text-color h3">Bitsey Family</p>
+                <p style="font-size: 14px;">Family Fun: Games for All Ages</p>
+                <p style="font-size: 14px;">This carefully curated collection of family-friendly games is perfect for everyone of all ages</p>
+                <a  href="{% url 'SearchFamily' %}" class="primary-btn" style="padding: 4px 15px;">View</a>
+            </div>
+        </section>
+    </div>
+
+
+    <!-- wide screen-->
+    <div class="d-none d-md-block">
+        <!-- Family Friendly games -->
+        <section class="background-container d-flex align-items-center px-5 family-background">
+            <div class="col-5 bg-white p-5">
+                <p class="bitsey-text-color h2">Bitsey Family</p>
+                <p>Family Fun: Games for All Ages</p>
+                <p>This carefully curated collection of family-friendly games is perfect for everyone of all ages</p>
+                <a href="{% url 'SearchFamily' %}" class="primary-btn" >View</a>
+
+            </div>
+        </section>
+    </div>
+    
 
   
     <!-- Why buy at bitsey -->
@@ -296,17 +546,24 @@
         <div class="d-flex px-5 justify-content-evenly align-items-center">
 
             <div class="content-block">
-                <img src="{% static '/media/images/homeImages/returning.png' %}" alt="">
+                <div class="d-flex justify-content-center" style="width: 100%;">
+                    <img src="{% static '/media/images/homeImages/returning.png' %}" alt="">
+                </div>
+               
                 <p>7 Days Return Policy</p>
             </div>
 
             <div class="content-block">
-                <img src="{% static '/media/images/homeImages/fast-delivery.png' %}" alt="">
+                <div class="d-flex justify-content-center" style="width: 100%;">
+                    <img src="{% static '/media/images/homeImages/fast-delivery.png' %}" alt="">
+                </div>
                 <p>Fast Delivery</p>
             </div>
 
             <div class="content-block">
-                <img src="{% static '/media/images/homeImages/game-controller.png' %}" alt="">
+                <div class="d-flex justify-content-center" style="width: 100%;">
+                    <img src="{% static '/media/images/homeImages/game-controller.png' %}" alt="">
+                </div>
                 <p>Free Trial</p>
             </div>
 
@@ -327,4 +584,17 @@
 <script type="text/javascript" src="{% static 'js/home.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/notification.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/cartNotification.js' %}"></script>
+
+<script>
+
+    function CODMW3Trailer() {
+           
+        window.location.href = 'https://www.youtube.com/watch?v=mHDEDDrGYvo&ab_channel=CallofDuty';
+    }
+
+
+  
+
+</script>
+
 </html>

@@ -75,8 +75,8 @@
     height: auto;
 }
 .content-block p{
-    text-align: center;
     margin-top: 10px;
+    text-align: center;
 }
 
 /* Game promotion css */
@@ -90,6 +90,7 @@
     border-radius: 13px;
     display: flex;
     align-items: center;
+    justify-content: center;
 }
 .icon {
   width: 100px;
@@ -166,4 +167,18 @@
     border-radius: 20px;
     background-color: gray;
     object-fit: cover;
+}
+
+.tab-small{
+  width: 35vw;
+  height: auto;
+  margin: 0 20px;
+}
+
+.block-small{
+  width: 35vw;
+  height: 35vw;
+  border-radius: 20px;
+  background-color: gray;
+  object-fit: cover;
 }

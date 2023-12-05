@@ -8,32 +8,58 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
 from .serializer import GameSerializer
+from django.utils import timezone
+from django.shortcuts import redirect
+from system import models as sysmodels
+from user import views as uviews
+
 # Create your views here.
 def browse(request):
     returnedGames = Game.objects.all()
     if request.user.is_authenticated:
         user = request.user
-        return render(request, 'store.html', {'returnedGames': returnedGames, 'user': user})
+        return render(request, 'store.html', {'returnedGames': returnedGames, 'user': user, 'search': 'All'})
 
 
 
     
-    return render(request, 'store.html', {'returnedGames': returnedGames})
+    return render(request, 'store.html', {'returnedGames': returnedGames, 'search': 'All'})
     #return HttpResponse("Hello world! this i supposingly from homepahe html")
 
 
 def game_detail(request, game_id):
-    returnedGame = Game.objects.get(pk=game_id)
-    
+    if request.method == 'POST':
+         #check if user is logged in 
+        #If YES, proceed 
+        #If NO, redirect to front end
+        if request.user.id != None:
+            # set the trial date
+            cGame = Game.objects.get(pk=game_id)
+            trial = sysmodels.Trial(user=request.user, game = cGame, date = timezone.now(), approved= False)
+            
+            trial.save()
+            returnedGame = Game.objects.get(pk=game_id)
+            
+            returnedGameplayImages = GameplayImage.objects.filter(game = returnedGame)
+            print("This is the returned gameplayImages")
+            print(returnedGameplayImages)
+            return render(request, 'game.html', {'returnedGame': returnedGame,
+                                                'returnedGameplayImages': returnedGameplayImages,
+                                                'TrialRequested' : True
+                                                })
+        else:
+              return redirect(uviews.signin)
+    else:    
 
-
-    returnedGameplayImages = GameplayImage.objects.filter(game = returnedGame)
-    print("This is the returned gameplayImages")
-    print(returnedGameplayImages)
-    return render(request, 'game.html', {'returnedGame': returnedGame,
-                                         'returnedGameplayImages': returnedGameplayImages
-                                         })
-
+        returnedGame = Game.objects.get(pk=game_id)
+        
+        returnedGameplayImages = GameplayImage.objects.filter(game = returnedGame)
+        print("This is the returned gameplayImages")
+        print(returnedGameplayImages)
+        return render(request, 'game.html', {'returnedGame': returnedGame,
+                                            'returnedGameplayImages': returnedGameplayImages,
+                                            'TrialRequested' : False
+                                            })
 
 
 def addToCart(request, gameId):
@@ -101,10 +127,25 @@ def SearchFilter(request):
         
         genre_to_search = data.get('queries').get('genre')
 
+        orderBy = data.get('queries').get('orderby')
+        print(orderBy)
+
         if not platform_to_search and not genre_to_search:
 
             result = Game.objects.all()
-            serializer = GameSerializer(result, many=True)
+
+            if len(orderBy) > 0:
+                if orderBy[0] =='SortByIncreasingPrice':
+                    sortedResult = sorted(result, key=lambda x: x.price)
+                elif orderBy[0] == 'SortByDecresingPrice':
+                    sortedResult = sorted(result, key=lambda x: x.price, reverse=True)
+                else:
+                    sortedResult = result
+            else:
+                sortedResult = result
+
+
+            serializer = GameSerializer(sortedResult, many=True)
             json_data = serializer.data
 
             return JsonResponse({'result': json_data})
@@ -146,19 +187,82 @@ def SearchFilter(request):
                 # Find the common elements
                 common_elements = set(platform_to_search_result).intersection(set(genre_to_search_result))
                 result = list(common_elements)
+            
+            if len(orderBy) > 0:
+                if orderBy[0] =='SortByIncreasingPrice':
+                    sortedResult = sorted(result, key=lambda x: x.price)
+                elif orderBy[0] == 'SortByDecresingPrice':
+                    sortedResult = sorted(result, key=lambda x: x.price, reverse=True)
+                else:
+                    sortedResult = result
+            else:
+                sortedResult = result
 
-
-            # Perform filtering based on selected platforms in your model/queryset
-            # Example: filtered_data = YourModel.objects.filter(platform__in=selected_platforms)
-            #result = Game.objects.filter(platforms__in=selected_platforms)
-            #games = Game.objects.filter(platforms__platformName__in=selected_platforms).values('name', 'price', 'description', 'releaseDate', 'platforms__platformName')
+            # Perform filtering based on selected platforms in  model/queryset
 
             # Convert queryset to a list of dictionaries
             #games_list = list(games)
-            serializer = GameSerializer(result, many=True)
+
+            serializer = GameSerializer(sortedResult, many=True)
             json_data = serializer.data
 
             # Return filtered data as JSON response
             return JsonResponse({'result': json_data})
 
     return JsonResponse({'error': 'Invalid request method'})
+
+def SearchFromHomeHorror(request):
+    returnedGames = Game.objects.filter(gameCategories__category__icontains ='Horror' ) | Game.objects.filter(gameCategories__category__icontains ='Adventure' )
+    if request.user.is_authenticated:
+        user = request.user
+        return render(request, 'store.html', {'returnedGames': returnedGames, 'user': user, 'search': 'Horror'})
+    return render(request, 'store.html', {'returnedGames': returnedGames, 'search': 'Horror'})
+
+
+@csrf_exempt
+def SearchFromHomeWar(request):
+    returnedGames = Game.objects.filter(gameCategories__category__icontains ='War') | Game.objects.filter(gameCategories__category__icontains ='Action' )
+    if request.user.is_authenticated:
+        user = request.user
+        return render(request, 'store.html', {'returnedGames': returnedGames, 'user': user, 'search': 'War'})
+    return render(request, 'store.html', {'returnedGames': returnedGames, 'search': 'War'})
+
+@csrf_exempt
+def SearchFromHomeFamily(request):
+    returnedGames = Game.objects.filter(gameCategories__category__icontains ='Family') | Game.objects.filter(gameCategories__category__icontains ='children' ) | Game.objects.filter(gameCategories__category__icontains ='kid' )
+    if request.user.is_authenticated:
+        user = request.user
+        return render(request, 'store.html', {'returnedGames': returnedGames, 'user': user, 'search': 'Family'})
+    return render(request, 'store.html', {'returnedGames': returnedGames, 'search': 'Family'})
+
+@csrf_exempt
+def SearchFromHomePS5(request):
+    returnedGames = Game.objects.filter(platforms__platformName__icontains = 'PS5')
+    if request.user.is_authenticated:
+        user = request.user
+        return render(request, 'store.html', {'returnedGames': returnedGames, 'user': user,'search': 'Playstation 5'})
+    return render(request, 'store.html', {'returnedGames': returnedGames, 'search': 'Playstation 5'})
+
+
+@csrf_exempt
+def SearchFromHomePromotion(request):
+    game_promotions = GamePromotion.objects.all().select_related('game')
+    returnedGames = []
+
+    for game_promotion in game_promotions:
+        game = game_promotion.game
+        returnedGames.append(game)
+
+    if request.user.is_authenticated:
+        user = request.user
+        return render(request, 'store.html', {'returnedGames': returnedGames, 'user': user, 'search': 'Promotion'})
+    return render(request, 'store.html', {'returnedGames': returnedGames, 'search': 'Promotion'})
+
+
+@csrf_exempt
+def SearchFromHomePlatform(request):
+    returnedGames = Game.objects.filter(platforms__platformName__icontains ='Family')
+    if request.user.is_authenticated:
+        user = request.user
+        return render(request, 'store.html', {'returnedGames': returnedGames, 'user': user})
+    return render(request, 'store.html', {'returnedGames': returnedGames})

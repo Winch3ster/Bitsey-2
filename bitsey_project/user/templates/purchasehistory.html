@@ -30,11 +30,11 @@
     <div class="d-block d-md-none">
 
         <div class="col-12 dark-gray-background" style=" margin-bottom: 20px;">
-            <a href="">Home</a>
+            <a href="{% url 'homepage' %}">Home</a>
             <i class="bi bi-chevron-right"></i>
-            <a href="">Account</a>
+            <a href="{% url 'edit_user' user_id=user.id %}">Account</a>
             <i class="bi bi-chevron-right"></i>
-            <a href="">Purchase history</a>
+            <a href="">Purchase History</a>
         </div>
 
         <div class="col-12 d-flex">
@@ -141,9 +141,9 @@
         <div class="standard-margin-left mt-5 mb-5">
             
             <div> <!-- Links breakdown-->
-                <a href="">Home</a>
+                <a href="{% url 'homepage' %}">Home</a>
                 <i class="bi bi-chevron-right"></i>
-                <a href="">Account</a>
+                <a href="{% url 'edit_user' user_id=user.id %}">Account</a>
                 <i class="bi bi-chevron-right"></i>
                 <a href="">Purchase History</a>
             </div> 

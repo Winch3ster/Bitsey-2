@@ -17,9 +17,15 @@ function RenderCartMark(){
 
             //For modern browser
             if(data.itemInCart > 0){
-                var cart_mark =document.getElementById('cart-mark')
-                cart_mark.classList.add('cart-mark')
-                cart_mark.innerHTML = data.itemInCart
+                var cart_marks = document.getElementsByClassName('cart-mark-identifier')
+
+                console.log(`cart marks: ${cart_marks}`)
+
+                for(var i =0;i < cart_marks.length; i++){
+                    cart_marks[i].classList.add('cart-mark')
+                    cart_marks[i].innerHTML = data.itemInCart
+                }
+                
 
             }
             

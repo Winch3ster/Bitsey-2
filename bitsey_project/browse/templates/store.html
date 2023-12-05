@@ -116,7 +116,7 @@
             </form>      
         </div>
         
-        <div class="secondary-btn-bitsey small-btn-padding">
+        <div class="secondary-btn-bitsey small-btn-padding" onclick="ShowFilterOption()">
             Filter
         </div>
     </div>
@@ -125,26 +125,15 @@
     <div class="d-none d-md-block">
         <div class="position-relative d-flex justify-content-evenly col-12 mt-5">
 
-            <form action="">
-                
-            </form>
+            
+
             <div class="col-2 light-gray-background rounded-3 pb-5 d-block" style="height: fit-content">
-                <div class="empty-btn col-12 mt-2">
+            
+                <a href="{% url 'SearchPromotion' %}" style="margin-left: 15px; margin-top: 20px;">
                     Deals
-                </div>
-    
-                <div class="empty-btn col-12">
-                    Pre-orders
-                </div>
-    
-                <div class="empty-btn col-12">
-                    New Releases 
-                </div>
+                </a>
                 
-    
-                <div class="col-12  bitsey-text-color" style="padding: 5px;">
-                    Platform
-                </div>
+               
     
                 <div class="col-12">
                     <div class="form-check">
@@ -253,8 +242,53 @@
                         </div>
                     </div>
                 </div>
+
+
+
+
+
+
+                <div class="accordion accordion-flush col-12" id="accordionFlushExample">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="flush-headingOne">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseSortBy" aria-expanded="false" aria-controls="flush-collapseOne">
+                            Sort By
+                            </button>
+                        </h2>
+                        <div id="flush-collapseSortBy" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body">
+                                <div class="form-check">
+                                    <input class="form-check-input sortby-input" type="radio" name="SortBy" value="SortByNone" id="SortByDecresingPrice">
+                                    <label class="form-check-label" for="flexRadioDefault1">
+                                        None
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input sortby-input" type="radio" name="SortBy" value="SortByIncreasingPrice"  id="SortByIncreasingPrice">
+                                    <label class="form-check-label" for="flexRadioDefault1">
+                                      Price- Low to high
+                                    </label>
+                                  </div>
+                                  <div class="form-check">
+                                    <input class="form-check-input sortby-input" type="radio" name="SortBy" value="SortByDecresingPrice" id="SortByDecresingPrice">
+                                    <label class="form-check-label" for="flexRadioDefault1">
+                                        Price- High to low
+                                    </label>
+                                </div>
+                                
+                                
+                               
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
     
-                <div class="col-12 d-flex justify-content-center"><button type="button" class="secondary-btn-bitsey" style="padding: 5px 10px;" onclick="ApplyChanges()">Apply changes</button></div>
+                <div class="col-12 d-flex justify-content-center"><a href="{% url 'browse' %}" class="secondary-btn-bitsey" style="padding: 5px 10px;">Clear Filter</a></div>
                 
     
             </div> <!-- filter-->
@@ -263,6 +297,13 @@
         
             <div class=" position-relative col-9 " id="list-game-container">
                 <div class="container">
+                    
+                    <div class="col-12">
+                        <p><span class="bitsey-text-color">Search result for: </span>{{search}}</p>
+
+                    </div>
+
+
                     <div id="noResultDisplay" class="col-10" style="display: none;">
                         <div class="col-12 d-flex justify-content-center">
                             <img style="height: 300px; width: 300px;" src="{% static '/media/images/userAppImages/sad.gif' %}" alt="empty wishlist">
@@ -273,7 +314,7 @@
                     </div>
     
     
-                    <div class="row" id="resultsContainer">
+                    <div class="row resultsContainer">
                         
                     
                         {% for game in returnedGames%}
@@ -316,7 +357,178 @@
     
     <!-- Small screen -->
     <div class="d-block d-md-none">
-        <div class=" position-relative col-9 " id="list-game-container">
+
+        <div id="filterPanel" class="col-2 light-gray-background rounded-3 pb-5" style="height: fit-content; display: none;">
+            
+            <a href="{% url 'SearchPromotion' %}" style="margin-left: 15px; margin-top: 20px;">
+                Deals
+            </a>
+            
+           
+
+            <div class="col-12">
+                <div class="form-check">
+                    <input class="form-check-input platform-check-input" type="checkbox" value="PS5" id="flexCheckPlayStation">
+                    <label class="form-check-label" for="flexCheckDefault">
+                        PlayStation 5
+                    </label>
+                </div>
+                <div class="form-check my-3">
+                    <input class="form-check-input platform-check-input" type="checkbox" value="PS4" id="flexCheckXbox">
+                    <label class="form-check-label" for="flexCheckChecked">
+                        PlayStation 4
+                    </label>
+                </div>
+
+                <div class="form-check my-3">
+                    <input class="form-check-input platform-check-input" type="checkbox" value="PS3" id="flexCheckXbox">
+                    <label class="form-check-label" for="flexCheckChecked">
+                        PlayStation 3
+                    </label>
+                </div>
+
+                <div class="form-check my-3">
+                    <input class="form-check-input platform-check-input" type="checkbox" value="Xbox One" id="flexCheckXbox">
+                    <label class="form-check-label" for="flexCheckChecked">
+                        Xbox One S
+                    </label>
+                </div>
+
+                <div class="form-check my-3">
+                    <input class="form-check-input platform-check-input" type="checkbox" value="Xbox 360" id="flexCheckXbox">
+                    <label class="form-check-label" for="flexCheckChecked">
+                        Xbox 360
+                    </label>
+                </div>
+
+    
+                <div class="form-check my-3">
+                    <input class="form-check-input platform-check-input" type="checkbox" value="Nintendo" id="flexCheckNintendo">
+                    <label class="form-check-label" for="flexCheckChecked">
+                        Nintendo
+                    </label>
+                </div>
+    
+                <div class="form-check my-3">
+                    <input class="form-check-input platform-check-input" type="checkbox" value="PC" id="flexCheckPC">
+                    <label class="form-check-label" for="flexCheckChecked">
+                        PC
+                    </label>
+                </div>
+            </div>
+            
+
+
+            <div class="accordion accordion-flush col-12" id="accordionFlushExample">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingOne">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                        Genre
+                        </button>
+                    </h2>
+                    <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                            <div class="form-check my-3">
+                                <input class="form-check-input genre-check-input" type="checkbox" value="Action" id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                Action
+                                </label>
+                            </div>
+                            <div class="form-check my-3">
+                                <input class="form-check-input genre-check-input" type="checkbox" value="Multiplayer" id="flexCheckChecked">
+                                <label class="form-check-label" for="flexCheckChecked">
+                                Multiplayer
+                                </label>
+                            </div>
+
+                            <div class="form-check my-3">
+                                <input class="form-check-input genre-check-input" type="checkbox" value="Horror" id="flexCheckChecked">
+                                <label class="form-check-label" for="flexCheckChecked">
+                                Horror
+                                </label>
+                            </div>
+
+                            <div class="form-check my-3">
+                                <input class="form-check-input genre-check-input" type="checkbox" value="Family" id="flexCheckChecked">
+                                <label class="form-check-label" for="flexCheckChecked">
+                                Family
+                                </label>
+                            </div>
+
+                            <div class="form-check my-3">
+                                <input class="form-check-input genre-check-input" type="checkbox" value="Sport" id="flexCheckChecked">
+                                <label class="form-check-label" for="flexCheckChecked">
+                                Sport
+                                </label>
+                            </div>
+
+                            <div class="form-check my-3">
+                                <input class="form-check-input genre-check-input" type="checkbox" value="Single Player" id="flexCheckChecked">
+                                <label class="form-check-label" for="flexCheckChecked">
+                                Single Player
+                                </label>
+                            </div>
+                           
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+            <div class="accordion accordion-flush col-12" id="accordionFlushExample">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingOne">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseSortBy" aria-expanded="false" aria-controls="flush-collapseOne">
+                        Sort By
+                        </button>
+                    </h2>
+                    <div id="flush-collapseSortBy" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                            <div class="form-check">
+                                <input class="form-check-input sortby-input" type="radio" name="SortBy" value="SortByNone" id="SortByDecresingPrice">
+                                <label class="form-check-label" for="flexRadioDefault1">
+                                    None
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input sortby-input" type="radio" name="SortBy" value="SortByIncreasingPrice"  id="SortByIncreasingPrice">
+                                <label class="form-check-label" for="flexRadioDefault1">
+                                  Price- Low to high
+                                </label>
+                              </div>
+                              <div class="form-check">
+                                <input class="form-check-input sortby-input" type="radio" name="SortBy" value="SortByDecresingPrice" id="SortByDecresingPrice">
+                                <label class="form-check-label" for="flexRadioDefault1">
+                                    Price- High to low
+                                </label>
+                            </div>
+                            
+                            
+                           
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+            <div class="col-12 d-flex justify-content-center"><a href="{% url 'browse' %}" class="secondary-btn-bitsey" style="padding: 5px 10px;">Clear Filter</a></div>
+            <div class="col-12 d-flex justify-content-center"><div onclick="CloseFilter()" class="primary-btn" style="padding: 5px 10px;">Apply Changes</div></div>
+            
+
+        </div> <!-- filter-->
+
+
+
+
+        <div class=" position-relative col-9 " id="list-game-container-small">
 
             <div class="container">
                 <div id="noResultDisplay" class="col-10" style="display: none;">
@@ -329,7 +541,7 @@
                 </div>
 
 
-                <div class="row" id="resultsContainer">
+                <div class="row resultsContainer" >
                     
                 
                     {% for game in returnedGames%}
@@ -372,6 +584,23 @@
 
     {% include 'footer.html'%}
 <script>
+
+    function ShowFilterOption(){
+        console.log("ShowFilterOption is clicked")
+        var filterPanel = document.getElementById('filterPanel')
+        var listGameContainer = document.getElementById('list-game-container-small')
+        console.log(listGameContainer)
+        listGameContainer.style.display = 'none'
+        filterPanel.style.display = 'block'
+    }
+    function CloseFilter(){
+        var filterPanel = document.getElementById('filterPanel')
+        var listGameContainer = document.getElementById('list-game-container-small')
+        console.log(listGameContainer)
+        listGameContainer.style.display = 'block'
+        filterPanel.style.display = 'none'
+    }
+
     function ViewDetailsPage(id) {
         console.log("This is clicked")
        // Use window.location to navigate to the detail page with the specified game ID

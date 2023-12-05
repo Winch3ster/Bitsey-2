@@ -30,7 +30,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     #path('user/', include('user.urls')),
     #path('home/', include('home.urls')),
-
+    
+    path('bookTrial/<int:game_id>/', systemviews.BookTrial, name='book_trial'),
 
 
     path('', home.home, name='homepage'),
@@ -39,6 +40,7 @@ urlpatterns = [
     path('signin/', userviews.signin, name='signin'),
     path('signup/', userviews.signup, name='signup'),
     path('logout/', auth_views.LogoutView.as_view(next_page='homepage'), name='logout'),
+    path('captcha/', include('captcha.urls')),
 
 
     path('cart/', orderviews.view_cart, name='cart'),
@@ -74,6 +76,14 @@ urlpatterns = [
 
     path('searchfilter/', browse.SearchFilter, name="SearchFilter"),
 
+
+    #Search from homepage
+    path('SearchHorror/', browse.SearchFromHomeHorror, name='SearchHorror'),
+    path('SearchWar/', browse.SearchFromHomeWar, name='SearchWar'),
+    path('SearchFamily/', browse.SearchFromHomeFamily, name='SearchFamily'),
+    
+    path('SearchPS5/', browse.SearchFromHomePS5, name='SearchPS5'),
+    path('SearchPromotion/', browse.SearchFromHomePromotion, name='SearchPromotion'),
 
     
 

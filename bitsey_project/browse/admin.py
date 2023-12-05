@@ -1,6 +1,8 @@
 from django.contrib import admin
 from .models import *
 from order import models as ordermodels
+from system import models as sysmodels
+
 # Register your models here.
 #admin.site.register(Game)
 admin.site.register(Platform)
@@ -37,3 +39,15 @@ admin.site.register(ordermodels.Order, OrderAdmin)
 
 #admin.site.register(GameplayImage)
 admin.site.register(Game, GameAdmin)
+
+
+
+class TrialAdmin(admin.ModelAdmin):
+    # the fields to be editable in the admin interface
+    fields = ['approved']
+
+    # Customize display fields in the list view
+    list_display = ['user', 'game', 'date']
+
+
+admin.site.register(sysmodels.Trial, TrialAdmin)

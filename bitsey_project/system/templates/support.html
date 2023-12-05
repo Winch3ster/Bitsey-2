@@ -26,125 +26,207 @@
 <body>
    {% include 'navbar.html' %}
 
+   {% if emailSent %}
+   <!-- small screen -->
+   <div class="d-block d-md-none">
+      <div id='modal' class="modal" style="display: block;">
+         <div class="modal-content" style="width:90vw">
 
-    <!-- Trigger/Open The Modal -->
-<button id="myBtn">Open Modal</button>
+            <div class="col-12" style="text-align: center;">
+               <img style="width: 200px; height: auto;" src="{% static '/media/images/systemImages/email.gif' %}" alt="">
+               <p style="font-size: 14px;">Email sent! We will reply as soon as possible.</p>
+               <div class="d-flex justify-content-center">
+                  <div class="primary-btn text-center" onclick="CloseModal()" style="font-size: 14px;">close</div>
+               </div>
 
-<!-- The Modal -->
-<div id="myModal" class="modal">
-
-  <!-- Modal content -->
-  <div class="modal-content">
-    <span class="close">&times;</span>
-    
-   
-   <div class="col-10" style=" text-align: center;">
-      <img style="width: 200px; height: auto;" src="{% static '/media/images/systemImages/email.gif' %}" alt="">
-      <p>Email sent! we will reply as soon as possible</p>
-      <div class="primary-btn text-center" style="width: 100px;">Noted!</div>
-   </div>
-
-
-
-  </div>
-
-</div>
-
-
-
-   <div class="standard-margin-left mt-3 mb-5">
-      <h2>Support</h2>
-      <div> <!-- Links breakdown-->
-         <a href="">Home</a>
-         <i class="bi bi-chevron-right"></i>
-         <a href="">Support</a>
-      </div> 
-   </div> 
-   <div class="standard-margin-left">
-      <p class="h2 bitsey-text-color">Hey there!</p>
-      <p>Do you have anything in your mind? Feel free to contact us and we will reply as soon as possible!</p>
-   </div>
-   
-   <div class="col-11 d-flex standard-margin-left my-2 p-0">
-      <div class="col-5 col-s-12 m-0 p-0 d-flex justify-content-center align-items-center">    
-         <img class="support-page-image" src="{% static '/media/images/systemImages/support-page.png' %}" alt="">
-      </div>
-
-      <div class="col-6  col-s-12" style="margin-left: 20px;">
-
-         <div class="contact-us-container">
-               <div class="bitsey-text-color text-center h3">Contact us</div>
-
-               <form action="{% url 'support_page' %}" method="post">
-                  {% csrf_token %}
-                  <div class="form-row">
-                     <div class="input-data">
-                        <input type="text" name="firstName" required>
-                        <div class="underline"></div>
-                        <label for="">First Name</label>
-                     </div>
-                     <div class="input-data">
-                        <input type="text" name="lastName"  required>
-                        <div class="underline"></div>
-                        <label for="">Last Name</label>
-                     </div>
-                  </div>
-                  <div class="form-row">
-                     <div class="input-data">
-                        <input type="text" name="email"  required>
-                        <div class="underline"></div>
-                        <label for="">Email Address</label>
-                     </div>
-                  </div>
-                  <div class="form-row">
-                     <div class="input-data textarea">
-                        <textarea rows="8" cols="80" name="message"  required></textarea>
-                        <br />
-                        <div class="underline"></div>
-                        <label for="">Write your message</label>
-                     </div>
-                  </div>
-                  
-                  <div class="col-12 d-flex justify-content-center  mb-4">
-                        <button type="submit" class="secondary-btn-bitsey">Submit</button>
-
-                  </div>
-               </form>
             </div>
          </div>
       </div>
    </div>
+
+
+   <!--wide screen-->
+   <div class="d-none d-md-block">
+      <div id='modal' class="modal" style="display: block;">
+         <div class="modal-content" style="width:50vw">
+
+            <div class="col-12" style="text-align: center;">
+               <img style="width: 200px; height: auto;" src="{% static '/media/images/systemImages/email.gif' %}" alt="">
+               <p>Email sent! We will reply as soon as possible.</p>
+               <div class="d-flex justify-content-center">
+                  <div class="primary-btn text-center" onclick="CloseModal()">close</div>
+               </div>
+
+            </div>
+         </div>
+      </div>
+   </div>
+
+
+    {% endif %}
+   
+   
+
+    <!-- small screen -->
+   <div class="d-block d-md-none">
+
+      <div class="col-12 dark-gray-background" style=" margin-bottom: 20px; font-size: 14px;">
+         <a href="{% url 'homepage' %}">Home</a>
+         <i class="bi bi-chevron-right"></i>
+         <a href="">Support</a>
+      </div>
+
+      <div class="standard-margin-left">
+         <p class="h3 bitsey-text-color">Hey there!</p>
+         <p style="font-size: 14px;">Do you have anything in your mind? Feel free to contact us and we will reply as soon as possible!</p>
+      </div>
+      <div class="col-5 col-s-12 m-0 p-0 d-flex justify-content-center align-items-center">    
+         <img class="support-page-image" src="{% static '/media/images/systemImages/support-page.png' %}" alt="">
+      </div>
+   </div>
+
+
+   <!-- wide screen -->
+   <div class="d-none d-md-block">
+
+      <div class="standard-margin-left mt-3 mb-5">
+         <h2>Support</h2>
+         <div> <!-- Links breakdown-->
+            <a href="{% url 'homepage' %}">Home</a>
+            <i class="bi bi-chevron-right"></i>
+            <a href="">Support</a>
+         </div> 
+      </div> 
+      <div class="standard-margin-left">
+         <p class="h2 bitsey-text-color">Hey there!</p>
+         <p>Do you have anything in your mind? Feel free to contact us and we will reply as soon as possible!</p>
+      </div>
+
+    </div>
+
+
+   
+   <!-- small screen -->
+   <div class="d-block d-md-none">
+
+      <div class="col-11  my-2 p-0">
+        
+   
+         <div class="col-6 col-s-12">
+   
+            <div class="contact-us-container">
+                  <div class="bitsey-text-color text-center h3">Contact us</div>
+   
+                  <form action="{% url 'support_page' %}" method="post">
+                     {% csrf_token %}
+                     <div class="form-row">
+                         <div class="input-data">
+                             <input type="text" name="firstName" required>
+                             <div class="underline"></div>
+                             <label for="">First Name</label>
+                         </div>
+                         <div class="input-data">
+                             <input type="text" name="lastName"  required>
+                             <div class="underline"></div>
+                             <label for="">Last Name</label>
+                         </div>
+                     </div>
+                     <div class="form-row">
+                         <div class="input-data">
+                             <input type="text" name="email"  required>
+                             <div class="underline"></div>
+                             <label for="">Email Address</label>
+                         </div>
+                     </div>
+                     <div class="form-row">
+                         <div class="input-data textarea">
+                             <textarea rows="8" cols="80" name="message"  required></textarea>
+                             <br />
+                             <div class="underline"></div>
+                             <label for="">Write your message</label>
+                         </div>
+                     </div>
+                     {{ form.captcha }}
+                     <div class="col-12 d-flex justify-content-center  mb-4">
+                         <button type="submit" class="secondary-btn-bitsey" style="font-size: 14px;">Submit</button>
+                     </div>
+                 </form>
+               </div>
+            </div>
+         </div>
+      </div>
+
+   </div>
+
+
+   <!--- wide screen -->
+   <div class="d-none d-md-block">
+
+      <div class="col-11 d-flex standard-margin-left my-2 p-0">
+         <div class="col-5 col-s-12 m-0 p-0 d-flex justify-content-center align-items-center">    
+            <img class="support-page-image" src="{% static '/media/images/systemImages/support-page.png' %}" alt="">
+         </div>
+   
+         <div class="col-6  col-s-12" style="margin-left: 20px;">
+   
+            <div class="contact-us-container">
+                  <div class="bitsey-text-color text-center h3">Contact us</div>
+   
+
+
+                  <form action="{% url 'support_page' %}" method="post">
+                     {% csrf_token %}
+                     <div class="form-row">
+                         <div class="input-data">
+                             <input type="text" name="firstName" required>
+                             <div class="underline"></div>
+                             <label for="">First Name</label>
+                         </div>
+                         <div class="input-data">
+                             <input type="text" name="lastName"  required>
+                             <div class="underline"></div>
+                             <label for="">Last Name</label>
+                         </div>
+                     </div>
+                     <div class="form-row">
+                         <div class="input-data">
+                             <input type="text" name="email"  required>
+                             <div class="underline"></div>
+                             <label for="">Email Address</label>
+                         </div>
+                     </div>
+                     <div class="form-row">
+                         <div class="input-data textarea">
+                             <textarea rows="8" cols="80" name="message"  required></textarea>
+                             <br />
+                             <div class="underline"></div>
+                             <label for="">Write your message</label>
+                         </div>
+                     </div>
+                     {{ form.captcha }}
+                     <div class="col-12 d-flex justify-content-center  mb-4">
+                         <button type="submit" class="secondary-btn-bitsey" style="font-size: 14px;">Submit</button>
+                     </div>
+                 </form>
+
+               </div>
+            </div>
+         </div>
+      </div>
+
+   </div>
+   
    {% include 'footer.html'%}
 </body>
 
 <script type="text/javascript" src="{% static 'js/notification.js' %}"></script>
-<script type="text/javascript" src="{% static 'js/cartNotification.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/cartNotification.js' %}"></script>   
 <script>
-   // Get the modal
-   var modal = document.getElementById("myModal");
-   
-   // Get the button that opens the modal
-   var btn = document.getElementById("myBtn");
-   
-   // Get the <span> element that closes the modal
-   var span = document.getElementsByClassName("close")[0];
-   
-   // When the user clicks the button, open the modal 
-   btn.onclick = function() {
-     modal.style.display = "block";
+   function CloseModal(){
+      console.log('Close modal')
+      var modal = document.getElementById('modal')
+      modal.style.display = "none"
+
    }
-   
-   // When the user clicks on <span> (x), close the modal
-   span.onclick = function() {
-     modal.style.display = "none";
-   }
-   
-   // When the user clicks anywhere outside of the modal, close it
-   window.onclick = function(event) {
-     if (event.target == modal) {
-       modal.style.display = "none";
-     }
-   }
-   </script>
-    
+</script>
 </html>

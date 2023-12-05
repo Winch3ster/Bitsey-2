@@ -26,9 +26,9 @@
     <!-- small screen-->
     <div class="d-block d-md-none">
         <div class="col-12 dark-gray-background" style=" margin-bottom: 20px;">
-            <a href="">Home</a>
+            <a href="{% url 'homepage' %}">Home</a>
             <i class="bi bi-chevron-right"></i>
-            <a href="">Browse</a>
+            <a href="{% url 'edit_user' user_id=user.id %}">Account</a>
             <i class="bi bi-chevron-right"></i>
             <a href="">Cart</a>
         </div>
@@ -162,9 +162,9 @@
             <p class="h2 standard-margin-left">{{user.username}}'s Cart</p> 
     
             <div class="standard-margin-left"> <!-- Links breakdown-->
-                <a href="">Home</a>
+                <a href="{% url 'homepage' %}">Home</a>
                 <i class="bi bi-chevron-right"></i>
-                <a href="">Browse</a>
+                <a href="{% url 'edit_user' user_id=user.id %}">Account</a>
                 <i class="bi bi-chevron-right"></i>
                 <a href="">Cart</a>
             </div> 

@@ -22,9 +22,23 @@
         <title>Bitsey | Store</title>
     </head>
 <body>
+
+    {% if TrialRequested %}
+    <div id="TrialRequestMessage" class="p-0" style="display: block;">
+        <div class="col-12 bg-success d-flex justify-content-center align-items-center p-2">
+            <p class="text-center text-white m-0">Game trial sucessfully requested</p>
+            <div class="text-white h1 m-0 position-absolute" style="right: 10vw; cursor: pointer;" onclick="CloseTrialRequestMessage()">&times;</div>
+        </div>
+    </div>
+   
+    {% endif %}
+
     <!--Navigation bar-->
     {% include 'navbar.html'%}
 
+    
+    
+  
     <!-- Small screen -->
     <div class="d-block d-md-none">
         
@@ -47,7 +61,13 @@
                     
                     <div class="inline-display">  
                         <a class="primary-btn " href="#add-to-cart-section">Buy Now</a>
-                        <button class="secondary-btn">Try Out</button>
+
+                        
+                        <form method="post" action="{% url 'game_Details'  game_id=returnedGame.id %}">
+                            {% csrf_token %}
+                            <button class="secondary-btn" style=" width: 90px;">Try Out</button>
+                        </form>
+                        
                     </div>
                 </div>
 
@@ -83,7 +103,12 @@
                     <div class="inline-display"> 
                         
                         <a class="primary-btn" href="#add-to-cart-section">Buy Now</a>
-                        <button class="secondary-btn">Try Out</button>
+
+                        <form method="post" action="{% url 'game_Details'  game_id=returnedGame.id %}" >
+                            {% csrf_token %}
+                            <button class="secondary-btn"style=" width:120px;" >Try Out</button>
+                        </form>
+
                     </div>
                 </div>
             </div>
@@ -351,6 +376,12 @@
     
 <script>
 
+    function CloseTrialRequestMessage(){
+        var TrialRequestMessage = document.getElementById('TrialRequestMessage')
+        console.log(TrialRequestMessage)
+        TrialRequestMessage.style.display = 'none'
+    }
+
     function validateAddToCartForm() {
         console.log("Get game is running")
         var gameId = document.getElementById('addToCartForm').dataset.gameId;
@@ -528,11 +559,15 @@
         // For older browsers (including IE)
         document.body.scrollTop = 0;
 
-        var cart_mark =document.getElementById('cart-mark')
-        cart_mark.classList.remove('cart-mark')
-        cart_mark.innerHTML = itemInCart
-        cart_mark.classList.add('add-to-cart-mark')
-        cart_mark.style.display= 'flex'
+        var cart_marks =document.getElementsByClassName('cart-mark-identifier')
+
+        for(var i = 0; i< cart_marks.length; i++){
+            cart_marks[i].classList.remove('cart-mark')
+            cart_marks[i].innerHTML = itemInCart
+            cart_marks[i].classList.add('add-to-cart-mark')
+            cart_marks[i].style.display= 'flex'
+        }
+       
         
 
     }

@@ -8,8 +8,6 @@ def home(request):
     if request.user.is_authenticated:
         user = request.user
 
-        
-
         return render(request, 'index.html', {'user': user, 'gamesOnPromotion': gamesOnPromotion})
 
     return render(request, 'index.html', {'gamesOnPromotion': gamesOnPromotion})
