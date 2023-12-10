@@ -168,3 +168,9 @@ EMAIL_HOST_PASSWORD = 'caud ykkq disf beyp'
 #reCAPTCHA keys
 RECAPTCHA_PUBLIC_KEY = '6LcZryYpAAAAAMCmb8keL9TpGsZKYkOgJ3oWK2mj'
 RECAPTCHA_PRIVATE_KEY = '6LcZryYpAAAAAN6STYhG5nd7CB7UBo6bqHIa3Um1'
+
+
+
+
+import django_heroku
+django_heroku.settings(locals())
