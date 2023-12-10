@@ -66,8 +66,10 @@ class GamePromotion(models.Model):
         return self.game.name 
 
 
-
-
+class NewRelease(models.Model):
+    game = models.ForeignKey(Game, on_delete=CASCADE)
+    def __str__(self):
+        return self.game.name 
 
 
 class PreOrderGame(models.Model):   

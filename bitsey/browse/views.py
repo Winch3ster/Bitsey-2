@@ -16,9 +16,10 @@ from user import views as uviews
 # Create your views here.
 def browse(request):
     returnedGames = Game.objects.all()
+    NewRelease = Game.objects.all()
     if request.user.is_authenticated:
         user = request.user
-        return render(request, 'store.html', {'returnedGames': returnedGames, 'user': user, 'search': 'All'})
+        return render(request, 'store.html', {'returnedGames': returnedGames, 'user': user, 'search': 'All', 'NewRelease': NewRelease})
 
 
 

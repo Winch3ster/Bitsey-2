@@ -279,45 +279,28 @@
 
 
             <div class="position-relative d-flex justify-content-center align-items-center my-5">
-                <div class="col-4 rounded-pill p-1" style="background-color: #1E1F23;">
-                    <div class="col-6 rounded-pill px-1 py-2 bg-white text-center" style="font-size: 16px;">New Releases</div>
+                <div class=" rounded-pill p-1" style="background-color: #1E1F23; width: 50vw;">
+                    <div class="rounded-pill px-1 py-2 bg-white text-center" style="font-size: 16px;">New Releases</div>
                 </div>
             </div>
-
-            <div class="bitsey-container-s bitsey-container-m bitsey-container-l">
-                <div class="row-bitsey">
-                    <div class="column-bitsey">
-                        <div class="square">
-                            <div class="game-block-background-image" style="background-image: url('../Images/index/minecraft.jpg');"></div>
-                            <p class="text-white text-s">Minecraft</p>
+            <div class="container">
+                <div class="row">
+                    
+    
+                        {% for newGame in newRelease %}
+    
+                        
+                        <div  style="margin: 40px 15px; height: 150px; width: 150px;">
+                            <div class="game-block-background-image" style="background-image: url('{{newGame.game.image.url}}'); background-position: center;"></div>
+                            <p class="text-white text-s">{{newGame.game.name}}</p>
                         </div>
-                        <div class="square">
-                            <div class="game-block-background-image" style="background-image: url('../Images/index/store/bf1.webp');"></div>
-                            <p class="text-white text-s">Battlefield 1</p>
-                        </div>
-                        <div class="square">
-                            <div class="game-block-background-image" style="background-image: url('../Images/index/store/bfv.avif');"></div>
-                            <p class="text-white text-s">Battlefield V</p>
-                        </div>
-                    </div>
-                    <div class="column-bitsey">
-                        <div class="square">
-                            <div class="game-block-background-image" style="background-image: url('../Images/index/store/cod-mw-2020.webp');"></div>
-                            <p class="text-white text-s">Call of Duty Modern Warfare</p>
-                        </div>
-                        <div class="square">
-                            <div class="game-block-background-image" style="background-image: url('../Images/index/store/cod-ww2.jpg');"></div>
-                            <p class="text-white text-s">Call of Duty WW2</p>
-                        </div>
-                        <div class="square">
-                            <div class="game-block-background-image" style="background-image: url('../Images/index/store/god-of-war-ragnarok.webp');"></div>
-                            <p class="text-white text-s">God of War Ragnarok</p>
-                        </div>
-                    </div>
+                        
+    
+                        {% endfor %}
+            
                 </div>
-
+    
             </div>        
-
 
             
         </section>
@@ -352,41 +335,26 @@
 
 
         <div class="position-relative d-flex justify-content-center align-items-center my-5">
-            <div class="col-4 rounded-pill p-1" style="background-color: #1E1F23;">
-                <div class="col-6 rounded-pill px-1 py-2 bg-white text-center" style="font-size: 16px;">New Releases</div>
+            <div class=" rounded-pill p-1" style="background-color: #1E1F23; width: 150px;">
+                <div class="rounded-pill px-1 py-2 bg-white text-center" style="font-size: 16px;">New Releases</div>
             </div>
         </div>
 
-        <div class="bitsey-container-s bitsey-container-m bitsey-container-l">
-            <div class="row-bitsey">
-                <div class="column-bitsey">
-                    <div class="square">
-                        <div class="game-block-background-image" style="background-image: url('../Images/index/minecraft.jpg');"></div>
-                        <p class="text-white text-s">Minecraft</p>
+        <div class="container">
+            <div class="row">
+                
+
+                    {% for newGame in newRelease %}
+
+                     
+                    <div  style="margin: 40px 15px; height: 150px; width: 150px;">
+                        <div class="game-block-background-image" style="background-image: url('{{newGame.game.image.url}}'); background-position: center;"></div>
+                        <p class="text-white text-s">{{newGame.game.name}}</p>
                     </div>
-                    <div class="square">
-                        <div class="game-block-background-image" style="background-image: url('../Images/index/store/bf1.webp');"></div>
-                        <p class="text-white text-s">Battlefield 1</p>
-                    </div>
-                    <div class="square">
-                        <div class="game-block-background-image" style="background-image: url('../Images/index/store/bfv.avif');"></div>
-                        <p class="text-white text-s">Battlefield V</p>
-                    </div>
-                </div>
-                <div class="column-bitsey">
-                    <div class="square">
-                        <div class="game-block-background-image" style="background-image: url('../Images/index/store/cod-mw-2020.webp');"></div>
-                        <p class="text-white text-s">Call of Duty Modern Warfare</p>
-                    </div>
-                    <div class="square">
-                        <div class="game-block-background-image" style="background-image: url('../Images/index/store/cod-ww2.jpg');"></div>
-                        <p class="text-white text-s">Call of Duty WW2</p>
-                    </div>
-                    <div class="square">
-                        <div class="game-block-background-image" style="background-image: url('../Images/index/store/god-of-war-ragnarok.webp');"></div>
-                        <p class="text-white text-s">God of War Ragnarok</p>
-                    </div>
-                </div>
+
+                
+                    {% endfor %}
+        
             </div>
 
         </div>        
@@ -447,7 +415,7 @@
                         <div class="d-flex justify-content-evenly align-items-center my-2" >
                             <p class="text-danger" style="text-decoration: line-through;">RM{{game.oldPrice}}</p>
                             <p><i class="bi bi-arrow-right"></i></p>
-                            <p class="bitsey-text-color">RM{{game.newPrice}}</p>
+                            <p class="bitsey-text-color">RM {{game.newPrice}}</p>
                         </div>
                     </div>
                     {% endfor %}

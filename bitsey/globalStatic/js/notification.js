@@ -73,17 +73,22 @@ function RenderNotificationMark(){
 
     console.log(`Number of unread notification: ${unreadNotification}`)
     var notification_mark = document.getElementById('notification-mark')
-    console.log(`This is the unread notification: ${notification_mark}`)
+    var notification_marks = document.getElementsByClassName('notification-mark')
+    console.log(`This is the unread notification: ${notification_marks}`)
 
-    notification_mark.style.display = 'flex'
-    if(unreadNotification > 10){
-        notification_mark.innerHTML = '10+'
-    }else if(unreadNotification <= 0){
-        notification_mark.style.display = 'none'
-        notification_mark.style.padding = '0'
-    }else{
-        notification_mark.innerHTML = unreadNotification
-    }   
+    for (var i = 0; i < notification_marks.length; i++){
+        notification_marks[i].style.display = 'flex'
+        if(unreadNotification > 10){
+            notification_marks[i].innerHTML = '10+'
+        }else if(unreadNotification <= 0){
+            notification_marks[i].style.display = 'none'
+            notification_marks[i].style.padding = '0'
+        }else{
+            notification_marks[i].innerHTML = unreadNotification
+        }   
+    }
+
+    
 }
 
 function ReadNotification(){

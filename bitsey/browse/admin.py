@@ -8,7 +8,7 @@ from system import models as sysmodels
 admin.site.register(Platform)
 admin.site.register(GameCategory)
 admin.site.register(GameCapabilities)
-
+admin.site.register(NewRelease)
 
 class GameplayImageAdmin(admin.StackedInline):
     model = GameplayImage
