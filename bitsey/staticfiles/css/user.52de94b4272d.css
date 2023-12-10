@@ -1,0 +1,193 @@
+
+.sign-in-wallpaper-container{
+    height: 100vh;
+    background-image: url("../media/images/userAppImages/sign-in-wallpaper.4f673f0d883f.jpg");
+    background-size: cover;
+}
+.sign-in-container{
+    background-color: white;
+    height: 100vh;
+}
+
+.sign-in-control{
+    position: relative;
+    width: 90%;
+    border: none;
+    border-radius: 20px;
+    padding: 8px 20px;
+    background-color: #F4F4F4;
+    transition: 0.2s;
+    cursor: pointer;
+    margin: 10px 0;
+}
+.sign-in-control:hover{
+    background-color: #cacaca;
+}
+.sign-in-control:focus{
+    outline: none;
+    background-color: #cacaca;
+}
+
+.sign-in-back:hover{
+    color: #038BA5;
+}
+
+.signup-form-container{
+    margin-top: 20px;
+    background-color: white;
+    width: 500px;
+    box-shadow: 1px 9px 22px -1px rgba(139,139,139,0.75);
+    -webkit-box-shadow: 1px 9px 22px -1px rgba(139,139,139,0.75);
+    -moz-box-shadow: 1px 9px 22px -1px rgba(139,139,139,0.75);
+    padding-bottom: 30px;
+}
+
+.individual-form-container{
+    margin-top: 20px;
+    width: 90%;
+    margin-left: 5%;
+    font-size: 14px;
+}
+.user-progress{
+    outline: none;
+    border: none;
+    padding: 4px 25px;
+    border-radius: 10px;
+    background-color: #F4F4F4;
+    margin: 0 5px;
+    transition: 0.3s;
+}
+.user-progress:hover{
+    background-color: #038BA5;
+    opacity: 0.6;
+}
+.current{
+    background-color: #038BA5;
+}
+
+.basket-item{
+    width: 100%;
+    padding: 1px;
+    border-radius: 5px;
+    border-bottom: 1px solid #d8d8d8;
+    transition: 0.5s;
+
+}
+.btn-empty{
+    outline: none;
+    border: none;
+    background-color: transparent;
+}
+.btn-empty:hover{
+    outline: none;
+}
+
+.account-nav{
+  margin-left: 20px;
+  transition: 0.2s;
+  cursor: pointer;
+}
+
+.account-nav:hover{
+    color: #038BA5;
+}
+
+
+@media (min-width: 768px) { 
+    .sign-in-control{
+        width: 55%;
+    }
+
+    .signup-form-container{
+        margin-top: 0;
+    }
+}
+
+
+/*     wishlist page css        */
+.wishlist-Individual-Item-Container{
+    position: relative;
+    width: 100%;
+    padding: 10px 0;
+    margin-top: 10px;
+    border-bottom: 1px solid gray;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+.learn-more-btn-bitsey{
+    padding: 10px 4px;
+    width: 100%;
+    background-color: white;
+    color: #343434;
+    border: 2px solid #038BA5;;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: 0.2s;
+    cursor: pointer;
+    font-size: 16px;
+    max-width: 120px;
+    margin-left: 0;
+}
+.learn-more-btn-bitsey:hover{
+    background-color: #038BA5;;
+    border: 2px solid #038BA5;;
+    color: white;
+}
+
+
+
+
+.primary-btn-disabled{
+    width: fit-content;
+    padding: 4px 10px;
+    background-color: rgb(3, 139, 165);
+    border: 2px solid rgb(3, 139, 165);
+    opacity: 0.6;
+    border-radius: 6px;
+    font-size: 1.2rem;
+    margin: 0 5%;
+    color: white;
+    font-size: 16px;
+
+}
+
+
+
+.order-history-Individual-Item-Container{
+    position: relative;
+    height: fit-content;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #F4F4F4;
+    margin-bottom: 30px;
+}
+.order-history-Individual-Item-Container-small{
+    position: relative;
+    height: fit-content;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: #F4F4F4;
+    margin-bottom: 10px;
+
+}
+
+.attibute-label{
+    padding: 1px 5px;
+    background-color: gray;
+    border-radius: 2px;
+    height: fit-content;
+    color: white;
+    text-align: center;
+}
+
+
+@media (min-width: 768px) { 
+.learn-more-btn-bitsey{
+    margin-left: 5vw;
+}
+
+
+}

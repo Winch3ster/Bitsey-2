@@ -45,7 +45,7 @@ class Game(models.Model):
     gameCategories = models.ManyToManyField(GameCategory)
     gameCapabilities = models.ManyToManyField(GameCapabilities)
 
-    isOnPromotion = models.BooleanField()
+    isOnPromotion = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name

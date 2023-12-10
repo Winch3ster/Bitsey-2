@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-vdqi_svffxjrobl8088l$ogni96!482gpup_!h9vpcli9os$cx
 DEBUG = True
 
 ALLOWED_HOSTS = ['bitsey-studio-2023-6507e9796599.herokuapp.com', '127.0.0.1']
-
+#ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -93,10 +93,21 @@ WSGI_APPLICATION = 'bitsey.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.sqlite3',
+#        'NAME': BASE_DIR / 'db.sqlite3',
+#    }
+#}
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'bitsey',
+        'USER': 'bitseyuser',
+        'PASSWORD': 'bitsey1234',
+        'HOST': 'localhost',  # Set to the appropriate host
+        'PORT': '5432',       # Set to the appropriate port
     }
 }
 
@@ -143,10 +154,10 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR
 
 STATICFILES_DIRS = [
-    #BASE_DIR / "globalStatic"
-    os.path.join(BASE_DIR,'static')
+    BASE_DIR / "globalStatic"
+    #os.path.join(BASE_DIR,'static')
 ]
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+#STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -177,3 +188,5 @@ RECAPTCHA_PRIVATE_KEY = '6LcZryYpAAAAAN6STYhG5nd7CB7UBo6bqHIa3Um1'
 
 import django_heroku
 django_heroku.settings(locals())
+
+
