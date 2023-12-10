@@ -1,0 +1,1 @@
+web: gunicorn bitsey.wsgi --log-file -
