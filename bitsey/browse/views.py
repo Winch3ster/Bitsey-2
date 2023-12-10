@@ -13,6 +13,7 @@ from django.shortcuts import redirect
 from system import models as sysmodels
 from user import views as uviews
 
+
 # Create your views here.
 def browse(request):
     returnedGames = Game.objects.all()
@@ -90,7 +91,8 @@ def addToCart(request, gameId):
             itemInCart = ordermodels.CartItem.objects.filter(cart = cart).count()
             return JsonResponse({"Success": True, "itemInCart": itemInCart})
         else:
-            return redirect('signin')        
+            return JsonResponse({"Success": False})
+            return redirect(uviews.signin)    
 
 
 def get_game_platform_data(request, gameId):

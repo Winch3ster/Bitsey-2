@@ -45,21 +45,10 @@ def signin(request):
             return render(request, 'signin.html', {'signIn_form': signIn_form, 'errorMessage': "Please enter valid credentials"})
     
     else:
-        print("This is working")
+        print("This is working from sign in Hello World")
         signIn_form = userSignInForm()
-    
-    return render(request, 'signin.html', {'signIn_form': signIn_form})
+        return render(request, 'signin.html', {'signIn_form': signIn_form})
 
-
-
-
-    #return HttpResponse("Hello world! this is supposingly from sign in html")
-
-#def signUp(request):
-    #form = userForm()
-    #return render(request, 'register.html', {'form': form})
-
-#def signUpValidation(request)
 
 
 
@@ -104,7 +93,7 @@ def signup(request):
             address.save()
             #login(request, new_user)
 
-            return HttpResponse("successfully saved user")
+            return redirect(signin)
 
     else:
         #When user first entered the page it will be GET so this will run

@@ -290,7 +290,7 @@
                         {% for newGame in newRelease %}
     
                         
-                        <div  style="margin: 40px 15px; height: 150px; width: 150px;">
+                        <div  style="margin: 40px 15px; height: 150px; width: 150px; cursor: pointer;" onclick="ViewDetailsPage('{{ newGame.game.id }}')">
                             <div class="game-block-background-image" style="background-image: url('{{newGame.game.image.url}}'); background-position: center;"></div>
                             <p class="text-white text-s">{{newGame.game.name}}</p>
                         </div>
@@ -301,7 +301,11 @@
                 </div>
     
             </div>        
+            <div class="col-12 d-flex justify-content-center">
+                <a href="{% url 'browse' %}" class="secondary-btn" >Visit Store</a>
+            </div>
 
+          
             
         </section>
     </div> <!-- small screen  until here-->
@@ -347,7 +351,7 @@
                     {% for newGame in newRelease %}
 
                      
-                    <div  style="margin: 40px 15px; height: 150px; width: 150px;">
+                    <div  style="margin: 40px 15px; height: 150px; width: 180px; cursor: pointer;" onclick="ViewDetailsPage('{{ newGame.game.id }}')">
                         <div class="game-block-background-image" style="background-image: url('{{newGame.game.image.url}}'); background-position: center;"></div>
                         <p class="text-white text-s">{{newGame.game.name}}</p>
                     </div>
@@ -358,9 +362,9 @@
             </div>
 
         </div>        
-
-
-        
+        <div class="col-12 d-flex justify-content-center">
+            <a href="{% url 'browse' %}" class="secondary-btn" >Visit Store</a>
+        </div>
     </section>
     </div>
 
@@ -457,10 +461,6 @@
                             </div>
                         </li>
                         {% endfor %}
-                      
-       
-    
-                      
                     </ul>
                     <div class="icon" style="right: 0;"><i id="right" class="bi bi-chevron-right"></i></div>
                   </div>     
@@ -554,6 +554,12 @@
 <script type="text/javascript" src="{% static 'js/cartNotification.js' %}"></script>
 
 <script>
+
+    function ViewDetailsPage(id) {
+        console.log("This is clicked")
+       // Use window.location to navigate to the detail page with the specified game ID
+       window.location.href = "{% url 'game_Details' game_id=0 %}".replace('0', id);
+    }
 
     function CODMW3Trailer() {
            
