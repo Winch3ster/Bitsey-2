@@ -24,8 +24,8 @@ SECRET_KEY = 'django-insecure-vdqi_svffxjrobl8088l$ogni96!482gpup_!h9vpcli9os$cx
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['bitsey-studio-2023-6507e9796599.herokuapp.com', '127.0.0.1']
-#ALLOWED_HOSTS = []
+#ALLOWED_HOSTS = ['bitsey-studio-2023-6507e9796599.herokuapp.com', '127.0.0.1']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -186,7 +186,7 @@ RECAPTCHA_PRIVATE_KEY = '6LcZryYpAAAAAN6STYhG5nd7CB7UBo6bqHIa3Um1'
 
 
 
-import django_heroku
-django_heroku.settings(locals())
+#import django_heroku
+#django_heroku.settings(locals())
 
 

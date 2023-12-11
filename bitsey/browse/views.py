@@ -183,9 +183,9 @@ def SearchFilter(request):
         
             # Check if either list is empty
             if not platform_to_search:
-                result = genre_to_search_result
+                result = list(set(genre_to_search_result))
             elif not genre_to_search:
-                result = platform_to_search_result
+                result = list(set(platform_to_search_result)) 
             else:
                 # Find the common elements
                 common_elements = set(platform_to_search_result).intersection(set(genre_to_search_result))

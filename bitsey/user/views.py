@@ -24,9 +24,6 @@ def signin(request):
             username = request.POST.get('username')
             password = request.POST.get('password')
             #user = User.objects.get(username = username, password=password)
-
-
-
             print(username)
             print(password)
             user = authenticate(request, username=username, password=password)
@@ -213,10 +210,7 @@ def view_purchase_history(request):
         noOrder = False
 
     #Create JSON for it
-
-
-    print(orders[0].orderItems)
-    print("noOrder: " + str(orders) )
+    print("Order items: " + str(order_items))
 
     return render(request, 'purchasehistory.html', {'orders': orders,'order_items': order_items ,'noOrder':noOrder} )
 

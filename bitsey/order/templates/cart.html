@@ -79,7 +79,7 @@
                                             <div class="d-flex"><!-- quantity selector --> 
         
                                                 <button type="button" class="btn-empty"><i class="bi bi-dash bitsey-text-color" onclick="decrement(`{{item.id}}`)"></i></button>
-                                                <p style="margin: 0px 5px;" id="game-quantity-{{item.id}}" data-maxPhysicalQuantity="{{item.game.physicalCopyQuantity}}">{{item.quantity}}</p>
+                                                <p style="margin: 0px 5px;" id="game-quantity-{{item.id}}-s" data-maxPhysicalQuantity="{{item.game.physicalCopyQuantity}}">{{item.quantity}}</p>
                                                 <button type="button" class="btn-empty"><i class="bi bi-plus bitsey-text-color" onclick="increment(`{{item.id}}`)"></i></button>
                                             
                                             </div>
@@ -120,19 +120,19 @@
                 <div><!-- price summary  -->
                     <div class="d-flex justify-content-between">
                         <p>Item(s) subtotal:</p>
-                        <p class="fw-bold">RM <span id="itemSubtotal" data-subtotal="{{total_price}}">{{total_price}}</span></p>
+                        <p class="fw-bold">RM <span id="itemSubtotal-s" data-subtotal="{{total_price}}">{{total_price}}</span></p>
                     </div>
                     
                     <div class="d-flex justify-content-between">
                         <p>Shipping:</p>
-                        <p class="fw-bold">RM  <span id="shippingField" data-shippingfee="{{shipping_price}}">{{shipping_price}}</span></p>
+                        <p class="fw-bold">RM  <span id="shippingField-s" data-shippingfee="{{shipping_price}}">{{shipping_price}}</span></p>
                     </div>
                 </div>  
 
                 <!-- Estimated total -->
                 <div class="d-flex justify-content-between mt-4" style="border-top: 1px solid #d8d8d8;">
                     <p>Total:</p>
-                    <p class="fw-bold">RM <span id="cartTotal"></span></p>
+                    <p class="fw-bold">RM <span id="cartTotal-s"></span></p>
                 </div>
 
                 {% if cart_is_empty %}
@@ -293,6 +293,41 @@
 
 </body>
 <script>
+    function decrementS(cartItemId){
+        var numberDisplay =document.getElementById(`game-quantity-${cartItemId}-s`)
+
+        if(Number(numberDisplay.innerHTML) > 1){
+            console.log("decreasing count")
+
+            //Update cart item in the database
+            fetch('http://127.0.0.1:8000/UpdateCartItemQuantity/', {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ data: {
+                    //"userId": userId,
+                    "cartItemId": cartItemId,
+                    "operation": "decrement"
+                } }),
+            })
+            .then(response => response.json())
+            .then(data => {
+               
+                console.log(data.newQuantity)
+                
+                
+                numberDisplay.innerHTML = data.newQuantity
+                UpdateTotal(data.newTotal)
+            })
+            .catch(error => console.error('Error:', error));
+
+        }
+
+    }
+
+
+
     function decrement(cartItemId){
         var numberDisplay =document.getElementById(`game-quantity-${cartItemId}`)
 
@@ -325,6 +360,40 @@
         }
 
     }
+    function increment(cartItemId){
+        var numberDisplay =document.getElementById(`game-quantity-${cartItemId}-s`)
+        var maxQuantity = numberDisplay.getAttribute('data-maxPhysicalQuantity');
+
+        console.log("Max quantity: " + maxQuantity)
+
+        if(Number(numberDisplay.innerHTML) < maxQuantity){
+            console.log("Increasing count count")
+            //Update cart item in the database
+
+            fetch('http://127.0.0.1:8000/UpdateCartItemQuantity/', {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ data: {
+                    //"userId": userId,
+                    "cartItemId": cartItemId,
+                    "operation": "increment"
+                } }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data.newQuantity)
+                //Update the UI
+                numberDisplay.innerHTML = data.newQuantity
+                UpdateTotal(data.newTotal)
+            })
+            .catch(error => console.error('Error:', error));
+       
+        }
+
+    }
+
 
     function increment(cartItemId){
         var numberDisplay =document.getElementById(`game-quantity-${cartItemId}`)
@@ -371,6 +440,19 @@
 
         var totalField = document.getElementById('cartTotal')
         totalField.innerHTML = (Number(newTotal) + Number(shipping)).toFixed(2)
+
+        //Small screen
+        var subtotal = document.getElementById('itemSubtotal-s');
+        subtotal.innerHTML = Number(newTotal).toFixed(2)
+
+        var shippingField = document.getElementById('shippingField-s')
+
+        var shippingField = document.getElementById('shippingField-s')
+        var shipping = shippingField.dataset.shippingfee;
+
+        var totalField = document.getElementById('cartTotal-s')
+        totalField.innerHTML = (Number(newTotal) + Number(shipping)).toFixed(2)
+
     }
 
     function CalculateTotal(){
@@ -380,6 +462,18 @@
         console.log(shipping)
         var totalField = document.getElementById('cartTotal')
         var subtotal = document.getElementById('itemSubtotal').dataset.subtotal;
+        console.log(subtotal)
+
+
+        totalField.innerHTML = Number(subtotal) + Number(shipping) 
+
+
+        //small screen
+        var shippingField = document.getElementById('shippingField-s')
+        var shipping = shippingField.dataset.shippingfee;
+        console.log(shipping)
+        var totalField = document.getElementById('cartTotal-s')
+        var subtotal = document.getElementById('itemSubtotal-s').dataset.subtotal;
         console.log(subtotal)
 
 

@@ -92,6 +92,7 @@ def order_shipped_notification(sender, instance, **kwargs):
         print(f"An order is shipped from system model")
 
 
+
 def CreateIsShippedNotification(toUser, message):
     notication = Notifications(user=toUser, message = message, date=date.today(), isRead = False) 
 
