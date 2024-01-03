@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/1e357d81-10d0-44f4-aaaa-2be76a84c5be/resourceGroups/appsvc_linux_centralus/providers/Microsoft.Web/sites/bitsey-store-2023",
+    "appService.deploySubpath": "."
+}
